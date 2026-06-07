@@ -13,7 +13,6 @@
     
     <style>
         :root {
-            /* Warna Tema Dinamis (Bisa diganti lewat JS) */
             --theme-color: #00e5ff; 
             --discord: #5865F2;
             --tiktok: #ff0050;
@@ -41,7 +40,6 @@
             background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 0;
         }
 
-        /* 1. LOADING SCREEN (ENTER TO BYPASS AUTOPLAY) */
         #loader {
             position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -67,7 +65,6 @@
         }
         .hub-card::-webkit-scrollbar { width: 0px; }
 
-        /* THEME SWITCHER BUTTON */
         .theme-switcher {
             position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5);
             border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px;
@@ -75,7 +72,6 @@
         }
         .theme-switcher:hover { background: var(--theme-color); color: #000; }
 
-        /* MASKOT DISEMPURNAKAN (Lebih Kecil & Proporsional) */
         .mascot-wrapper {
             position: absolute; top: -65px; left: 50%; transform: translateX(-50%);
             width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
@@ -101,17 +97,8 @@
 
         .code-box {
             background: #000; border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; color: #ddd; text-align: left; margin-bottom: 15px; border: 1px solid #222;
+            font-size: 11px; color: #ddd; text-align: left; margin-bottom: 20px; border: 1px solid #222;
         }
-
-        /* FAKE TERMINAL LOG */
-        .terminal-box {
-            background: #080808; border-radius: 8px; border: 1px solid #222; padding: 10px;
-            font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--theme-color);
-            text-align: left; height: 45px; overflow-y: hidden; margin-bottom: 20px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-        }
-        .terminal-box div { margin-bottom: 3px; opacity: 0.8; }
 
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn {
@@ -148,6 +135,19 @@
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
         .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
+        /* TERMINAL PINDAH KE KANAN BAWAH LEYAR */
+        .terminal-box {
+            position: fixed; bottom: 30px; right: 30px; z-index: 50;
+            width: 320px; height: 90px;
+            background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px);
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px;
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color);
+            text-align: left; overflow-y: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            pointer-events: none; /* Biar tembus pandang kalau diklik */
+        }
+        .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
+
         .audio-controls {
             position: fixed; bottom: 30px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 20px;
             border-radius: 50px; display: flex; align-items: center; gap: 15px; backdrop-filter: blur(10px);
@@ -156,16 +156,16 @@
         .audio-btn { color: #fff; transition: 0.3s; }
         .audio-controls:hover .audio-btn { color: var(--theme-color); }
 
+        /* TOAST PINDAH KE KANAN ATAS */
         .custom-toast {
-            position: fixed; bottom: -100px; right: 30px; background: rgba(15, 15, 15, 0.95);
+            position: fixed; top: -100px; right: 30px; background: rgba(15, 15, 15, 0.95);
             border-left: 4px solid var(--theme-color); color: #fff; padding: 15px 25px; border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; font-size: 13px; font-family: 'Urbanist', sans-serif;
             display: flex; align-items: center; gap: 12px; z-index: 1000;
-            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px);
+            transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px);
         }
-        .custom-toast.show { bottom: 30px; }
+        .custom-toast.show { top: 30px; }
 
-        /* MODAL KHUSUS ADBLOCK */
         .modal {
             position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center;
             align-items: center; z-index: 9999; backdrop-filter: blur(15px);
@@ -225,10 +225,6 @@
                 loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()
             </div>
 
-            <div class="terminal-box" id="terminalLog">
-                <div>[SYSTEM] Initializing Kellzy Engine v2...</div>
-            </div>
-
             <div class="btn-grid">
                 <button class="btn btn-tiktok interactive-btn" id="followBtn" onclick="followTikTok()">
                     <i class="fa-brands fa-youtube"></i> SUBSCRIBE YOUTUBE TO UNLOCK
@@ -271,14 +267,17 @@
         </div>
     </div>
 
+    <div class="terminal-box" id="terminalLog">
+        <div>[SYSTEM] Initializing Kellzy Engine v2.0.4...</div>
+    </div>
+
     <div class="audio-controls interactive-btn" onclick="toggleMusic()">
         <div class="audio-btn" id="musicToggle"><i class="fa-solid fa-pause"></i></div>
         <span style="font-size: 10px; font-weight: 800; color: #888;">KELLZY RADIO</span>
     </div>
 
     <script>
-        // --- 1. THEME SWITCHER ---
-        const themes = ['#00e5ff', '#39ff14', '#ff66cc']; // Cyan, Hacker Green, Kawaii Pink
+        const themes = ['#00e5ff', '#39ff14', '#ff66cc']; 
         let currentTheme = 0;
         function toggleTheme() {
             currentTheme = (currentTheme + 1) % themes.length;
@@ -287,18 +286,15 @@
             clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
         }
 
-        // --- 2. AUTO-DEVICE DETECTOR ---
         window.addEventListener('DOMContentLoaded', () => {
             const ua = navigator.userAgent;
-            let device = "PC / Desktop";
-            let rec = "Wave / Krampus";
+            let device = "PC / Desktop"; let rec = "Wave / Krampus";
             if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; }
             else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
             document.getElementById('deviceType').innerText = device;
             document.getElementById('recExec').innerText = rec;
         });
 
-        // --- 3. FAKE TERMINAL LOG ANIMATION ---
         const termLogs = [
             "[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS",
             "[SYSTEM] Fetching Kellzy Key API... OK",
@@ -318,11 +314,9 @@
             }
         }, 1500);
 
-        // --- 4. ANTI-ADBLOCK DETECTOR ---
         setTimeout(() => {
             let ad = document.createElement('div');
-            ad.innerHTML = '&nbsp;';
-            ad.className = 'adsbox'; // Class yg dibenci adblocker
+            ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; 
             document.body.appendChild(ad);
             window.setTimeout(function() {
               if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; }
@@ -330,7 +324,6 @@
             }, 100);
         }, 2500);
 
-        // --- LOADING SCREEN ---
         const loaderText = document.getElementById('loader-text');
         const loaderScreen = document.getElementById('loader');
         const enterBtn = document.getElementById('enterBtn');
