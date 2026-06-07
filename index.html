@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaell Store Script</title>
+    <title>Kellzy Hub Script</title>
     <style>
         body { 
             background-color: #0a0a0a; 
@@ -17,7 +17,7 @@
         }
         .card { 
             background-color: #121212; 
-            border: 1px solid #00e5ff; /* Aksen Cyan */
+            border: 1px solid #00e5ff;
             border-radius: 16px; 
             padding: 40px; 
             max-width: 450px; 
@@ -95,29 +95,28 @@
 </head>
 <body>
     <div class="card">
-        <div class="badge">SCRIPT KAELL SECURITY</div>
-        <h1>SCRIPT<br>KAELL</h1>
-        <p>Copy Script dibawah dan paste di executor kamu.<br>Terima kasih sudah menggunakan Script Kaell Store.</p>
+        <div class="badge">SCRIPT SECURITY</div>
+        <h1>KELLZY<br>HUB</h1>
+        <p>Copy Script dibawah dan paste di executor kamu.<br>Terima kasih sudah menggunakan Script Kellzy Hub.</p>
         
         <div class="code-container">
             <div class="code-label">LOADSTRING -></div>
             <div class="code-box" id="scriptCode">
                 getgenv().Key = "KELLYZ-2X5NYFU6";<br>
-                loadstring(game:HttpGet("https://NAMAPROJECT-kamu.vercel.app/script.lua"))()
+                loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()
             </div>
         </div>
 
         <button onclick="copyScript()">COPY LOADSTRING</button>
         
-        <div class="footer">PROTECT BY KAELL STORE</div>
+        <div class="footer">PROTECT BY KELLZY HUB</div>
     </div>
 
     <script>
         function copyScript() {
-            // Ganti URL di bawah ini dengan URL Vercel kamu nanti setelah di-deploy
-            const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://NAMAPROJECT-kamu.vercel.app/script.lua"))()`;
+            const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
             navigator.clipboard.writeText(code).then(() => {
-                alert("Script berhasil di-copy!");
+                alert("Script Kellzy Hub berhasil di-copy!");
             });
         }
     </script>
