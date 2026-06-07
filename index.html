@@ -23,7 +23,6 @@
 
         * { box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
-        /* 3. KURSOR KUSTOM TEMA GAMING/ANIME */
         body {
             margin: 0; padding: 0;
             background-color: var(--bg-dark);
@@ -31,11 +30,9 @@
             background-size: cover; background-position: center; background-attachment: fixed;
             font-family: 'Urbanist', sans-serif; color: #ffffff;
             height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
-            /* Ganti kursor default jadi Neon Cyan */
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
         }
 
-        /* Ganti kursor saat diarahkan ke tombol */
         a, button, .interactive-btn {
             cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important;
         }
@@ -58,24 +55,24 @@
             box-shadow: 0 0 20px rgba(0,229,255,0.2);
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loader-text { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; }
+        .loader-text { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
+        .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--cyan); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
 
         #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .slide-container { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
+        /* PERBAIKAN MASKOT: Menghapus overflow-y: auto yang menyembunyikan maskot */
         .hub-card {
             background: var(--card-glass); width: 90%; max-width: 520px; padding: 45px 50px 30px 50px;
             border-radius: 24px; border: 1px solid rgba(0, 229, 255, 0.2);
             backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center; position: relative; max-height: 95vh; overflow-y: auto;
+            text-align: center; position: relative; 
         }
-        /* Hide scrollbar di dalam card */
-        .hub-card::-webkit-scrollbar { width: 0px; }
 
         .mascot-wrapper {
             position: absolute; top: -110px; left: 50%; transform: translateX(-50%);
             width: 160px; filter: drop-shadow(0 10px 20px rgba(0,229,255,0.4));
-            transition: var(--transition);
+            transition: var(--transition); z-index: 100;
         }
 
         .status-badge {
@@ -113,7 +110,6 @@
         .btn-primary { background: var(--cyan); color: #000; grid-column: span 2; }
         .btn-primary:hover { box-shadow: 0 0 25px rgba(0, 229, 255, 0.5); transform: translateY(-3px); }
         
-        /* State Tombol Terkunci */
         .btn-locked { background: #222 !important; color: #666 !important; box-shadow: none !important; opacity: 0.8; }
         .btn-locked:hover { transform: none !important; }
 
@@ -122,7 +118,6 @@
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); transform: translateY(-3px); }
 
-        /* 2. ETALASE KATALOG (Roblox & Eneba) */
         .catalog-container { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
         .catalog-title { font-size: 10px; font-weight: 800; color: var(--cyan); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
         .catalog-scroll {
@@ -160,19 +155,14 @@
             transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px);
         }
         .custom-toast.show { bottom: 30px; }
-
-        .modal {
-            position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center;
-            align-items: center; z-index: 999; backdrop-filter: blur(15px);
-        }
-        .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid var(--cyan); text-align: left; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
     <div id="loader">
-        <div class="loader-spinner"></div>
+        <div class="loader-spinner" id="spinnerAnim"></div>
         <div class="loader-text" id="loader-text">Connecting to secure server...</div>
+        <div class="loader-enter-btn" id="enterBtn">CLICK HERE TO ENTER</div>
     </div>
 
     <div class="custom-toast" id="toastBox">
@@ -180,7 +170,7 @@
         <span id="toastMsg">Notification</span>
     </div>
 
-    <audio id="bgm" loop><source src="musik.mp3" type="audio/mpeg"></audio>
+    <audio id="bgm" loop autoplay><source src="musik.mp3" type="audio/mpeg"></audio>
 
     <div id="particles-js"></div>
 
@@ -209,7 +199,7 @@
 
             <div class="btn-grid">
                 <button class="btn btn-tiktok interactive-btn" id="followBtn" onclick="followTikTok()">
-                    <i class="fa-brands fa-tiktok"></i> FOLLOW TIKTOK TO UNLOCK SCRIPT
+                    <i class="fa-brands fa-youtube"></i> SUBSCRIBE YOUTUBE TO UNLOCK
                 </button>
                 
                 <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()">
@@ -255,20 +245,39 @@
     </div>
 
     <div class="audio-controls interactive-btn" onclick="toggleMusic()">
-        <div class="audio-btn" id="musicToggle"><i class="fa-solid fa-play"></i></div>
+        <div class="audio-btn" id="musicToggle"><i class="fa-solid fa-pause"></i></div>
         <span style="font-size: 10px; font-weight: 800; color: #888;">KELLZY RADIO</span>
     </div>
 
     <script>
+        // --- SISTEM LOADING BARU (DENGAN TOMBOL ENTER UNTUK BYPASS AUTOPLAY BROWSER) ---
         const loaderText = document.getElementById('loader-text');
         const loaderScreen = document.getElementById('loader');
-        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading User Interface...", "Welcome to Kellzy Store."];
+        const enterBtn = document.getElementById('enterBtn');
+        const spinnerAnim = document.getElementById('spinnerAnim');
+        const bgm = document.getElementById('bgm');
+        
+        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading User Interface...", "Initialization Complete."];
         let textIndex = 0;
+        
         const textInterval = setInterval(() => {
             textIndex++;
-            if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
-            else { clearInterval(textInterval); setTimeout(() => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; }, 500); }
+            if (textIndex < loadingTexts.length) { 
+                loaderText.innerText = loadingTexts[textIndex]; 
+            } else { 
+                clearInterval(textInterval); 
+                spinnerAnim.style.display = 'none';
+                loaderText.style.display = 'none';
+                enterBtn.style.display = 'block'; // Munculkan tombol enter
+            }
         }, 800);
+
+        // Pas dipencet tombol Enter, layar ilang dan musik dijamin 100% jalan
+        enterBtn.addEventListener('click', () => {
+            loaderScreen.style.opacity = '0'; 
+            setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
+            bgm.play().catch(e => console.log("Audio play error:", e));
+        });
 
         let originalTitle = document.title;
         document.addEventListener("visibilitychange", function() {
@@ -276,7 +285,6 @@
             else { document.title = originalTitle; }
         });
 
-        const bgm = document.getElementById('bgm');
         const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3;
         const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
 
@@ -292,39 +300,32 @@
             else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
         }
 
-        // FUNGSI CUSTOM TOAST UNIVERSAL
         function showToast(message, color = "#00ff7f", iconClass = "fa-circle-check") {
             const toast = document.getElementById("toastBox");
             const icon = document.getElementById("toastIcon");
             const msg = document.getElementById("toastMsg");
-            
             toast.style.borderLeftColor = color;
             icon.style.color = color;
             icon.className = `fa-solid ${iconClass}`;
             msg.innerText = message;
-            
             toast.classList.add("show");
             setTimeout(() => { toast.classList.remove("show"); }, 3500);
         }
 
-        // --- SISTEM GATEWAY TIKTOK ---
         let isScriptUnlocked = false;
 
         function followTikTok() {
-            // GANTI LINK TIKTOK KAMU DI SINI
             window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
-            
             const followBtn = document.getElementById('followBtn');
             followBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> VERIFYING...';
             followBtn.style.background = '#333';
             
-            // Simulasi verifikasi selama 5 detik
             setTimeout(() => {
                 isScriptUnlocked = true;
                 followBtn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
                 followBtn.style.background = '#00ff7f';
                 followBtn.style.color = '#000';
-                followBtn.style.pointerEvents = 'none'; // Matikan tombol tiktok
+                followBtn.style.pointerEvents = 'none';
 
                 const copyBtn = document.getElementById('copyBtn');
                 copyBtn.classList.remove('btn-locked');
@@ -335,7 +336,6 @@
             }, 5000);
         }
 
-        // --- SISTEM COPY SCRIPT ---
         function copyScript() {
             if (!isScriptUnlocked) {
                 showToast("Tolong Subscribe Youtube dulu untuk membuka Script!", "#ff3333", "fa-circle-xmark");
@@ -347,18 +347,16 @@
             });
         }
 
-        // --- EASTER EGG MASKOT ---
         let mascotClicks = 0;
         function mascotClick() {
             mascotClicks++;
             const mascot = document.getElementById('mascotImg');
-            // Efek goyang setiap diklik
             mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`;
             setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200);
 
             if (mascotClicks === 5) {
                 showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--cyan)", "fa-gift");
-                mascotClicks = 0; // Reset hitungan
+                mascotClicks = 0;
             }
         }
 
