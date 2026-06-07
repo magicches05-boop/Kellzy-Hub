@@ -13,7 +13,7 @@
     
     <style>
         :root {
-            --cyan: #00e5ff; /* Biru Muda / Cyan */
+            --cyan: #00e5ff; 
             --discord: #5865F2;
             --bg-dark: #050505;
             --card-glass: rgba(15, 15, 15, 0.85);
@@ -37,14 +37,28 @@
             z-index: 0;
         }
 
-        /* Container Partikel */
-        #particles-js {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none;
+        /* 1. CINEMATIC LOADING SCREEN */
+        #loader {
+            position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .loader-spinner {
+            width: 50px; height: 50px; border: 4px solid rgba(0,229,255,0.1);
+            border-top: 4px solid var(--cyan); border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 25px;
+            box-shadow: 0 0 20px rgba(0,229,255,0.2);
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loader-text {
+            color: var(--cyan); font-family: 'JetBrains Mono', monospace; 
+            font-size: 13px; letter-spacing: 2px; font-weight: 700;
         }
 
-        .slide-container {
-            position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;
-        }
+        /* Container Partikel */
+        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
+        .slide-container { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
         .hub-card {
             background: var(--card-glass); width: 90%; max-width: 520px; padding: 50px;
@@ -74,7 +88,7 @@
         .sub-text { color: #aaa; font-size: 14px; margin-bottom: 30px; }
 
         .live-counter {
-            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 30px;
+            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 25px;
             display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,0.05);
         }
         .counter-item span { display: block; font-size: 10px; color: #888; font-weight: 800; text-transform: uppercase; }
@@ -82,7 +96,7 @@
 
         .code-box {
             background: #000; border-radius: 12px; padding: 20px; font-family: 'JetBrains Mono', monospace;
-            font-size: 12px; color: #ddd; text-align: left; margin-bottom: 30px; border: 1px solid #222;
+            font-size: 12px; color: #ddd; text-align: left; margin-bottom: 25px; border: 1px solid #222;
         }
 
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -93,20 +107,41 @@
         }
         .btn-primary { background: var(--cyan); color: #000; grid-column: span 2; }
         .btn-primary:hover { box-shadow: 0 0 25px rgba(0, 229, 255, 0.5); transform: translateY(-3px); }
-        
         .btn-key { background: #1a1a1a; color: #fff; border: 1px solid #333; }
         .btn-key:hover { border-color: var(--cyan); color: var(--cyan); }
-
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); transform: translateY(-3px); }
+
+        /* 4. EXECUTOR STATUS BOARD */
+        .executor-status {
+            margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+        }
+        .exec-badge {
+            background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 50px;
+            font-size: 9px; font-weight: 800; letter-spacing: 1px; color: #aaa;
+            border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px;
+        }
+        .status-working { color: #00ff7f; }
+        .status-patched { color: #ff3333; }
 
         .audio-controls {
             position: fixed; bottom: 30px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 20px;
             border-radius: 50px; display: flex; align-items: center; gap: 15px; backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1); z-index: 100;
+            border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer;
         }
-        .audio-btn { color: #fff; cursor: pointer; transition: 0.3s; }
-        .audio-btn:hover { color: var(--cyan); }
+        .audio-btn { color: #fff; transition: 0.3s; }
+        .audio-controls:hover .audio-btn { color: var(--cyan); }
+
+        /* 2. CUSTOM TOAST NOTIFICATION */
+        .custom-toast {
+            position: fixed; bottom: -100px; right: 30px; background: rgba(15, 15, 15, 0.95);
+            border-left: 4px solid #00ff7f; color: #fff; padding: 15px 25px; border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; font-size: 13px; font-family: 'Urbanist', sans-serif;
+            display: flex; align-items: center; gap: 12px; z-index: 1000;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px);
+        }
+        .custom-toast.show { bottom: 30px; }
 
         .modal {
             position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center;
@@ -119,6 +154,16 @@
     </style>
 </head>
 <body oncontextmenu="return false;">
+
+    <div id="loader">
+        <div class="loader-spinner"></div>
+        <div class="loader-text" id="loader-text">Connecting to secure server...</div>
+    </div>
+
+    <div class="custom-toast" id="toastBox">
+        <i class="fa-solid fa-circle-check" style="color: #00ff7f; font-size: 18px;"></i>
+        <span>Script Copied Successfully!</span>
+    </div>
 
     <audio id="bgm" loop>
         <source src="musik.mp3" type="audio/mpeg">
@@ -170,7 +215,14 @@
                 </button>
             </div>
 
-            <div style="margin-top: 30px; font-size: 10px; color: #444; font-weight: 800; letter-spacing: 3px;">
+            <div class="executor-status">
+                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Delta</div>
+                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Fluxus</div>
+                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Codex</div>
+                <div class="exec-badge"><i class="fa-solid fa-circle status-patched"></i> Arceus X</div>
+            </div>
+
+            <div style="margin-top: 25px; font-size: 10px; color: #444; font-weight: 800; letter-spacing: 3px;">
                 PROTECTED BY KELLZY HUB SECURITY
             </div>
         </div>
@@ -197,47 +249,76 @@
     </div>
 
     <script>
-        // --- 1. SETUP AUDIO (BGM & SFX) ---
+        // --- FITUR LOADING SCREEN ---
+        const loaderText = document.getElementById('loader-text');
+        const loaderScreen = document.getElementById('loader');
+        const loadingTexts = [
+            "Connecting to secure server...",
+            "Bypassing Anti-Cheat...",
+            "Loading User Interface...",
+            "Welcome to Kellzy Store."
+        ];
+        
+        let textIndex = 0;
+        const textInterval = setInterval(() => {
+            textIndex++;
+            if (textIndex < loadingTexts.length) {
+                loaderText.innerText = loadingTexts[textIndex];
+            } else {
+                clearInterval(textInterval);
+                setTimeout(() => {
+                    loaderScreen.style.opacity = '0';
+                    loaderScreen.style.visibility = 'hidden';
+                }, 500);
+            }
+        }, 800); // Ganti teks tiap 0.8 detik
+
+        // --- FITUR DYNAMIC BROWSER TAB ---
+        let originalTitle = document.title;
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                document.title = "⚠️ Hei, Scriptnya Belum Di-copy!";
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+        // --- SETUP AUDIO (BGM & SFX) ---
         const bgm = document.getElementById('bgm');
-        
-        // SFX Hover (Suara tik-tik digital pendek)
         const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
-        hoverSfx.volume = 0.3; // Volume dikecilkan dikit biar elegan
-        
-        // SFX Click (Suara klik game)
+        hoverSfx.volume = 0.3;
         const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
         clickSfx.volume = 0.5;
 
-        // Pasang sensor SFX ke semua tombol
         const interactiveBtns = document.querySelectorAll('.interactive-btn');
         interactiveBtns.forEach(btn => {
             btn.addEventListener('mouseenter', () => {
-                hoverSfx.currentTime = 0; 
-                hoverSfx.play().catch(e => {}); // Catch error kalau auto-play diblok browser
+                hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {});
             });
             btn.addEventListener('click', () => {
-                clickSfx.currentTime = 0; 
-                clickSfx.play().catch(e => {});
+                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
             });
         });
 
-        // Fitur Nyalain/Matiin Lagu
         function toggleMusic() {
             const icon = document.querySelector('#musicToggle i');
             if (bgm.paused) {
-                bgm.play();
-                icon.className = 'fa-solid fa-pause';
+                bgm.play(); icon.className = 'fa-solid fa-pause';
             } else {
-                bgm.pause();
-                icon.className = 'fa-solid fa-play';
+                bgm.pause(); icon.className = 'fa-solid fa-play';
             }
         }
 
-        // --- 2. FITUR COPY SCRIPT ---
+        // --- FITUR COPY SCRIPT & CUSTOM TOAST ---
         function copyScript() {
             const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
             navigator.clipboard.writeText(code).then(() => {
-                alert("Kellzy Hub Script Copied! 🚀");
+                const toast = document.getElementById("toastBox");
+                toast.classList.add("show");
+                // Hilangkan toast setelah 3 detik
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 3000);
             });
         }
 
@@ -246,7 +327,7 @@
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
         }
 
-        // --- 3. ANIMASI COUNTER USER ---
+        // --- ANIMASI COUNTER USER ---
         setInterval(() => {
             const counter = document.getElementById('userCount');
             let val = parseInt(counter.innerText.replace(',', ''));
@@ -254,7 +335,7 @@
             counter.innerText = val.toLocaleString();
         }, 3000);
 
-        // --- 4. SECURITY (ANTI MALING SCRIPT) ---
+        // --- SECURITY (ANTI MALING SCRIPT) ---
         document.onkeydown = function(e) {
             if(e.keyCode == 123) { return false; }
             if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
@@ -262,33 +343,26 @@
             if(e.ctrlKey && e.keyCode == 85) { return false; }
         };
 
-        // --- 5. SETUP PARTIKEL HATI (LIGHT BLUE CYAN) ---
-        // Base64 gambar hati warna light blue cyan (#00e5ff)
+        // --- SETUP PARTIKEL HATI (LIGHT BLUE CYAN) ---
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
 
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 40 },
                 "color": { "value": "#00e5ff" },
-                "shape": { 
-                    "type": "image", 
-                    "image": { "src": heartSvgBase64, "width": 100, "height": 100 }
-                },
+                "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } },
                 "opacity": { "value": 0.6, "random": true },
                 "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } },
-                "line_linked": { "enable": false }, // Garis dimatikan biar fokus ke hatinya
+                "line_linked": { "enable": false },
                 "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" }
             },
             "interactivity": {
                 "detect_on": "canvas",
                 "events": {
-                    "onhover": { "enable": true, "mode": "repulse" }, // Hati akan menjauh kalau kena kursor
-                    "onclick": { "enable": true, "mode": "push" } // Nambahin hati kalau diklik
+                    "onhover": { "enable": true, "mode": "repulse" },
+                    "onclick": { "enable": true, "mode": "push" }
                 },
-                "modes": {
-                    "repulse": { "distance": 80, "duration": 0.4 },
-                    "push": { "particles_nb": 2 }
-                }
+                "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } }
             },
             "retina_detect": true
         });
