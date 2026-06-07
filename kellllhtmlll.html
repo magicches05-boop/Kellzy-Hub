@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaell Store Script</title>
+    <style>
+        body { 
+            background-color: #0a0a0a; 
+            color: #ffffff; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .card { 
+            background-color: #121212; 
+            border: 1px solid #00e5ff; /* Aksen Cyan */
+            border-radius: 16px; 
+            padding: 40px; 
+            max-width: 450px; 
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+        }
+        .badge { 
+            font-size: 10px; 
+            color: #00e5ff; 
+            border: 1px solid #00e5ff; 
+            padding: 4px 12px; 
+            border-radius: 20px; 
+            display: inline-block; 
+            margin-bottom: 20px; 
+            letter-spacing: 1px;
+        }
+        h1 { 
+            font-size: 36px; 
+            margin: 0 0 10px 0; 
+            line-height: 1.1;
+            color: #00e5ff;
+        }
+        p { 
+            color: #888; 
+            font-size: 13px; 
+            margin-bottom: 25px; 
+            line-height: 1.5;
+        }
+        .code-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        .code-label {
+            font-size: 10px;
+            color: #00e5ff;
+            position: absolute;
+            top: -8px;
+            left: 15px;
+            background-color: #121212;
+            padding: 0 5px;
+        }
+        .code-box { 
+            background-color: #080808; 
+            border: 1px solid #333; 
+            padding: 20px 15px 15px 15px; 
+            border-radius: 10px; 
+            font-family: 'Courier New', Courier, monospace; 
+            color: #ccc; 
+            font-size: 12px;
+            word-wrap: break-word; 
+        }
+        button { 
+            background-color: #00e5ff; 
+            color: #000; 
+            border: none; 
+            padding: 14px 20px; 
+            border-radius: 10px; 
+            width: 100%; 
+            font-weight: 800; 
+            font-size: 14px;
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+        }
+        button:hover { 
+            background-color: #00b3cc; 
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+        }
+        .footer { 
+            text-align: center; 
+            margin-top: 25px; 
+            font-size: 9px; 
+            color: #444; 
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="badge">SCRIPT KAELL SECURITY</div>
+        <h1>SCRIPT<br>KAELL</h1>
+        <p>Copy Script dibawah dan paste di executor kamu.<br>Terima kasih sudah menggunakan Script Kaell Store.</p>
+        
+        <div class="code-container">
+            <div class="code-label">LOADSTRING -></div>
+            <div class="code-box" id="scriptCode">
+                getgenv().Key = "KELLYZ-2X5NYFU6";<br>
+                loadstring(game:HttpGet("https://NAMAPROJECT-kamu.vercel.app/script.lua"))()
+            </div>
+        </div>
+
+        <button onclick="copyScript()">COPY LOADSTRING</button>
+        
+        <div class="footer">PROTECT BY KAELL STORE</div>
+    </div>
+
+    <script>
+        function copyScript() {
+            // Ganti URL di bawah ini dengan URL Vercel kamu nanti setelah di-deploy
+            const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://NAMAPROJECT-kamu.vercel.app/script.lua"))()`;
+            navigator.clipboard.writeText(code).then(() => {
+                alert("Script berhasil di-copy!");
+            });
+        }
+    </script>
+</body>
+</html>
