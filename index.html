@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kellzy Hub Script</title>
+    <title>Kellzy Hub | Kaell Store</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         :root {
             --main-color: #00e5ff;
             --bg-color: #0a0a0a;
-            --card-bg: rgba(18, 18, 18, 0.85); /* Dibuat sedikit transparan biar background fotonya agak tembus */
+            --card-bg: rgba(18, 18, 18, 0.75); 
         }
 
         body { 
             background-color: var(--bg-color);
-            
-            /* PENGATURAN BACKGROUND FOTO */
             background-image: url('https://i.pinimg.com/736x/cb/99/d3/cb99d30e0b0842ae1ba254bb9bac84c3.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            
             color: #ffffff; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             display: flex; 
@@ -27,18 +25,22 @@
             align-items: center; 
             height: 100vh; 
             margin: 0; 
-            transition: background-color 0.5s;
+            overflow: hidden; /* Biar partikel ga bikin scroll */
         }
 
-        /* Tambahan efek gelap (overlay) biar tulisan tetap terbaca jelas meski fotonya terang */
         body::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: -2;
+        }
+
+        /* Container Partikel */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             z-index: -1;
         }
         
@@ -46,12 +48,29 @@
             background-color: var(--card-bg); 
             border: 1px solid var(--main-color);
             border-radius: 16px; 
-            padding: 40px; 
+            padding: 45px 40px 40px 40px; 
             max-width: 450px; 
-            backdrop-filter: blur(10px); /* Efek blur ala kaca/glassmorphism */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            backdrop-filter: blur(12px); 
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
             transition: border-color 0.3s ease;
             position: relative;
+            z-index: 1;
+        }
+
+        /* Maskot Anime Chibi */
+        .mascot {
+            position: absolute;
+            top: -65px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100px;
+            z-index: 2;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        .mascot:hover {
+            transform: translateX(-50%) translateY(-10px);
         }
 
         .color-gui {
@@ -65,144 +84,121 @@
             padding: 5px 10px;
             border-radius: 20px;
             border: 1px solid #333;
+            z-index: 3;
         }
-        .color-gui span {
-            font-size: 10px;
-            color: #ccc;
-            font-weight: bold;
-        }
+        .color-gui span { font-size: 10px; color: #ccc; font-weight: bold; }
         input[type="color"] {
-            -webkit-appearance: none;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            cursor: pointer;
-            padding: 0;
-            background: none;
+            -webkit-appearance: none; border: none; width: 20px; height: 20px; 
+            border-radius: 50%; cursor: pointer; padding: 0; background: none;
         }
-        input[type="color"]::-webkit-color-swatch-wrapper {
-            padding: 0;
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch { border: 2px solid #333; border-radius: 50%; }
+
+        /* Status Undetected */
+        .status-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            width: max-content;
+            margin-bottom: 15px;
         }
-        input[type="color"]::-webkit-color-swatch {
-            border: 2px solid #333;
+        .status-dot {
+            width: 8px; height: 8px;
+            background-color: #00ff00;
             border-radius: 50%;
+            box-shadow: 0 0 10px #00ff00;
+            animation: blink 1.5s infinite;
+        }
+        .status-text { color: #00ff00; font-size: 10px; font-weight: bold; letter-spacing: 1px;}
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
         }
 
-        .badge { 
-            font-size: 10px; 
-            color: var(--main-color); 
-            border: 1px solid var(--main-color); 
-            padding: 4px 12px; 
-            border-radius: 20px; 
-            display: inline-block; 
-            margin-bottom: 20px; 
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        h1 { 
-            font-size: 36px; 
-            margin: 0 0 10px 0; 
-            line-height: 1.1;
-            color: var(--main-color);
-            transition: color 0.3s ease;
-        }
-        p { 
-            color: #ddd; 
-            font-size: 13px; 
-            margin-bottom: 25px; 
-            line-height: 1.5;
-        }
-        .code-container {
-            position: relative;
-            margin-bottom: 25px;
-        }
+        h1 { font-size: 36px; margin: 0 0 5px 0; line-height: 1.1; color: var(--main-color); }
+        p { color: #ddd; font-size: 12px; margin-bottom: 20px; line-height: 1.5; }
+        
+        .code-container { position: relative; margin-bottom: 20px; }
         .code-label {
-            font-size: 10px;
-            color: var(--main-color);
-            position: absolute;
-            top: -8px;
-            left: 15px;
-            background-color: #080808;
-            padding: 0 5px;
-            border-radius: 4px;
-            transition: color 0.3s ease;
+            font-size: 10px; color: var(--main-color); position: absolute;
+            top: -8px; left: 15px; background-color: #080808; padding: 0 5px; border-radius: 4px;
         }
         .code-box { 
-            background-color: rgba(8, 8, 8, 0.9); 
-            border: 1px solid #333; 
-            padding: 20px 15px 15px 15px; 
-            border-radius: 10px; 
-            font-family: 'Courier New', Courier, monospace; 
-            color: #ccc; 
+            background-color: rgba(8, 8, 8, 0.9); border: 1px solid #333; 
+            padding: 20px 15px 15px 15px; border-radius: 10px; 
+            font-family: 'Courier New', Courier, monospace; color: #ccc; font-size: 12px;
+        }
+
+        /* Styling Semua Tombol */
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        .btn-row { display: flex; gap: 10px; }
+        
+        button, .btn-link { 
+            padding: 12px 20px; border-radius: 10px; font-weight: 800; font-size: 12px;
+            cursor: pointer; transition: all 0.3s ease; text-align: center; text-decoration: none;
+            display: flex; justify-content: center; align-items: center; width: 100%; border: none;
+        }
+        
+        .btn-main { background-color: var(--main-color); color: #000; }
+        .btn-main:hover { filter: brightness(1.2); box-shadow: 0 0 15px var(--main-color); }
+        
+        .btn-discord { background-color: rgba(26, 26, 26, 0.8); color: #fff; border: 1px solid #333; }
+        .btn-discord:hover { background-color: #5865F2; border-color: #5865F2; box-shadow: 0 0 15px rgba(88, 101, 242, 0.5); }
+        
+        .btn-store { background-color: transparent; color: var(--main-color); border: 1px solid var(--main-color); }
+        .btn-store:hover { background-color: rgba(0, 229, 255, 0.1); }
+
+        .footer { text-align: center; margin-top: 20px; font-size: 9px; color: #888; letter-spacing: 2px; }
+
+        /* Notifikasi Pop-up (Toast) */
+        .toast {
+            position: fixed;
+            bottom: -100px; /* Sembunyi di bawah */
+            right: 20px;
+            background: rgba(18, 18, 18, 0.9);
+            border-left: 4px solid var(--main-color);
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             font-size: 12px;
-            word-wrap: break-word; 
+            z-index: 999;
+            transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(5px);
         }
-
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        button { 
-            background-color: var(--main-color); 
-            color: #000; 
-            border: none; 
-            padding: 14px 20px; 
-            border-radius: 10px; 
-            width: 100%; 
-            font-weight: 800; 
-            font-size: 13px;
-            cursor: pointer; 
-            transition: all 0.3s ease; 
-        }
-        button:hover { 
-            filter: brightness(1.2);
-            box-shadow: 0 0 15px var(--main-color);
-        }
-
-        /* Styling Tombol Discord */
-        .btn-discord {
-            background-color: rgba(26, 26, 26, 0.8);
-            color: #fff;
-            border: 1px solid #333;
-            text-decoration: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 13px;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
-        .btn-discord:hover {
-            background-color: #5865F2; /* Warna Biru Discord */
-            border-color: #5865F2;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-        }
-
-        .footer { 
-            text-align: center; 
-            margin-top: 25px; 
-            font-size: 9px; 
-            color: #888; 
-            letter-spacing: 2px;
-        }
+        .toast.show { bottom: 20px; }
+        .toast-title { font-weight: bold; color: var(--main-color); margin-bottom: 5px; font-size: 14px;}
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
+
+    <div class="toast" id="welcomeToast">
+        <div class="toast-title">Welcome to Kellzy Hub!</div>
+        <div>Script is updated and fully undetectable. Enjoy! 🚀</div>
+    </div>
+
     <div class="card">
+        <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" alt="Mascot" class="mascot">
+
         <div class="color-gui">
             <span>THEME</span>
             <input type="color" id="themeColor" value="#00e5ff" oninput="changeThemeColor(this.value)">
         </div>
 
-        <div class="badge">SECURITY BY Kellzy Hub</div>
+        <div class="status-box">
+            <div class="status-dot"></div>
+            <div class="status-text">STATUS: UNDETECTED</div>
+        </div>
+
         <h1>KELLZY<br>HUB</h1>
-        <p>Copy Script dibawah dan paste di executor kamu.<br>Terima kasih sudah menggunakan Script Kellzy Hub.</p>
+        <p>Copy Script di bawah dan execute di game. Jangan lupa cek Kellzy Store untuk apparel Roblox keren!</p>
         
         <div class="code-container">
             <div class="code-label">LOADSTRING -></div>
@@ -213,26 +209,66 @@
         </div>
 
         <div class="btn-group">
-            <button onclick="copyScript()">COPY SCRIPT</button>
-            <a href="https://discord.com/invite/Skg2mVqZ2q" class="btn-discord" target="_blank">JOIN DISCORD</a>
+            <div class="btn-row">
+                <button class="btn-main" onclick="copyScript()">COPY SCRIPT</button>
+                <a href="https://discord.com/invite/Skg2mVqZ2q" class="btn-link btn-discord" target="_blank">JOIN DISCORD</a>
+            </div>
+            <a href="https://www.g2g.com/Kaellstoree" class="btn-link btn-store" target="_blank">🛒 KUNJUNGI KAELL STORE</a>
         </div>
         
-        <div class="footer">PROTECT BY KELLZY HUB</div>
+        <div class="footer">PROTECT BY KELLZY HUB & KELLZY STORE</div>
     </div>
 
     <script>
+        // Fitur Ganti Warna
         function changeThemeColor(color) {
             document.documentElement.style.setProperty('--main-color', color);
-            const card = document.querySelector('.card');
-            card.style.boxShadow = `0 0 20px ${color}40`; 
+            document.querySelector('.card').style.boxShadow = `0 0 30px ${color}40`; 
         }
 
+        // Fitur Copy
         function copyScript() {
             const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
             navigator.clipboard.writeText(code).then(() => {
                 alert("Script Kellzy Hub berhasil di-copy!");
             });
         }
+
+        // Munculin Notifikasi Pop-up
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('welcomeToast').classList.add('show');
+            }, 1000); // Muncul setelah 1 detik
+            
+            setTimeout(() => {
+                document.getElementById('welcomeToast').classList.remove('show');
+            }, 6000); // Hilang setelah 6 detik
+        };
+
+        // Setting Animasi Partikel
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 80 },
+                "color": { "value": "#00e5ff" }, // Warna partikel
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#00e5ff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" }, // Garis nyambung ke mouse pas disorot
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.8 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
     </script>
 </body>
 </html>
