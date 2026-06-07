@@ -13,7 +13,8 @@
     
     <style>
         :root {
-            --cyan: #00e5ff; 
+            /* Warna Tema Dinamis (Bisa diganti lewat JS) */
+            --theme-color: #00e5ff; 
             --discord: #5865F2;
             --tiktok: #ff0050;
             --bg-dark: #050505;
@@ -33,16 +34,14 @@
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
         }
 
-        a, button, .interactive-btn {
-            cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important;
-        }
+        a, button, .interactive-btn { cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important; }
 
         body::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%);
-            z-index: 0;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 0;
         }
 
+        /* 1. LOADING SCREEN (ENTER TO BYPASS AUTOPLAY) */
         #loader {
             position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -50,28 +49,36 @@
         }
         .loader-spinner {
             width: 50px; height: 50px; border: 4px solid rgba(0,229,255,0.1);
-            border-top: 4px solid var(--cyan); border-radius: 50%;
-            animation: spin 1s linear infinite; margin-bottom: 25px;
-            box-shadow: 0 0 20px rgba(0,229,255,0.2);
+            border-top: 4px solid var(--theme-color); border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 25px; box-shadow: 0 0 20px var(--theme-color);
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loader-text { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
-        .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--cyan); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
+        .loader-text { color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
+        .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--theme-color); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
 
         #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         .slide-container { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
-        /* PERBAIKAN MASKOT: Menghapus overflow-y: auto yang menyembunyikan maskot */
         .hub-card {
             background: var(--card-glass); width: 90%; max-width: 520px; padding: 45px 50px 30px 50px;
-            border-radius: 24px; border: 1px solid rgba(0, 229, 255, 0.2);
-            backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center; position: relative; 
+            border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1);
+            text-align: center; position: relative; max-height: 95vh; overflow-y: auto;
         }
+        .hub-card::-webkit-scrollbar { width: 0px; }
 
+        /* THEME SWITCHER BUTTON */
+        .theme-switcher {
+            position: absolute; top: 20px; right: 20px; background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px;
+            color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; z-index: 100;
+        }
+        .theme-switcher:hover { background: var(--theme-color); color: #000; }
+
+        /* MASKOT DISEMPURNAKAN (Lebih Kecil & Proporsional) */
         .mascot-wrapper {
-            position: absolute; top: -110px; left: 50%; transform: translateX(-50%);
-            width: 160px; filter: drop-shadow(0 10px 20px rgba(0,229,255,0.4));
+            position: absolute; top: -65px; left: 50%; transform: translateX(-50%);
+            width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
             transition: var(--transition); z-index: 100;
         }
 
@@ -82,58 +89,60 @@
         .status-dot { width: 8px; height: 8px; background: #00ff7f; border-radius: 50%; box-shadow: 0 0 10px #00ff7f; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
 
-        h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--cyan); }
-        .sub-text { color: #aaa; font-size: 13px; margin-bottom: 25px; }
+        h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
+        .sub-text { color: #aaa; font-size: 13px; margin-bottom: 20px; }
 
         .live-counter {
-            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; margin-bottom: 20px;
+            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; margin-bottom: 15px;
             display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,0.05);
         }
         .counter-item span { display: block; font-size: 10px; color: #888; font-weight: 800; text-transform: uppercase; }
-        .counter-item strong { font-size: 16px; color: #fff; font-family: 'JetBrains Mono', monospace; }
+        .counter-item strong { font-size: 14px; color: #fff; font-family: 'JetBrains Mono', monospace; }
 
         .code-box {
             background: #000; border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; color: #ddd; text-align: left; margin-bottom: 20px; border: 1px solid #222;
+            font-size: 11px; color: #ddd; text-align: left; margin-bottom: 15px; border: 1px solid #222;
         }
+
+        /* FAKE TERMINAL LOG */
+        .terminal-box {
+            background: #080808; border-radius: 8px; border: 1px solid #222; padding: 10px;
+            font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--theme-color);
+            text-align: left; height: 45px; overflow-y: hidden; margin-bottom: 20px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+        .terminal-box div { margin-bottom: 3px; opacity: 0.8; }
 
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn {
-            padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
-            font-size: 12px; transition: var(--transition); border: none;
+            padding: 12px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
+            font-size: 11px; transition: var(--transition); border: none;
             display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
         }
-        
         .btn-tiktok { background: var(--tiktok); color: #fff; grid-column: span 2; }
         .btn-tiktok:hover { box-shadow: 0 0 20px rgba(255, 0, 80, 0.5); transform: translateY(-3px); }
-        
-        .btn-primary { background: var(--cyan); color: #000; grid-column: span 2; }
-        .btn-primary:hover { box-shadow: 0 0 25px rgba(0, 229, 255, 0.5); transform: translateY(-3px); }
-        
+        .btn-primary { background: var(--theme-color); color: #000; grid-column: span 2; }
+        .btn-primary:hover { box-shadow: 0 0 25px var(--theme-color); transform: translateY(-3px); }
         .btn-locked { background: #222 !important; color: #666 !important; box-shadow: none !important; opacity: 0.8; }
         .btn-locked:hover { transform: none !important; }
-
         .btn-key { background: #1a1a1a; color: #fff; border: 1px solid #333; }
-        .btn-key:hover { border-color: var(--cyan); color: var(--cyan); }
+        .btn-key:hover { border-color: var(--theme-color); color: var(--theme-color); }
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); transform: translateY(-3px); }
 
-        .catalog-container { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .catalog-title { font-size: 10px; font-weight: 800; color: var(--cyan); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
-        .catalog-scroll {
-            display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;
-            scrollbar-width: thin; scrollbar-color: var(--cyan) #111;
-        }
+        .catalog-container { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .catalog-title { font-size: 10px; font-weight: 800; color: var(--theme-color); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+        .catalog-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: thin; scrollbar-color: var(--theme-color) #111; }
         .catalog-scroll::-webkit-scrollbar { height: 4px; }
-        .catalog-scroll::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; }
+        .catalog-scroll::-webkit-scrollbar-thumb { background: var(--theme-color); border-radius: 10px; }
         .catalog-item {
-            min-width: 110px; background: rgba(0,0,0,0.5); border: 1px solid #222; border-radius: 10px; 
-            padding: 10px; transition: var(--transition); display: block; text-decoration: none;
+            min-width: 100px; background: rgba(0,0,0,0.5); border: 1px solid #222; border-radius: 10px; 
+            padding: 8px; transition: var(--transition); display: block; text-decoration: none;
         }
-        .catalog-item:hover { border-color: var(--cyan); transform: translateY(-5px); background: rgba(0,229,255,0.1); }
+        .catalog-item:hover { border-color: var(--theme-color); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
         .catalog-item img { width: 100%; border-radius: 6px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
-        .catalog-item span { font-size: 10px; color: #fff; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .catalog-item .price { color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 4px; }
+        .catalog-item span { font-size: 9px; color: #fff; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .catalog-item .price { color: var(--theme-color); font-size: 10px; font-weight: 800; margin-top: 4px; }
 
         .executor-status { margin-top: 15px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
@@ -145,16 +154,23 @@
             border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer;
         }
         .audio-btn { color: #fff; transition: 0.3s; }
-        .audio-controls:hover .audio-btn { color: var(--cyan); }
+        .audio-controls:hover .audio-btn { color: var(--theme-color); }
 
         .custom-toast {
             position: fixed; bottom: -100px; right: 30px; background: rgba(15, 15, 15, 0.95);
-            border-left: 4px solid #00ff7f; color: #fff; padding: 15px 25px; border-radius: 8px;
+            border-left: 4px solid var(--theme-color); color: #fff; padding: 15px 25px; border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; font-size: 13px; font-family: 'Urbanist', sans-serif;
             display: flex; align-items: center; gap: 12px; z-index: 1000;
             transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px);
         }
         .custom-toast.show { bottom: 30px; }
+
+        /* MODAL KHUSUS ADBLOCK */
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center;
+            align-items: center; z-index: 9999; backdrop-filter: blur(15px);
+        }
+        .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid #ff3333; text-align: center; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -162,20 +178,32 @@
     <div id="loader">
         <div class="loader-spinner" id="spinnerAnim"></div>
         <div class="loader-text" id="loader-text">Connecting to secure server...</div>
-        <div class="loader-enter-btn" id="enterBtn">CLICK HERE TO ENTER</div>
+        <div class="loader-enter-btn" id="enterBtn"><i class="fa-solid fa-power-off"></i> CLICK HERE TO ENTER</div>
     </div>
 
     <div class="custom-toast" id="toastBox">
-        <i class="fa-solid fa-circle-info" id="toastIcon" style="color: #00ff7f; font-size: 18px;"></i>
+        <i class="fa-solid fa-circle-info" id="toastIcon" style="color: var(--theme-color); font-size: 18px;"></i>
         <span id="toastMsg">Notification</span>
     </div>
 
-    <audio id="bgm" loop autoplay><source src="musik.mp3" type="audio/mpeg"></audio>
+    <div class="modal" id="adblockModal">
+        <div class="modal-content">
+            <i class="fa-solid fa-shield-halved" style="font-size: 50px; color: #ff3333; margin-bottom: 20px;"></i>
+            <h2 style="color: #ff3333; margin-top: 0; font-weight: 800;">ADBLOCK DETECTED!</h2>
+            <p style="color: #ccc; font-size: 14px; line-height: 1.5;">Tolong matikan AdBlock kamu untuk menggunakan Kellzy Hub dan dukung kami terus berkarya. Refresh halaman setelah dimatikan.</p>
+        </div>
+    </div>
 
+    <audio id="bgm" loop autoplay><source src="musik.mp3" type="audio/mpeg"></audio>
     <div id="particles-js"></div>
 
     <div class="slide-container">
         <div class="hub-card">
+            
+            <div class="theme-switcher interactive-btn" onclick="toggleTheme()" title="Change Theme">
+                <i class="fa-solid fa-palette"></i>
+            </div>
+
             <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
 
             <div class="status-badge">
@@ -187,25 +215,27 @@
             <p class="sub-text">Ultimate Roblox Script Provider & Apparel Solution.</p>
 
             <div class="live-counter">
-                <div class="counter-item"><span>Active Users</span><strong id="userCount">1,429</strong></div>
-                <div class="counter-item"><span>Server Status</span><strong style="color: var(--cyan);">STABLE</strong></div>
+                <div class="counter-item"><span>Your Device</span><strong id="deviceType" style="color: var(--theme-color);">Checking..</strong></div>
+                <div class="counter-item"><span>Recommended</span><strong id="recExec">Checking..</strong></div>
             </div>
 
             <div class="code-box">
-                <span style="color: var(--cyan);">-- Kellzy Store Official Loadstring</span><br>
+                <span style="color: var(--theme-color);">-- Kellzy Store Official Loadstring</span><br>
                 getgenv().Key = "KELLYZ-2X5NYFU6";<br>
                 loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()
+            </div>
+
+            <div class="terminal-box" id="terminalLog">
+                <div>[SYSTEM] Initializing Kellzy Engine v2...</div>
             </div>
 
             <div class="btn-grid">
                 <button class="btn btn-tiktok interactive-btn" id="followBtn" onclick="followTikTok()">
                     <i class="fa-brands fa-youtube"></i> SUBSCRIBE YOUTUBE TO UNLOCK
                 </button>
-                
                 <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()">
                     <i class="fa-solid fa-lock"></i> SCRIPT LOCKED
                 </button>
-
                 <a href="LINK_GET_KEY_KAMU_DISINI" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
                 <a href="https://discord.com/invite/Skg2mVqZ2q" target="_blank" class="btn btn-discord interactive-btn"><i class="fa-brands fa-discord"></i> DISCORD</a>
             </div>
@@ -215,18 +245,15 @@
                 <div class="catalog-scroll">
                     <a href="LINK_ITEM_ROBLOX_ATAU_ENEBA_1" target="_blank" class="catalog-item interactive-btn">
                         <img src="https://tr.rbxcdn.com/13c6b22eb01e4a6a58bc2fba3f7215ed/420/420/Shirt/Png" alt="Apparel">
-                        <span>Cyan Chibi Shirt</span>
-                        <div class="price">R$ 5</div>
+                        <span>Cyan Chibi Shirt</span><div class="price">R$ 5</div>
                     </a>
                     <a href="https://www.roblox.com/share/g/506706077" target="_blank" class="catalog-item interactive-btn">
                         <img src="https://tr.rbxcdn.com/f9a8ed2c45f061f0de9d5f76b9f29910/420/420/Pants/Png" alt="Apparel">
-                        <span>Dark Y2K Pants</span>
-                        <div class="price">R$ 5</div>
+                        <span>Dark Y2K Pants</span><div class="price">R$ 5</div>
                     </a>
                     <a href="LINK_ITEM_ROBLOX_ATAU_ENEBA_3" target="_blank" class="catalog-item interactive-btn">
                         <img src="https://cdn.eneba.com/images/eneba-logo-social.jpg" alt="Eneba">
-                        <span>Roblox Gift Card</span>
-                        <div class="price">$ 10.00</div>
+                        <span>Roblox Gift Card</span><div class="price">$ 10.00</div>
                     </a>
                 </div>
             </div>
@@ -238,7 +265,7 @@
                 <div class="exec-badge"><i class="fa-solid fa-circle status-patched"></i> Arceus X</div>
             </div>
 
-            <div style="margin-top: 20px; font-size: 10px; color: #444; font-weight: 800; letter-spacing: 3px;">
+            <div style="margin-top: 15px; font-size: 9px; color: #444; font-weight: 800; letter-spacing: 3px;">
                 PROTECTED BY KELLZY HUB SECURITY
             </div>
         </div>
@@ -250,33 +277,81 @@
     </div>
 
     <script>
-        // --- SISTEM LOADING BARU (DENGAN TOMBOL ENTER UNTUK BYPASS AUTOPLAY BROWSER) ---
+        // --- 1. THEME SWITCHER ---
+        const themes = ['#00e5ff', '#39ff14', '#ff66cc']; // Cyan, Hacker Green, Kawaii Pink
+        let currentTheme = 0;
+        function toggleTheme() {
+            currentTheme = (currentTheme + 1) % themes.length;
+            document.documentElement.style.setProperty('--theme-color', themes[currentTheme]);
+            showToast("Theme Changed!", themes[currentTheme], "fa-palette");
+            clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+        }
+
+        // --- 2. AUTO-DEVICE DETECTOR ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const ua = navigator.userAgent;
+            let device = "PC / Desktop";
+            let rec = "Wave / Krampus";
+            if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; }
+            else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
+            document.getElementById('deviceType').innerText = device;
+            document.getElementById('recExec').innerText = rec;
+        });
+
+        // --- 3. FAKE TERMINAL LOG ANIMATION ---
+        const termLogs = [
+            "[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS",
+            "[SYSTEM] Fetching Kellzy Key API... OK",
+            "[SYSTEM] Securing Connection... ENCRYPTED",
+            "[SYSTEM] Injecting Modules... READY",
+            "[SYSTEM] Awaiting User Execution..."
+        ];
+        let termIdx = 0;
+        const termEl = document.getElementById('terminalLog');
+        setInterval(() => {
+            if(termIdx < termLogs.length) {
+                const newLog = document.createElement('div');
+                newLog.innerText = termLogs[termIdx];
+                termEl.appendChild(newLog);
+                termEl.scrollTop = termEl.scrollHeight;
+                termIdx++;
+            }
+        }, 1500);
+
+        // --- 4. ANTI-ADBLOCK DETECTOR ---
+        setTimeout(() => {
+            let ad = document.createElement('div');
+            ad.innerHTML = '&nbsp;';
+            ad.className = 'adsbox'; // Class yg dibenci adblocker
+            document.body.appendChild(ad);
+            window.setTimeout(function() {
+              if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; }
+              ad.remove();
+            }, 100);
+        }, 2500);
+
+        // --- LOADING SCREEN ---
         const loaderText = document.getElementById('loader-text');
         const loaderScreen = document.getElementById('loader');
         const enterBtn = document.getElementById('enterBtn');
         const spinnerAnim = document.getElementById('spinnerAnim');
         const bgm = document.getElementById('bgm');
         
-        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading User Interface...", "Initialization Complete."];
+        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading Interface...", "Initialization Complete."];
         let textIndex = 0;
-        
         const textInterval = setInterval(() => {
             textIndex++;
-            if (textIndex < loadingTexts.length) { 
-                loaderText.innerText = loadingTexts[textIndex]; 
-            } else { 
-                clearInterval(textInterval); 
-                spinnerAnim.style.display = 'none';
-                loaderText.style.display = 'none';
-                enterBtn.style.display = 'block'; // Munculkan tombol enter
+            if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
+            else { 
+                clearInterval(textInterval); spinnerAnim.style.display = 'none';
+                loaderText.style.display = 'none'; enterBtn.style.display = 'block'; 
             }
         }, 800);
 
-        // Pas dipencet tombol Enter, layar ilang dan musik dijamin 100% jalan
         enterBtn.addEventListener('click', () => {
             loaderScreen.style.opacity = '0'; 
             setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
-            bgm.play().catch(e => console.log("Audio play error:", e));
+            bgm.play().catch(e => console.log("Audio play error"));
         });
 
         let originalTitle = document.title;
@@ -300,13 +375,11 @@
             else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
         }
 
-        function showToast(message, color = "#00ff7f", iconClass = "fa-circle-check") {
+        function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") {
             const toast = document.getElementById("toastBox");
             const icon = document.getElementById("toastIcon");
             const msg = document.getElementById("toastMsg");
-            toast.style.borderLeftColor = color;
-            icon.style.color = color;
-            icon.className = `fa-solid ${iconClass}`;
+            toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`;
             msg.innerText = message;
             toast.classList.add("show");
             setTimeout(() => { toast.classList.remove("show"); }, 3500);
@@ -323,7 +396,7 @@
             setTimeout(() => {
                 isScriptUnlocked = true;
                 followBtn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
-                followBtn.style.background = '#00ff7f';
+                followBtn.style.background = 'var(--theme-color)';
                 followBtn.style.color = '#000';
                 followBtn.style.pointerEvents = 'none';
 
@@ -331,20 +404,15 @@
                 copyBtn.classList.remove('btn-locked');
                 copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
                 
-                showToast("Unlocked! You can now copy the script.", "#00ff7f");
+                showToast("Unlocked! You can now copy the script.", "var(--theme-color)");
                 clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
             }, 5000);
         }
 
         function copyScript() {
-            if (!isScriptUnlocked) {
-                showToast("Tolong Subscribe Youtube dulu untuk membuka Script!", "#ff3333", "fa-circle-xmark");
-                return;
-            }
+            if (!isScriptUnlocked) { showToast("Tolong Subscribe Youtube dulu untuk membuka Script!", "#ff3333", "fa-circle-xmark"); return; }
             const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
-            navigator.clipboard.writeText(code).then(() => {
-                showToast("Script Copied Successfully!", "#00ff7f", "fa-circle-check");
-            });
+            navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); });
         }
 
         let mascotClicks = 0;
@@ -355,17 +423,10 @@
             setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200);
 
             if (mascotClicks === 5) {
-                showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--cyan)", "fa-gift");
+                showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--theme-color)", "fa-gift");
                 mascotClicks = 0;
             }
         }
-
-        setInterval(() => {
-            const counter = document.getElementById('userCount');
-            let val = parseInt(counter.innerText.replace(',', ''));
-            val += Math.floor(Math.random() * 5) - 2; 
-            counter.innerText = val.toLocaleString();
-        }, 3000);
 
         document.onkeydown = function(e) {
             if(e.keyCode == 123) { return false; }
