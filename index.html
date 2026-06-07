@@ -15,6 +15,7 @@
         :root {
             --cyan: #00e5ff; 
             --discord: #5865F2;
+            --tiktok: #ff0050;
             --bg-dark: #050505;
             --card-glass: rgba(15, 15, 15, 0.85);
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -22,6 +23,7 @@
 
         * { box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
+        /* 3. KURSOR KUSTOM TEMA GAMING/ANIME */
         body {
             margin: 0; padding: 0;
             background-color: var(--bg-dark);
@@ -29,6 +31,13 @@
             background-size: cover; background-position: center; background-attachment: fixed;
             font-family: 'Urbanist', sans-serif; color: #ffffff;
             height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
+            /* Ganti kursor default jadi Neon Cyan */
+            cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
+        }
+
+        /* Ganti kursor saat diarahkan ke tombol */
+        a, button, .interactive-btn {
+            cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important;
         }
 
         body::before {
@@ -37,7 +46,6 @@
             z-index: 0;
         }
 
-        /* 1. CINEMATIC LOADING SCREEN */
         #loader {
             position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -50,80 +58,91 @@
             box-shadow: 0 0 20px rgba(0,229,255,0.2);
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .loader-text {
-            color: var(--cyan); font-family: 'JetBrains Mono', monospace; 
-            font-size: 13px; letter-spacing: 2px; font-weight: 700;
-        }
+        .loader-text { color: var(--cyan); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; }
 
-        /* Container Partikel */
         #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-
         .slide-container { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
         .hub-card {
-            background: var(--card-glass); width: 90%; max-width: 520px; padding: 50px;
+            background: var(--card-glass); width: 90%; max-width: 520px; padding: 45px 50px 30px 50px;
             border-radius: 24px; border: 1px solid rgba(0, 229, 255, 0.2);
             backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            text-align: center; position: relative;
+            text-align: center; position: relative; max-height: 95vh; overflow-y: auto;
         }
+        /* Hide scrollbar di dalam card */
+        .hub-card::-webkit-scrollbar { width: 0px; }
 
         .mascot-wrapper {
             position: absolute; top: -110px; left: 50%; transform: translateX(-50%);
             width: 160px; filter: drop-shadow(0 10px 20px rgba(0,229,255,0.4));
-            transition: var(--transition); cursor: pointer;
+            transition: var(--transition);
         }
-        .mascot-wrapper:hover { transform: translateX(-50%) translateY(-15px) scale(1.05); }
 
         .status-badge {
             display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 127, 0.1);
-            padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 25px;
+            padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 20px;
         }
-        .status-dot {
-            width: 8px; height: 8px; background: #00ff7f; border-radius: 50%;
-            box-shadow: 0 0 10px #00ff7f; animation: pulse 2s infinite;
-        }
+        .status-dot { width: 8px; height: 8px; background: #00ff7f; border-radius: 50%; box-shadow: 0 0 10px #00ff7f; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } 100% { transform: scale(1); opacity: 1; } }
 
-        h1 { font-size: 52px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--cyan); }
-        .sub-text { color: #aaa; font-size: 14px; margin-bottom: 30px; }
+        h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--cyan); }
+        .sub-text { color: #aaa; font-size: 13px; margin-bottom: 25px; }
 
         .live-counter {
-            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 25px;
+            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; margin-bottom: 20px;
             display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,0.05);
         }
         .counter-item span { display: block; font-size: 10px; color: #888; font-weight: 800; text-transform: uppercase; }
-        .counter-item strong { font-size: 18px; color: #fff; font-family: 'JetBrains Mono', monospace; }
+        .counter-item strong { font-size: 16px; color: #fff; font-family: 'JetBrains Mono', monospace; }
 
         .code-box {
-            background: #000; border-radius: 12px; padding: 20px; font-family: 'JetBrains Mono', monospace;
-            font-size: 12px; color: #ddd; text-align: left; margin-bottom: 25px; border: 1px solid #222;
+            background: #000; border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: #ddd; text-align: left; margin-bottom: 20px; border: 1px solid #222;
         }
 
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn {
-            padding: 15px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
-            font-size: 12px; cursor: pointer; transition: var(--transition); border: none;
-            display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
+            padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
+            font-size: 12px; transition: var(--transition); border: none;
+            display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
         }
+        
+        .btn-tiktok { background: var(--tiktok); color: #fff; grid-column: span 2; }
+        .btn-tiktok:hover { box-shadow: 0 0 20px rgba(255, 0, 80, 0.5); transform: translateY(-3px); }
+        
         .btn-primary { background: var(--cyan); color: #000; grid-column: span 2; }
         .btn-primary:hover { box-shadow: 0 0 25px rgba(0, 229, 255, 0.5); transform: translateY(-3px); }
+        
+        /* State Tombol Terkunci */
+        .btn-locked { background: #222 !important; color: #666 !important; box-shadow: none !important; opacity: 0.8; }
+        .btn-locked:hover { transform: none !important; }
+
         .btn-key { background: #1a1a1a; color: #fff; border: 1px solid #333; }
         .btn-key:hover { border-color: var(--cyan); color: var(--cyan); }
         .btn-discord { background: var(--discord); color: #fff; }
         .btn-discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); transform: translateY(-3px); }
 
-        /* 4. EXECUTOR STATUS BOARD */
-        .executor-status {
-            margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+        /* 2. ETALASE KATALOG (Roblox & Eneba) */
+        .catalog-container { margin-top: 25px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .catalog-title { font-size: 10px; font-weight: 800; color: var(--cyan); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+        .catalog-scroll {
+            display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;
+            scrollbar-width: thin; scrollbar-color: var(--cyan) #111;
         }
-        .exec-badge {
-            background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 50px;
-            font-size: 9px; font-weight: 800; letter-spacing: 1px; color: #aaa;
-            border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px;
+        .catalog-scroll::-webkit-scrollbar { height: 4px; }
+        .catalog-scroll::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 10px; }
+        .catalog-item {
+            min-width: 110px; background: rgba(0,0,0,0.5); border: 1px solid #222; border-radius: 10px; 
+            padding: 10px; transition: var(--transition); display: block; text-decoration: none;
         }
-        .status-working { color: #00ff7f; }
-        .status-patched { color: #ff3333; }
+        .catalog-item:hover { border-color: var(--cyan); transform: translateY(-5px); background: rgba(0,229,255,0.1); }
+        .catalog-item img { width: 100%; border-radius: 6px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
+        .catalog-item span { font-size: 10px; color: #fff; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .catalog-item .price { color: var(--cyan); font-size: 11px; font-weight: 800; margin-top: 4px; }
+
+        .executor-status { margin-top: 15px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
+        .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
         .audio-controls {
             position: fixed; bottom: 30px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 20px;
@@ -133,7 +152,6 @@
         .audio-btn { color: #fff; transition: 0.3s; }
         .audio-controls:hover .audio-btn { color: var(--cyan); }
 
-        /* 2. CUSTOM TOAST NOTIFICATION */
         .custom-toast {
             position: fixed; bottom: -100px; right: 30px; background: rgba(15, 15, 15, 0.95);
             border-left: 4px solid #00ff7f; color: #fff; padding: 15px 25px; border-radius: 8px;
@@ -147,10 +165,7 @@
             position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center;
             align-items: center; z-index: 999; backdrop-filter: blur(15px);
         }
-        .modal-content {
-            background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px;
-            border: 1px solid var(--cyan); text-align: left;
-        }
+        .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid var(--cyan); text-align: left; }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -161,19 +176,17 @@
     </div>
 
     <div class="custom-toast" id="toastBox">
-        <i class="fa-solid fa-circle-check" style="color: #00ff7f; font-size: 18px;"></i>
-        <span>Script Copied Successfully!</span>
+        <i class="fa-solid fa-circle-info" id="toastIcon" style="color: #00ff7f; font-size: 18px;"></i>
+        <span id="toastMsg">Notification</span>
     </div>
 
-    <audio id="bgm" loop>
-        <source src="musik.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="bgm" loop><source src="musik.mp3" type="audio/mpeg"></audio>
 
     <div id="particles-js"></div>
 
     <div class="slide-container">
         <div class="hub-card">
-            <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" alt="Mascot">
+            <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
 
             <div class="status-badge">
                 <div class="status-dot"></div>
@@ -184,14 +197,8 @@
             <p class="sub-text">Ultimate Roblox Script Provider & Apparel Solution.</p>
 
             <div class="live-counter">
-                <div class="counter-item">
-                    <span>Active Users</span>
-                    <strong id="userCount">1,429</strong>
-                </div>
-                <div class="counter-item">
-                    <span>Server Status</span>
-                    <strong style="color: var(--cyan);">STABLE</strong>
-                </div>
+                <div class="counter-item"><span>Active Users</span><strong id="userCount">1,429</strong></div>
+                <div class="counter-item"><span>Server Status</span><strong style="color: var(--cyan);">STABLE</strong></div>
             </div>
 
             <div class="code-box">
@@ -201,18 +208,37 @@
             </div>
 
             <div class="btn-grid">
-                <button class="btn btn-primary interactive-btn" onclick="copyScript()">
-                    <i class="fa-solid fa-copy"></i> COPY LOADSTRING
+                <button class="btn btn-tiktok interactive-btn" id="followBtn" onclick="followTikTok()">
+                    <i class="fa-brands fa-tiktok"></i> FOLLOW TIKTOK TO UNLOCK SCRIPT
                 </button>
-                <a href="https://discord.com/invite/Skg2mVqZ2qI" target="_blank" class="btn btn-key interactive-btn">
-                    <i class="fa-solid fa-key"></i> GET KEY
-                </a>
-                <a href="https://discord.com/invite/Skg2mVqZ2q" target="_blank" class="btn btn-discord interactive-btn">
-                    <i class="fa-brands fa-discord"></i> JOIN DISCORD
-                </a>
-                <button class="btn btn-key interactive-btn" onclick="toggleModal()" style="grid-column: span 2;">
-                    <i class="fa-solid fa-list-check"></i> VIEW CHANGELOG
+                
+                <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()">
+                    <i class="fa-solid fa-lock"></i> SCRIPT LOCKED
                 </button>
+
+                <a href="LINK_GET_KEY_KAMU_DISINI" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
+                <a href="https://discord.com/invite/Skg2mVqZ2q" target="_blank" class="btn btn-discord interactive-btn"><i class="fa-brands fa-discord"></i> DISCORD</a>
+            </div>
+
+            <div class="catalog-container">
+                <div class="catalog-title"><i class="fa-solid fa-bag-shopping"></i> Kellzy Store Apparel & Eneba</div>
+                <div class="catalog-scroll">
+                    <a href="LINK_ITEM_ROBLOX_ATAU_ENEBA_1" target="_blank" class="catalog-item interactive-btn">
+                        <img src="https://tr.rbxcdn.com/13c6b22eb01e4a6a58bc2fba3f7215ed/420/420/Shirt/Png" alt="Apparel">
+                        <span>Cyan Chibi Shirt</span>
+                        <div class="price">R$ 5</div>
+                    </a>
+                    <a href="https://www.roblox.com/share/g/506706077" target="_blank" class="catalog-item interactive-btn">
+                        <img src="https://tr.rbxcdn.com/f9a8ed2c45f061f0de9d5f76b9f29910/420/420/Pants/Png" alt="Apparel">
+                        <span>Dark Y2K Pants</span>
+                        <div class="price">R$ 5</div>
+                    </a>
+                    <a href="LINK_ITEM_ROBLOX_ATAU_ENEBA_3" target="_blank" class="catalog-item interactive-btn">
+                        <img src="https://cdn.eneba.com/images/eneba-logo-social.jpg" alt="Eneba">
+                        <span>Roblox Gift Card</span>
+                        <div class="price">$ 10.00</div>
+                    </a>
+                </div>
             </div>
 
             <div class="executor-status">
@@ -222,112 +248,120 @@
                 <div class="exec-badge"><i class="fa-solid fa-circle status-patched"></i> Arceus X</div>
             </div>
 
-            <div style="margin-top: 25px; font-size: 10px; color: #444; font-weight: 800; letter-spacing: 3px;">
+            <div style="margin-top: 20px; font-size: 10px; color: #444; font-weight: 800; letter-spacing: 3px;">
                 PROTECTED BY KELLZY HUB SECURITY
             </div>
         </div>
     </div>
 
     <div class="audio-controls interactive-btn" onclick="toggleMusic()">
-        <div class="audio-btn" id="musicToggle">
-            <i class="fa-solid fa-play"></i>
-        </div>
-        <span style="font-size: 10px; font-weight: 800; color: #888;">KELLZY RADIO - PLAYING</span>
-    </div>
-
-    <div class="modal" id="updateModal">
-        <div class="modal-content">
-            <h2 style="color: var(--cyan); margin-top: 0;">PATCH NOTES v2.0.4</h2>
-            <ul style="color: #ccc; font-size: 14px; line-height: 1.8; padding-left: 20px;">
-                <li>Added New Bypass Anti-Cheat</li>
-                <li>Optimized Auto-Farm Speed</li>
-                <li>Fixed UI Lag in Mobile Executor</li>
-                <li>Added Kellzy Store Apparel Support</li>
-            </ul>
-            <button class="btn btn-primary interactive-btn" style="margin-top: 20px; width: 100%;" onclick="toggleModal()">CLOSE</button>
-        </div>
+        <div class="audio-btn" id="musicToggle"><i class="fa-solid fa-play"></i></div>
+        <span style="font-size: 10px; font-weight: 800; color: #888;">KELLZY RADIO</span>
     </div>
 
     <script>
-        // --- FITUR LOADING SCREEN ---
         const loaderText = document.getElementById('loader-text');
         const loaderScreen = document.getElementById('loader');
-        const loadingTexts = [
-            "Connecting to secure server...",
-            "Bypassing Anti-Cheat...",
-            "Loading User Interface...",
-            "Welcome to Kellzy Store."
-        ];
-        
+        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading User Interface...", "Welcome to Kellzy Store."];
         let textIndex = 0;
         const textInterval = setInterval(() => {
             textIndex++;
-            if (textIndex < loadingTexts.length) {
-                loaderText.innerText = loadingTexts[textIndex];
-            } else {
-                clearInterval(textInterval);
-                setTimeout(() => {
-                    loaderScreen.style.opacity = '0';
-                    loaderScreen.style.visibility = 'hidden';
-                }, 500);
-            }
-        }, 800); // Ganti teks tiap 0.8 detik
+            if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
+            else { clearInterval(textInterval); setTimeout(() => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; }, 500); }
+        }, 800);
 
-        // --- FITUR DYNAMIC BROWSER TAB ---
         let originalTitle = document.title;
         document.addEventListener("visibilitychange", function() {
-            if (document.hidden) {
-                document.title = "⚠️ Hei, Scriptnya Belum Di-copy!";
-            } else {
-                document.title = originalTitle;
-            }
+            if (document.hidden) { document.title = "⚠️ Hei, Scriptnya Belum Di-copy!"; } 
+            else { document.title = originalTitle; }
         });
 
-        // --- SETUP AUDIO (BGM & SFX) ---
         const bgm = document.getElementById('bgm');
-        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3');
-        hoverSfx.volume = 0.3;
-        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3');
-        clickSfx.volume = 0.5;
+        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3;
+        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
 
         const interactiveBtns = document.querySelectorAll('.interactive-btn');
         interactiveBtns.forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {});
-            });
-            btn.addEventListener('click', () => {
-                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-            });
+            btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); });
+            btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); });
         });
 
         function toggleMusic() {
             const icon = document.querySelector('#musicToggle i');
-            if (bgm.paused) {
-                bgm.play(); icon.className = 'fa-solid fa-pause';
-            } else {
-                bgm.pause(); icon.className = 'fa-solid fa-play';
-            }
+            if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; } 
+            else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
         }
 
-        // --- FITUR COPY SCRIPT & CUSTOM TOAST ---
+        // FUNGSI CUSTOM TOAST UNIVERSAL
+        function showToast(message, color = "#00ff7f", iconClass = "fa-circle-check") {
+            const toast = document.getElementById("toastBox");
+            const icon = document.getElementById("toastIcon");
+            const msg = document.getElementById("toastMsg");
+            
+            toast.style.borderLeftColor = color;
+            icon.style.color = color;
+            icon.className = `fa-solid ${iconClass}`;
+            msg.innerText = message;
+            
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 3500);
+        }
+
+        // --- SISTEM GATEWAY TIKTOK ---
+        let isScriptUnlocked = false;
+
+        function followTikTok() {
+            // GANTI LINK TIKTOK KAMU DI SINI
+            window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
+            
+            const followBtn = document.getElementById('followBtn');
+            followBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> VERIFYING...';
+            followBtn.style.background = '#333';
+            
+            // Simulasi verifikasi selama 5 detik
+            setTimeout(() => {
+                isScriptUnlocked = true;
+                followBtn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
+                followBtn.style.background = '#00ff7f';
+                followBtn.style.color = '#000';
+                followBtn.style.pointerEvents = 'none'; // Matikan tombol tiktok
+
+                const copyBtn = document.getElementById('copyBtn');
+                copyBtn.classList.remove('btn-locked');
+                copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
+                
+                showToast("Unlocked! You can now copy the script.", "#00ff7f");
+                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+            }, 5000);
+        }
+
+        // --- SISTEM COPY SCRIPT ---
         function copyScript() {
+            if (!isScriptUnlocked) {
+                showToast("Tolong Subscribe Youtube dulu untuk membuka Script!", "#ff3333", "fa-circle-xmark");
+                return;
+            }
             const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
             navigator.clipboard.writeText(code).then(() => {
-                const toast = document.getElementById("toastBox");
-                toast.classList.add("show");
-                // Hilangkan toast setelah 3 detik
-                setTimeout(() => {
-                    toast.classList.remove("show");
-                }, 3000);
+                showToast("Script Copied Successfully!", "#00ff7f", "fa-circle-check");
             });
         }
 
-        function toggleModal() {
-            const modal = document.getElementById('updateModal');
-            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+        // --- EASTER EGG MASKOT ---
+        let mascotClicks = 0;
+        function mascotClick() {
+            mascotClicks++;
+            const mascot = document.getElementById('mascotImg');
+            // Efek goyang setiap diklik
+            mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`;
+            setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200);
+
+            if (mascotClicks === 5) {
+                showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--cyan)", "fa-gift");
+                mascotClicks = 0; // Reset hitungan
+            }
         }
 
-        // --- ANIMASI COUNTER USER ---
         setInterval(() => {
             const counter = document.getElementById('userCount');
             let val = parseInt(counter.innerText.replace(',', ''));
@@ -335,7 +369,6 @@
             counter.innerText = val.toLocaleString();
         }, 3000);
 
-        // --- SECURITY (ANTI MALING SCRIPT) ---
         document.onkeydown = function(e) {
             if(e.keyCode == 123) { return false; }
             if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
@@ -343,27 +376,16 @@
             if(e.ctrlKey && e.keyCode == 85) { return false; }
         };
 
-        // --- SETUP PARTIKEL HATI (LIGHT BLUE CYAN) ---
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
-
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 40 },
-                "color": { "value": "#00e5ff" },
+                "number": { "value": 40 }, "color": { "value": "#00e5ff" },
                 "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } },
                 "opacity": { "value": 0.6, "random": true },
                 "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } },
-                "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" }
+                "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" }
             },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": { "enable": true, "mode": "repulse" },
-                    "onclick": { "enable": true, "mode": "push" }
-                },
-                "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } }
-            },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } },
             "retina_detect": true
         });
     </script>
