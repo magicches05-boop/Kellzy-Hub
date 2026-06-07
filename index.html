@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kellzy Hub Script</title>
     <style>
+        /* CSS Variables untuk warna dinamis */
+        :root {
+            --main-color: #00e5ff; /* Warna default: Cyan */
+            --bg-color: #0a0a0a;
+            --card-bg: #121212;
+        }
+
         body { 
-            background-color: #0a0a0a; 
+            background-color: var(--bg-color); 
             color: #ffffff; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             display: flex; 
@@ -14,30 +21,73 @@
             align-items: center; 
             height: 100vh; 
             margin: 0; 
+            transition: background-color 0.5s;
         }
+        
         .card { 
-            background-color: #121212; 
-            border: 1px solid #00e5ff;
+            background-color: var(--card-bg); 
+            border: 1px solid var(--main-color);
             border-radius: 16px; 
             padding: 40px; 
             max-width: 450px; 
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s ease;
+            position: relative;
         }
+
+        /* Bagian Pengaturan Warna (GUI) */
+        .color-gui {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #1a1a1a;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+        .color-gui span {
+            font-size: 10px;
+            color: #888;
+            font-weight: bold;
+        }
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+            background: none;
+        }
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+        input[type="color"]::-webkit-color-swatch {
+            border: 2px solid #333;
+            border-radius: 50%;
+        }
+
         .badge { 
             font-size: 10px; 
-            color: #00e5ff; 
-            border: 1px solid #00e5ff; 
+            color: var(--main-color); 
+            border: 1px solid var(--main-color); 
             padding: 4px 12px; 
             border-radius: 20px; 
             display: inline-block; 
             margin-bottom: 20px; 
             letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
         h1 { 
             font-size: 36px; 
             margin: 0 0 10px 0; 
             line-height: 1.1;
-            color: #00e5ff;
+            color: var(--main-color);
+            transition: color 0.3s ease;
         }
         p { 
             color: #888; 
@@ -51,12 +101,13 @@
         }
         .code-label {
             font-size: 10px;
-            color: #00e5ff;
+            color: var(--main-color);
             position: absolute;
             top: -8px;
             left: 15px;
-            background-color: #121212;
+            background-color: var(--card-bg);
             padding: 0 5px;
+            transition: color 0.3s ease;
         }
         .code-box { 
             background-color: #080808; 
@@ -68,22 +119,51 @@
             font-size: 12px;
             word-wrap: break-word; 
         }
+
+        /* Container untuk tombol-tombol */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
         button { 
-            background-color: #00e5ff; 
+            background-color: var(--main-color); 
             color: #000; 
             border: none; 
             padding: 14px 20px; 
             border-radius: 10px; 
             width: 100%; 
             font-weight: 800; 
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer; 
             transition: all 0.3s ease; 
         }
         button:hover { 
-            background-color: #00b3cc; 
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px var(--main-color);
         }
+
+        .btn-tiktok {
+            background-color: #1a1a1a;
+            color: #fff;
+            border: 1px solid #333;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 13px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .btn-tiktok:hover {
+            background-color: #333;
+            border-color: var(--main-color);
+            color: var(--main-color);
+        }
+
         .footer { 
             text-align: center; 
             margin-top: 25px; 
@@ -95,7 +175,12 @@
 </head>
 <body>
     <div class="card">
-        <div class="badge">SCRIPT SECURITY</div>
+        <div class="color-gui">
+            <span>THEME</span>
+            <input type="color" id="themeColor" value="#00e5ff" oninput="changeThemeColor(this.value)">
+        </div>
+
+        <div class="badge">SECURITY BY Kellzy Hub</div>
         <h1>KELLZY<br>HUB</h1>
         <p>Copy Script dibawah dan paste di executor kamu.<br>Terima kasih sudah menggunakan Script Kellzy Hub.</p>
         
@@ -107,12 +192,25 @@
             </div>
         </div>
 
-        <button onclick="copyScript()">COPY LOADSTRING</button>
+        <div class="btn-group">
+            <button onclick="copyScript()">COPY SCRIPT</button>
+            <a href="#" class="btn-tiktok" target="_blank">FOLLOW TIKTOK</a>
+        </div>
         
         <div class="footer">PROTECT BY KELLZY HUB</div>
     </div>
 
     <script>
+        // Fitur Ganti Warna Tema (GUI)
+        function changeThemeColor(color) {
+            document.documentElement.style.setProperty('--main-color', color);
+            
+            // Opsional: bikin efek glow (bayangan) ngikutin warna yang dipilih
+            const card = document.querySelector('.card');
+            card.style.boxShadow = `0 0 20px ${color}33`; // 33 adalah kode hex transparan
+        }
+
+        // Fitur Copy
         function copyScript() {
             const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
             navigator.clipboard.writeText(code).then(() => {
