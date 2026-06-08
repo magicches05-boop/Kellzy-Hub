@@ -83,8 +83,8 @@
         #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
 
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
-        /* TAMBAHKAN KODE INI DI BAWAHNYA */
         .top-controls-left { position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; z-index: 100; }
+
         .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; }
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
@@ -161,12 +161,11 @@
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
         .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid #ff3333; text-align: center; }
 
-        /* --- STYLING MODAL BARU (Store, Key, Changelog) --- */
+        /* --- STYLING MODAL (Store, Key, Changelog) --- */
         .modal-glass { background: rgba(15, 15, 15, 0.95); width: 90%; max-width: 450px; padding: 30px; border-radius: 20px; border: 1px solid var(--theme-color); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; }
         .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; color: #aaa; font-size: 18px; transition: 0.3s; }
         .close-modal:hover { color: #ff3333; }
 
-        /* Store Grid Modal */
         .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; padding-right: 5px;}
         .store-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; }
         .store-item:hover { border-color: var(--theme-color); transform: translateY(-3px); }
@@ -174,23 +173,42 @@
         .store-item span { font-size: 11px; font-weight: 800; color: #fff; display: block; }
         .store-item .price { color: #00ff7f; font-size: 10px; margin-top: 4px; font-family: 'JetBrains Mono'; }
 
-        /* Key Input Container */
         .key-input-container { margin: 20px 0; }
         .key-input-container input { width: 100%; padding: 15px; background: #050505; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 14px; margin-bottom: 15px; outline: none; }
         .key-input-container input:focus { border-color: var(--theme-color); }
 
-        /* Changelog Content */
         .changelog-content { text-align: left; background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; max-height: 250px; overflow-y: auto; margin-top: 15px;}
         .changelog-content span.add { color: #00ff7f; }
         .changelog-content span.fix { color: #ffaa00; }
         .changelog-content span.del { color: #ff3333; }
 
-        /* Search Bar */
         .search-box { width: 100%; max-width: 400px; margin: 0 auto 20px auto; position: relative; }
         .search-box input { width: 100%; padding: 12px 15px 12px 40px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Urbanist', sans-serif; font-size: 12px; transition: var(--transition); outline: none; }
         .search-box input:focus { border-color: var(--theme-color); box-shadow: 0 0 15px rgba(0,229,255,0.2); }
         .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 14px; transition: var(--transition); }
         .search-box input:focus + i { color: var(--theme-color); }
+
+        /* --- CSS UNTUK FITUR SCROLL BAWAH --- */
+        .dll-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; margin-bottom: 40px; text-align: left; }
+        .dll-item { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
+        .dll-item:hover { border-color: var(--theme-color); transform: translateX(5px); background: rgba(0, 229, 255, 0.05); }
+        .dll-info { display: flex; align-items: center; gap: 15px; }
+        .dll-icon { font-size: 24px; color: var(--theme-color); width: 30px; text-align: center; }
+        .dll-text { display: flex; flex-direction: column; }
+        .dll-name { font-size: 13px; font-weight: 800; color: #fff; }
+        .dll-desc { font-size: 10px; color: #888; font-family: 'JetBrains Mono', monospace; }
+        .dll-status-badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .bg-working { background: rgba(0, 255, 127, 0.2); color: #00ff7f; border: 1px solid #00ff7f; }
+        .bg-patched { background: rgba(255, 51, 51, 0.2); color: #ff3333; border: 1px solid #ff3333; }
+
+        .vip-leaderboard { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; margin-top: 20px; }
+        .lb-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; align-items: center; }
+        .lb-row:last-child { border-bottom: none; }
+        .lb-header { background: rgba(0, 229, 255, 0.1); font-weight: 800; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; }
+        .lb-rank { font-weight: 800; font-size: 14px; width: 30px; }
+        .rank-1 { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+        .rank-2 { color: #c0c0c0; }
+        .rank-3 { color: #cd7f32; }
 
         #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
         .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
@@ -369,7 +387,7 @@
     <div id="customMenu">
         <div class="menu-title">KELLZY OS MENU</div>
         <div class="menu-item interactive-btn" onclick="toggleSettings()"><i class="fa-solid fa-sliders"></i> Open Settings</div>
-        <div class="menu-item interactive-btn" onclick="openStoreModal()"><i class="fa-solid fa-store"></i> Kaell Store</div> <!-- FITUR 1 ADDED HERE -->
+        <div class="menu-item interactive-btn" onclick="openStoreModal()"><i class="fa-solid fa-store"></i> Kaell Store</div>
         <div class="menu-item interactive-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i> Toggle Music</div>
         <div class="menu-item interactive-btn" onclick="toggleTheme()"><i class="fa-solid fa-palette"></i> Change Theme</div>
         <div class="menu-item interactive-btn" onclick="toggleVfx()"><i class="fa-solid fa-wand-magic-sparkles"></i> Switch VFX</div>
@@ -408,7 +426,7 @@
         
         <div class="hub-card">
             
-<div id="mainCardContent">
+            <div id="mainCardContent">
                 
                 <!-- TOMBOL TOKO PINDAH KE KIRI ATAS -->
                 <div class="top-controls-left">
@@ -417,7 +435,6 @@
                     </div>
                 </div>
 
-                <!-- TOMBOL SETTING, VFX, TEMA TETAP DI KANAN ATAS -->
                 <div class="top-controls">
                     <div class="control-btn interactive-btn" onclick="toggleSettings()" title="Settings"><i class="fa-solid fa-gear"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
@@ -426,8 +443,7 @@
 
                 <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
                 <div class="mascot-bubble" id="mascotBubble">Hi! Welcome to Kellzy Hub!</div>
-    
-                <!-- FITUR 5 TRIGGER ADDED HERE (onclick="openChangelogModal()") -->
+
                 <div class="status-badge interactive-btn" onclick="openChangelogModal()" style="cursor: pointer;" title="View Patch Notes">
                     <div class="status-dot"></div>
                     <span style="font-size: 11px; font-weight: 800; color: #00ff7f;">KELLZY HUB | V2.0.4 UPDATED</span>
@@ -462,7 +478,6 @@
                     <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
                     <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
                     <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
-                    <!-- FITUR 3 TRIGGER ADDED HERE (onclick="openKeyModal()") -->
                     <button onclick="openKeyModal()" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> REDEEM KEY</button>
                 </div>
 
@@ -508,13 +523,11 @@
         <div class="extra-content">
             <h2>🔥 SUPPORTED GAMES</h2>
             
-            <!-- FITUR 4: SEARCH BAR FILTER -->
             <div class="search-box">
                 <input type="text" id="gameSearch" placeholder="Search games (e.g., Lucky Blox)...">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
 
-            <!-- Tambahan class="game-card" untuk target script filter -->
             <div id="gamesGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; margin-bottom: 40px;">
                 <div class="game-card" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
                     <img src="https://i.pinimg.com/736x/13/82/44/13824471583ac734a97115c155c4d109.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" alt="Kick A Lucky Blox">
@@ -541,6 +554,106 @@
                     <p style="margin: 0; font-size: 11px; color: #ccc;">Setiap Key yang Anda dapatkan melalui Linkvertise kami akan aktif selama 24 Jam. Setelah itu, Anda bisa men-generate Key baru.</p>
                 </div>
             </div>
+
+            <!-- FITUR SCROLL BAWAH BARU MULAI DARI SINI -->
+
+            <!-- SCRIPT FEATURE BREAKDOWN -->
+            <h2>⚡ SCRIPT FEATURES</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 40px; text-align: left;">
+                <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--theme-color); padding: 12px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,229,255,0.1);">
+                    <i class="fa-solid fa-crosshairs" style="color: var(--theme-color); font-size: 18px; margin-bottom: 8px;"></i><br>
+                    <strong style="font-size: 12px; color: #fff;">Aimbot & Kill Aura</strong>
+                    <p style="margin: 3px 0 0 0; font-size: 10px; color: #aaa;">Auto-lock target musuh dengan presisi sangat tinggi.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.borderColor='var(--theme-color)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                    <i class="fa-solid fa-eye" style="color: var(--theme-color); font-size: 18px; margin-bottom: 8px;"></i><br>
+                    <strong style="font-size: 12px; color: #fff;">Player ESP</strong>
+                    <p style="margin: 3px 0 0 0; font-size: 10px; color: #aaa;">Lihat musuh tembus pandang atau dari balik dinding.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.borderColor='var(--theme-color)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                    <i class="fa-solid fa-sack-dollar" style="color: var(--theme-color); font-size: 18px; margin-bottom: 8px;"></i><br>
+                    <strong style="font-size: 12px; color: #fff;">Auto Farm (OP)</strong>
+                    <p style="margin: 3px 0 0 0; font-size: 10px; color: #aaa;">Farming level, item & koin otomatis berjalan 24/7.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 12px; border-radius: 8px; transition: 0.3s;" onmouseover="this.style.borderColor='var(--theme-color)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
+                    <i class="fa-solid fa-shield-cat" style="color: var(--theme-color); font-size: 18px; margin-bottom: 8px;"></i><br>
+                    <strong style="font-size: 12px; color: #fff;">Byfron Bypass</strong>
+                    <p style="margin: 3px 0 0 0; font-size: 10px; color: #aaa;">Sistem Undetected dari anti-cheat terbaru Roblox.</p>
+                </div>
+            </div>
+
+            <!-- EXECUTOR & DLL LIBRARY -->
+            <h2>📥 RECOMMENDED EXECUTORS</h2>
+            <p style="margin-top: -10px; margin-bottom: 20px;">Download executor yang aman dan teruji untuk Kellzy Hub.</p>
+            <div class="dll-list">
+                <div class="dll-item interactive-btn">
+                    <div class="dll-info">
+                        <i class="fa-brands fa-windows dll-icon"></i>
+                        <div class="dll-text">
+                            <span class="dll-name">Potassium Injector</span>
+                            <span class="dll-desc">Level 8 Exec | Windows 10/11</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="dll-status-badge bg-working">WORKING</span>
+                        <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 10px;"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+
+                <div class="dll-item interactive-btn">
+                    <div class="dll-info">
+                        <i class="fa-brands fa-android dll-icon"></i>
+                        <div class="dll-text">
+                            <span class="dll-name">Delta Executor</span>
+                            <span class="dll-desc">Mobile Bypass | Android 9+</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="dll-status-badge bg-working">WORKING</span>
+                        <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 10px;"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+
+                <div class="dll-item interactive-btn" style="opacity: 0.6;">
+                    <div class="dll-info">
+                        <i class="fa-brands fa-apple dll-icon"></i>
+                        <div class="dll-text">
+                            <span class="dll-name">Arceus X (iOS)</span>
+                            <span class="dll-desc">Mobile Bypass | iOS 14+</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="dll-status-badge bg-patched">PATCHED</span>
+                        <button class="btn" style="padding: 8px 15px; font-size: 10px; background: #333; color: #666; cursor: not-allowed;"><i class="fa-solid fa-ban"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIP LEADERBOARD -->
+            <h2>🏆 VIP HALL OF FAME</h2>
+            <p style="margin-top: -10px;">Top user dan pendukung setia Kellzy Hub bulan ini.</p>
+            <div class="vip-leaderboard">
+                <div class="lb-row lb-header">
+                    <span>RANK</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px;">USERNAME</span>
+                    <span>TIER</span>
+                </div>
+                <div class="lb-row interactive-btn">
+                    <span class="lb-rank rank-1">#1</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">ShadowSlayer_99</span>
+                    <span style="color: #ffd700; font-weight: 800; font-size: 10px;"><i class="fa-solid fa-crown"></i> LIFETIME VIP</span>
+                </div>
+                <div class="lb-row interactive-btn">
+                    <span class="lb-rank rank-2">#2</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">Kuli_BataX</span>
+                    <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 30D</span>
+                </div>
+                <div class="lb-row interactive-btn">
+                    <span class="lb-rank rank-3">#3</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">VellynCute</span>
+                    <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 7D</span>
+                </div>
+            </div>
             
         </div>
     </div>
@@ -564,7 +677,6 @@
     </div>
 
     <script>
-        // JS EXISTING
         function toggleSettings() {
             const drawer = document.getElementById('settingsDrawer');
             drawer.classList.toggle('open');
@@ -831,8 +943,6 @@
         function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
         loadVfx('hearts');
 
-        // --- JS FITUR BARU MULAI DI SINI ---
-
         // 1. Store Modal Logic
         function openStoreModal() { document.getElementById('storeModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); customMenu.style.display = 'none'; }
         function closeStoreModal() { document.getElementById('storeModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
@@ -842,16 +952,12 @@
         function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
         function submitKey() {
             const keyVal = document.getElementById('scriptKeyInput').value.trim();
-            // Cek jika key yang dimasukkan benar
             if(keyVal === "KELLZY-2X5NYFU6" || keyVal === "KAELL-VIP-2026") {
                 showToast("Key Valid! Access Granted.", "#00ff7f", "fa-unlock");
                 closeKeyModal();
-                
-                // Otomatis verif yt/dc biar script langsung kebuka
                 ytVerified = true; dcVerified = true; 
                 document.getElementById('ytBtn').innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; document.getElementById('ytBtn').style.background = 'var(--theme-color)'; document.getElementById('ytBtn').style.color = '#000';
                 document.getElementById('dcBtn').innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; document.getElementById('dcBtn').style.background = 'var(--theme-color)'; document.getElementById('dcBtn').style.color = '#000';
-                
                 unlockScript();
             } else {
                 showToast("Invalid Key! Please get a new one.", "#ff3333", "fa-xmark");
