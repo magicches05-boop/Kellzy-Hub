@@ -15,7 +15,7 @@
         :root {
             --theme-color: #00e5ff; 
             --discord: #5865F2;
-            --tiktok: #ff0050;
+            --youtube: #ff0000;
             --bg-dark: #050505;
             --card-glass: rgba(15, 15, 15, 0.85);
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -65,7 +65,6 @@
         }
         .hub-card::-webkit-scrollbar { width: 0px; }
 
-        /* KONTROL POJOK KANAN ATAS (VFX & THEME) */
         .top-controls {
             position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;
         }
@@ -76,7 +75,6 @@
         }
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
-        /* LIVE PING & FPS (KIRI ATAS) */
         .perf-stats {
             position: fixed; top: 20px; left: 20px; background: rgba(8, 8, 8, 0.6);
             border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px;
@@ -101,34 +99,41 @@
         h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
         .sub-text { color: #aaa; font-size: 13px; margin-bottom: 20px; }
 
+        /* LIVE COUNTER LENGKAP (GRID 4 KOTAK) */
         .live-counter {
-            background: rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; margin-bottom: 15px;
-            display: flex; justify-content: space-around; border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; margin-bottom: 15px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 1px solid rgba(255,255,255,0.05);
         }
-        .counter-item span { display: block; font-size: 10px; color: #888; font-weight: 800; text-transform: uppercase; }
-        .counter-item strong { font-size: 14px; color: #fff; font-family: 'JetBrains Mono', monospace; }
+        .counter-item { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
+        .counter-item span { display: block; font-size: 9px; color: #888; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; }
+        .counter-item strong { font-size: 13px; color: #fff; font-family: 'JetBrains Mono', monospace; }
 
         .code-box {
             background: #000; border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace;
             font-size: 11px; color: #ddd; text-align: left; margin-bottom: 20px; border: 1px solid #222;
         }
 
+        /* 2-STEP VERIFICATION BUTTONS */
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn {
-            padding: 12px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
+            padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
             font-size: 11px; transition: var(--transition); border: none;
             display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
         }
-        .btn-tiktok { background: var(--tiktok); color: #fff; grid-column: span 2; }
-        .btn-tiktok:hover { box-shadow: 0 0 20px rgba(255, 0, 80, 0.5); transform: translateY(-3px); }
+        
+        .btn-yt { background: var(--youtube); color: #fff; grid-column: span 1; }
+        .btn-yt:hover { box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); transform: translateY(-3px); }
+        
+        .btn-dc { background: var(--discord); color: #fff; grid-column: span 1; }
+        .btn-dc:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.5); transform: translateY(-3px); }
+
         .btn-primary { background: var(--theme-color); color: #000; grid-column: span 2; }
         .btn-primary:hover { box-shadow: 0 0 25px var(--theme-color); transform: translateY(-3px); }
         .btn-locked { background: #222 !important; color: #666 !important; box-shadow: none !important; opacity: 0.8; }
         .btn-locked:hover { transform: none !important; }
-        .btn-key { background: #1a1a1a; color: #fff; border: 1px solid #333; }
+        
+        .btn-key { background: #1a1a1a; color: #fff; border: 1px solid #333; grid-column: span 2;}
         .btn-key:hover { border-color: var(--theme-color); color: var(--theme-color); }
-        .btn-discord { background: var(--discord); color: #fff; }
-        .btn-discord:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.4); transform: translateY(-3px); }
 
         .catalog-container { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
         .catalog-title { font-size: 10px; font-weight: 800; color: var(--theme-color); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
@@ -165,7 +170,6 @@
         .audio-btn { color: #fff; transition: 0.3s; }
         .audio-controls:hover .audio-btn { color: var(--theme-color); }
 
-        /* TOAST DIGESER KE BAWAH DIKIT BIAR GAK NABRAK TOMBOL TEMA */
         .custom-toast {
             position: fixed; top: -100px; right: 30px; background: rgba(15, 15, 15, 0.95);
             border-left: 4px solid var(--theme-color); color: #fff; padding: 15px 25px; border-radius: 8px;
@@ -234,6 +238,8 @@
             <p class="sub-text">Ultimate Roblox Script Provider & Apparel Solution.</p>
 
             <div class="live-counter">
+                <div class="counter-item"><span>Active Users</span><strong id="userCount">1,429</strong></div>
+                <div class="counter-item"><span>Server Status</span><strong style="color: var(--theme-color);">STABLE</strong></div>
                 <div class="counter-item"><span>Your Device</span><strong id="deviceType" style="color: var(--theme-color);">Checking..</strong></div>
                 <div class="counter-item"><span>Recommended</span><strong id="recExec">Checking..</strong></div>
             </div>
@@ -245,30 +251,33 @@
             </div>
 
             <div class="btn-grid">
-                <button class="btn btn-tiktok interactive-btn" id="followBtn" onclick="followTikTok()">
-                    <i class="fa-brands fa-youtube"></i> SUBSCRIBE YOUTUBE TO UNLOCK
+                <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()">
+                    <i class="fa-brands fa-youtube"></i> 1. YOUTUBE
                 </button>
+                <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()">
+                    <i class="fa-brands fa-discord"></i> 2. DISCORD
+                </button>
+                
                 <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()">
                     <i class="fa-solid fa-lock"></i> SCRIPT LOCKED
                 </button>
-                <a href="https://link-target.net/6323111/fA6olvPyl0nD" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
-                <a href="https://discord.com/invite/Skg2mVqZ2q" target="_blank" class="btn btn-discord interactive-btn"><i class="fa-brands fa-discord"></i> DISCORD</a>
+                <a href="LINK_GET_KEY_KAMU_DISINI" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
             </div>
 
             <div class="catalog-container">
-                <div class="catalog-title"><i class="fa-solid fa-bag-shopping"></i> Kellzy Store Apparel + Info + Store</div>
+                <div class="catalog-title"><i class="fa-solid fa-bag-shopping"></i> Kellzy Store Apparel & Eneba</div>
                 <div class="catalog-scroll">
-                    <a href="https://discord.gg/9dBpy9Knr8" target="_blank" class="catalog-item interactive-btn">
-                        <img src="https://i.pinimg.com/736x/92/f8/fd/92f8fdfcd1c235625c8bf757392b19ec.jpg" alt="Apparel">
-                        <span>First Discord</span><div class="price">R$ 5</div>
+                    <a href="LINK_ITEM_ROBLOX_ATAU_ENEBA_1" target="_blank" class="catalog-item interactive-btn">
+                        <img src="https://tr.rbxcdn.com/13c6b22eb01e4a6a58bc2fba3f7215ed/420/420/Shirt/Png" alt="Apparel">
+                        <span>Cyan Chibi Shirt</span><div class="price">R$ 5</div>
                     </a>
                     <a href="https://www.roblox.com/share/g/506706077" target="_blank" class="catalog-item interactive-btn">
-                        <img src="https://i.pinimg.com/1200x/d9/d4/8a/d9d48a5c2e71022bbe4fe53fc8d2687b.jpg" alt="Apparel">
-                        <span>Comunity Roblox</span><div class="price">R$ 5</div>
+                        <img src="https://tr.rbxcdn.com/f9a8ed2c45f061f0de9d5f76b9f29910/420/420/Pants/Png" alt="Apparel">
+                        <span>Dark Y2K Pants</span><div class="price">R$ 5</div>
                     </a>
-                    <a href="https://www.g2g.com/Kaellstoree" target="_blank" class="catalog-item interactive-btn">
-                        <img src="https://i.pinimg.com/1200x/af/65/69/af6569f66882eee6916504052481d832.jpg" alt="Eneba">
-                        <span>My Store</span><div class="price">$ 10.00</div>
+                    <a href="LINK_ITEM_ROBLOX_ATAU_ENEBA_3" target="_blank" class="catalog-item interactive-btn">
+                        <img src="https://cdn.eneba.com/images/eneba-logo-social.jpg" alt="Eneba">
+                        <span>Roblox Gift Card</span><div class="price">$ 10.00</div>
                     </a>
                 </div>
             </div>
@@ -336,8 +345,8 @@
         // --- AUTO-DEVICE DETECTOR ---
         window.addEventListener('DOMContentLoaded', () => {
             const ua = navigator.userAgent;
-            let device = "PC / Desktop"; let rec = "Pottasium / Medium";
-            if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Ronix"; }
+            let device = "PC / Desktop"; let rec = "Wave / Krampus";
+            if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; }
             else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
             document.getElementById('deviceType').innerText = device;
             document.getElementById('recExec').innerText = rec;
@@ -430,33 +439,60 @@
             setTimeout(() => { toast.classList.remove("show"); }, 3500);
         }
 
-        // --- GATEWAY TIKTOK / YOUTUBE ---
+        // --- 2-STEP GATEWAY (YOUTUBE & DISCORD) ---
+        let ytVerified = false;
+        let dcVerified = false;
         let isScriptUnlocked = false;
 
-        function followTikTok() {
+        function verifyYT() {
+            if(ytVerified) return;
             window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
-            const followBtn = document.getElementById('followBtn');
-            followBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> VERIFYING...';
-            followBtn.style.background = '#333';
+            const btn = document.getElementById('ytBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...';
+            btn.style.opacity = '0.7';
             
             setTimeout(() => {
-                isScriptUnlocked = true;
-                followBtn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
-                followBtn.style.background = 'var(--theme-color)';
-                followBtn.style.color = '#000';
-                followBtn.style.pointerEvents = 'none';
-
-                const copyBtn = document.getElementById('copyBtn');
-                copyBtn.classList.remove('btn-locked');
-                copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
-                
-                showToast("Unlocked! You can now copy the script.", "var(--theme-color)");
-                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+                ytVerified = true;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
+                btn.style.background = 'var(--theme-color)';
+                btn.style.color = '#000';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'none';
+                checkUnlock();
             }, 5000);
         }
 
+        function verifyDC() {
+            if(dcVerified) return;
+            window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank');
+            const btn = document.getElementById('dcBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...';
+            btn.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                dcVerified = true;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
+                btn.style.background = 'var(--theme-color)';
+                btn.style.color = '#000';
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'none';
+                checkUnlock();
+            }, 5000);
+        }
+
+        function checkUnlock() {
+            if (ytVerified && dcVerified) {
+                isScriptUnlocked = true;
+                const copyBtn = document.getElementById('copyBtn');
+                copyBtn.classList.remove('btn-locked');
+                copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
+                showToast("Verification Complete! Script Unlocked.", "var(--theme-color)");
+                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+            }
+        }
+
         function copyScript() {
-            if (!isScriptUnlocked) { showToast("Tolong Subscribe Youtube dulu untuk membuka Script!", "#ff3333", "fa-circle-xmark"); return; }
+            if (!isScriptUnlocked) { showToast("Selesaikan Step 1 dan 2 dulu untuk unlock!", "#ff3333", "fa-circle-xmark"); return; }
             const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
             navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); });
         }
@@ -474,6 +510,14 @@
                 mascotClicks = 0;
             }
         }
+
+        // --- ACTIVE USERS COUNTER ANIMATION ---
+        setInterval(() => {
+            const counter = document.getElementById('userCount');
+            let val = parseInt(counter.innerText.replace(',', ''));
+            val += Math.floor(Math.random() * 5) - 2; 
+            counter.innerText = val.toLocaleString();
+        }, 3000);
 
         // --- SECURITY ---
         document.onkeydown = function(e) {
