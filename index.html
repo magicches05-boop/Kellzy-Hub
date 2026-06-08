@@ -24,7 +24,6 @@
 
         * { box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
-        /* SCROLL DIBUKA: height auto & overflow-y auto */
         body {
             margin: 0; padding: 0; background-color: var(--bg-dark);
             font-family: 'Urbanist', sans-serif; color: #ffffff;
@@ -33,14 +32,12 @@
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
         }
 
-        /* Semua Background dibikin Fixed agar tidak ikut terscroll */
         #bg-warp {
             position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg');
             background-size: cover; background-position: center; z-index: -3; transition: transform 0.1s ease-out;
         }
 
-        /* OVERLAY DAY/NIGHT */
         #dayNightOverlay {
             position: fixed; inset: 0; z-index: -2; pointer-events: none; transition: background 1s ease, backdrop-filter 1s ease;
         }
@@ -71,7 +68,7 @@
         .loader-text { color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
         .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--theme-color); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
 
-/* FADE UI UNTUK AFK MODE */
+        /* FADE UI UNTUK AFK MODE */
         .fade-ui { transition: opacity 1.5s ease, filter 1.5s ease; }
         .ui-hidden { opacity: 0 !important; filter: blur(10px) !important; pointer-events: none !important; }
 
@@ -186,11 +183,6 @@
 
     <div id="afkClock">12:00:00</div>
 
-    <div id="bg-warp"></div>
-    <div id="dayNightOverlay"></div>
-    <canvas id="visualizer"></canvas>
-    <div class="scanlines" id="scanlinesOverlay"></div>
-
     <div id="customMenu">
         <div class="menu-title">KELLZY OS MENU</div>
         <div class="menu-item interactive-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i> Toggle Music</div>
@@ -205,29 +197,21 @@
         <div class="loader-enter-btn" id="enterBtn"><i class="fa-solid fa-power-off"></i> CLICK HERE TO ENTER</div>
     </div>
 
-    <div class="perf-stats" title="Server Performance">
+    <div class="perf-stats fade-ui" title="Server Performance">
         <div>Ping <span id="pingValue">24</span>ms</div>
         <div>FPS <span id="fpsValue">60</span></div>
         <div id="timeStatus" style="color: #ffaa00; margin-left: 10px;">☀️ DAY MODE</div>
     </div>
 
-    <div class="custom-toast" id="toastBox">
+    <div class="custom-toast fade-ui" id="toastBox">
         <i class="fa-solid fa-circle-info" id="toastIcon" style="color: var(--theme-color); font-size: 18px;"></i>
         <span id="toastMsg">Notification</span>
-    </div>
-
-    <div class="modal" id="adblockModal">
-        <div class="modal-content">
-            <i class="fa-solid fa-shield-halved" style="font-size: 50px; color: #ff3333; margin-bottom: 20px;"></i>
-            <h2 style="color: #ff3333; margin-top: 0; font-weight: 800;">ADBLOCK DETECTED!</h2>
-            <p style="color: #ccc; font-size: 14px; line-height: 1.5;">Tolong matikan AdBlock kamu untuk menggunakan Kellzy Hub dan dukung kami terus berkarya. Refresh halaman setelah dimatikan.</p>
-        </div>
     </div>
 
     <audio id="bgm" loop crossorigin="anonymous"><source src="musik.mp3" type="audio/mpeg"></audio>
     <div id="particles-js"></div>
 
-    <div class="slide-container">
+    <div class="slide-container fade-ui">
         
         <div class="hub-card">
             <div class="top-controls">
@@ -258,13 +242,6 @@
                 loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()
             </div>
 
-            <div class="btn-grid">
-                <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
-                <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
-                <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
-                <a href="LINK_GET_KEY_KAMU_DISINI" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
-            </div>
-
             <div class="catalog-container">
                 <div class="catalog-title"><i class="fa-solid fa-bag-shopping"></i> Kellzy Store Apparel & Eneba</div>
                 <div class="catalog-scroll">
@@ -283,7 +260,15 @@
                 </div>
             </div>
 
-            <div class="extra-content">
+            <div class="btn-grid">
+                <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
+                <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
+                <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
+                <a href="LINK_GET_KEY_KAMU_DISINI" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
+            </div>
+        </div>
+
+        <div class="extra-content">
             <h2>🔥 SUPPORTED GAMES</h2>
             <p>Kellzy Hub dilengkapi dengan ratusan fitur Auto-Farm, ESP, dan Aimbot untuk game terpopuler saat ini.</p>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; margin-bottom: 40px;">
@@ -301,7 +286,7 @@
                 </div>
             </div>
 
-             <h2>❓ FREQUENTLY ASKED QUESTIONS</h2>
+            <h2>❓ FREQUENTLY ASKED QUESTIONS</h2>
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px; margin-bottom: 40px;">
                 <div style="background: rgba(0,0,0,0.6); border-left: 4px solid var(--theme-color); padding: 15px; text-align: left; border-radius: 0 10px 10px 0;">
                     <h4 style="margin: 0 0 5px 0; color: var(--theme-color); font-size: 13px;">Apakah Script Kellzy Hub Aman?</h4>
@@ -324,81 +309,111 @@
             <div class="chat-msg"><span class="tag-vip">STAFF</span><strong>System:</strong> Welcome to Kellzy Hub Global Chat.</div>
         </div>
     </div>
-            <div class="executor-status">
-                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Delta</div>
-                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Fluxus</div>
-                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Codex</div>
-                <div class="exec-badge"><i class="fa-solid fa-circle status-patched"></i> Arceus X</div>
-            </div>
 
-            <div style="margin-top: 15px; font-size: 9px; color: #444; font-weight: 800; letter-spacing: 3px;">
-                PROTECTED BY KELLZY HUB SECURITY
-            </div>
-        </div>
+    <div class="terminal-box fade-ui" id="terminalLog"><div>[SYSTEM] Initializing Kellzy Engine v2.0.4...</div></div>
 
-        <div class="extra-content">
-            <h2>Why Choose Kellzy Hub?</h2>
-            <p>
-                Kellzy Store menyediakan *script hub* terbaik dengan proteksi Anti-Cheat *Byfron Bypass*. 
-                Scroll ke atas untuk menyalin script atau kunjungi katalog Eneba dan Roblox Apparel kami untuk desain paling keren. 
-                Sistem kami selalu ter-update secara *real-time* untuk memastikan pengalaman *gaming* Anda aman.
-            </p>
-        </div>
-
-    </div> <div class="terminal-box" id="terminalLog"><div>[SYSTEM] Initializing Kellzy Engine v2.0.4...</div></div>
-
-    <div class="audio-controls interactive-btn" onclick="toggleMusic()">
+    <div class="audio-controls interactive-btn fade-ui" onclick="toggleMusic()">
         <div class="audio-btn" id="musicToggle"><i class="fa-solid fa-pause"></i></div>
         <span style="font-size: 10px; font-weight: 800; color: #888;">KELLZY RADIO</span>
     </div>
 
     <script>
+        // --- AFK SCREEN SAVER MODE ---
+        let afkTimer;
+        const afkTimeout = 15000; // 15 Detik biar cepat ngetesnya
+        const uiElements = document.querySelectorAll('.fade-ui');
+        const afkClock = document.getElementById('afkClock');
+
+        function resetAFK() {
+            clearTimeout(afkTimer);
+            // Kembalikan UI
+            uiElements.forEach(el => el.classList.remove('ui-hidden'));
+            afkClock.classList.remove('show');
+            
+            // Set timer ulang
+            afkTimer = setTimeout(() => {
+                uiElements.forEach(el => el.classList.add('ui-hidden'));
+                afkClock.classList.add('show');
+            }, afkTimeout);
+        }
+
+        // Jalankan jam raksasa
+        setInterval(() => {
+            const now = new Date();
+            afkClock.innerText = now.toLocaleTimeString('en-US', { hour12: false });
+        }, 1000);
+
+        // Deteksi aktivitas user
+        window.addEventListener('mousemove', resetAFK);
+        window.addEventListener('keydown', resetAFK);
+        window.addEventListener('click', resetAFK);
+        window.addEventListener('scroll', resetAFK);
+        resetAFK(); // Mulai timer saat web dibuka
+
+        // --- FAKE GLOBAL LIVE CHAT LOGIC ---
+        const fakeChatNames = ["xX_Slayer_Xx", "Guest992", "RbxKing", "ShadowNinja", "Kuli_Bata", "ProGamerID", "BocilKematian"];
+        const fakeChatMessages = [
+            "Bang bagi key dong, males lewat linkvertise.",
+            "Gila script blox fruits nya lanjay banget! 🔥",
+            "Auto farm level nya OP parah 🚀",
+            "Ada script buat Pet Sim 99 bang?",
+            "Kellzy Hub emang ga ada obat",
+            "Thanks bang, kebantu banget buat push rank.",
+            "Ini anti ban kan bang? bypass byfron aman?",
+            "Gimana cara makenya bang, ajarin dong.",
+            "Wih UI nya makin keren aja Kellzy Store 🥶"
+        ];
+        
+        const chatBody = document.getElementById('chatBody');
+        
+        setInterval(() => {
+            // Jangan kirim chat kalau lagi AFK biar ga berisik layarnya
+            if (afkClock.classList.contains('show')) return;
+
+            const isVip = Math.random() > 0.8;
+            const randomName = fakeChatNames[Math.floor(Math.random() * fakeChatNames.length)];
+            const randomMsg = fakeChatMessages[Math.floor(Math.random() * fakeChatMessages.length)];
+            
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'chat-msg';
+            
+            let vipTag = isVip ? '<span class="tag-vip">VIP</span>' : '';
+            msgDiv.innerHTML = `${vipTag}<strong>${randomName}:</strong> ${randomMsg}`;
+            
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight; // Auto scroll ke bawah
+            
+            // Hapus pesan lama biar ga nge-lag (maksimal 20 chat)
+            if (chatBody.children.length > 20) {
+                chatBody.removeChild(chatBody.firstChild);
+            }
+        }, Math.floor(Math.random() * 4000) + 3000); // Muncul tiap 3-7 detik
+
+
         // --- REAL-TIME DAY/NIGHT SYNC ---
         function checkDayNight() {
             const hour = new Date().getHours();
             const overlay = document.getElementById('dayNightOverlay');
             const statusText = document.getElementById('timeStatus');
-            
-            // Jam 06:00 pagi sampai 17:59 sore = Day Mode
             if (hour >= 6 && hour < 18) {
-                overlay.style.background = 'rgba(255, 255, 255, 0.05)';
-                overlay.style.backdropFilter = 'brightness(1.1)';
-                if(statusText) {
-                    statusText.innerText = "☀️ DAY MODE";
-                    statusText.style.color = "#ffdd00";
-                }
+                overlay.style.background = 'rgba(255, 255, 255, 0.05)'; overlay.style.backdropFilter = 'brightness(1.1)';
+                if(statusText) { statusText.innerText = "☀️ DAY MODE"; statusText.style.color = "#ffdd00"; }
             } else {
-                // Jam 18:00 malam sampai 05:59 pagi = Night Mode
-                overlay.style.background = 'rgba(0, 0, 15, 0.6)';
-                overlay.style.backdropFilter = 'brightness(0.7) contrast(1.2)';
-                if(statusText) {
-                    statusText.innerText = "🌙 NIGHT MODE";
-                    statusText.style.color = "#8888ff";
-                }
+                overlay.style.background = 'rgba(0, 0, 15, 0.6)'; overlay.style.backdropFilter = 'brightness(0.7) contrast(1.2)';
+                if(statusText) { statusText.innerText = "🌙 NIGHT MODE"; statusText.style.color = "#8888ff"; }
             }
         }
-        checkDayNight();
-        // Cek ulang setiap menit
-        setInterval(checkDayNight, 60000);
+        checkDayNight(); setInterval(checkDayNight, 60000);
 
         // --- CUSTOM RIGHT CLICK MENU ---
         const customMenu = document.getElementById('customMenu');
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-            customMenu.style.display = 'block';
-            customMenu.style.left = e.pageX + 'px'; customMenu.style.top = e.pageY + 'px';
-        });
+        document.addEventListener('contextmenu', (e) => { e.preventDefault(); customMenu.style.display = 'block'; customMenu.style.left = e.pageX + 'px'; customMenu.style.top = e.pageY + 'px'; });
         document.addEventListener('click', (e) => { if (e.button !== 2) customMenu.style.display = 'none'; });
 
-        // --- SCROLLING TAB TITLE ---
         let docTitle = " Kellzy Store ✦ Ultimate Hub ✦ Status: Undetected ✦ ";
-        let titleInterval = setInterval(() => {
-            docTitle = docTitle.substring(1) + docTitle[0];
-            if (!document.hidden) document.title = docTitle;
-        }, 300);
+        setInterval(() => { docTitle = docTitle.substring(1) + docTitle[0]; if (!document.hidden) document.title = docTitle; }, 300);
         document.addEventListener("visibilitychange", function() { if (document.hidden) { document.title = "⚠️ Hei, Scriptnya Belum Di-copy!"; } });
 
-        // --- SECRET KONAMI CHEAT CODE ("KELLZY") ---
         let secretCode = "kellzy"; let inputBuffer = "";
         window.addEventListener('keydown', (e) => {
             inputBuffer += e.key.toLowerCase();
@@ -407,8 +422,7 @@
                 isScriptUnlocked = true;
                 const copyBtn = document.getElementById('copyBtn');
                 copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
-                showToast("CHEAT ACTIVATED! Script Unlocked.", "var(--theme-color)", "fa-unlock-keyhole");
-                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+                showToast("CHEAT ACTIVATED! Script Unlocked.", "var(--theme-color)", "fa-unlock-keyhole"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
                 var duration = 3000; var end = Date.now() + duration;
                 (function frame() {
                     confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#00e5ff', '#ffffff'] });
@@ -418,61 +432,41 @@
             }
         });
 
-        // --- PARALLAX WARP BACKGROUND ---
         document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 50;
-            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            const x = (window.innerWidth / 2 - e.pageX) / 50; const y = (window.innerHeight / 2 - e.pageY) / 50;
             document.getElementById('bg-warp').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
         });
 
-        // --- AUDIO VISUALIZER ---
         let audioCtx, analyser, source, canvasCtx, visualizerCanvas; let isAudioInit = false;
         function initVisualizer() {
             if (isAudioInit) return;
-            const audioEl = document.getElementById('bgm');
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            const audioEl = document.getElementById('bgm'); const AudioContext = window.AudioContext || window.webkitAudioContext;
             audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
-            source = audioCtx.createMediaElementSource(audioEl);
-            source.connect(analyser); analyser.connect(audioCtx.destination);
+            source = audioCtx.createMediaElementSource(audioEl); source.connect(analyser); analyser.connect(audioCtx.destination);
             analyser.fftSize = 256; const bufferLength = analyser.frequencyBinCount; const dataArray = new Uint8Array(bufferLength);
             visualizerCanvas = document.getElementById('visualizer'); canvasCtx = visualizerCanvas.getContext('2d');
             visualizerCanvas.width = window.innerWidth; visualizerCanvas.height = window.innerHeight * 0.25;
 
             function draw() {
-                requestAnimationFrame(draw); analyser.getByteFrequencyData(dataArray);
-                canvasCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+                requestAnimationFrame(draw); analyser.getByteFrequencyData(dataArray); canvasCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
                 const barWidth = (visualizerCanvas.width / bufferLength) * 2.5; let barHeight; let x = 0;
                 const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || '#00e5ff';
                 for(let i = 0; i < bufferLength; i++) {
                     barHeight = dataArray[i]; canvasCtx.fillStyle = themeColor; canvasCtx.globalAlpha = 0.5;
-                    canvasCtx.fillRect(x, visualizerCanvas.height - (barHeight / 2), barWidth, barHeight / 2);
-                    x += barWidth + 2;
+                    canvasCtx.fillRect(x, visualizerCanvas.height - (barHeight / 2), barWidth, barHeight / 2); x += barWidth + 2;
                 }
-            }
-            draw(); isAudioInit = true;
+            } draw(); isAudioInit = true;
         }
 
-        // --- FPS & PING COUNTER ---
         let frameCount = 0; let lastTime = performance.now(); const fpsEl = document.getElementById('fpsValue');
-        function updateFPS(now) {
-            frameCount++; if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; }
-            requestAnimationFrame(updateFPS);
-        }
+        function updateFPS(now) { frameCount++; if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; } requestAnimationFrame(updateFPS); }
         requestAnimationFrame(updateFPS);
-        const pingEl = document.getElementById('pingValue');
-        setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
+        const pingEl = document.getElementById('pingValue'); setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
 
-        // --- THEME & VFX SWITCHER ---
         const themes = ['#00e5ff', '#39ff14', '#ff66cc']; let currentTheme = 0;
-        function toggleTheme() {
-            currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]);
-            showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-        }
+        function toggleTheme() { currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]); showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
         const vfxModes = ['hearts', 'snow', 'matrix']; const vfxNames = ['Cyan Hearts', 'Chill Snow', 'Matrix Rain']; let currentVfx = 0;
-        function toggleVfx() {
-            currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]);
-            showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-        }
+        function toggleVfx() { currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]); showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
 
         window.addEventListener('DOMContentLoaded', () => {
             const ua = navigator.userAgent; let device = "PC / Desktop"; let rec = "Wave / Krampus";
@@ -480,100 +474,42 @@
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
         });
 
-        const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."];
-        let termIdx = 0; const termEl = document.getElementById('terminalLog');
-        setInterval(() => {
-            if(termIdx < termLogs.length) {
-                const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx];
-                termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++;
-            }
-        }, 1500);
-
-        setTimeout(() => {
-            let ad = document.createElement('div'); ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; document.body.appendChild(ad);
-            window.setTimeout(function() { if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; } ad.remove(); }, 100);
-        }, 2500);
+        const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."]; let termIdx = 0; const termEl = document.getElementById('terminalLog');
+        setInterval(() => { if(termIdx < termLogs.length) { const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx]; termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++; } }, 1500);
 
         const loaderText = document.getElementById('loader-text'); const loaderScreen = document.getElementById('loader'); const enterBtn = document.getElementById('enterBtn'); const spinnerAnim = document.getElementById('spinnerAnim'); const bgm = document.getElementById('bgm');
         const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading Interface...", "Initialization Complete."]; let textIndex = 0;
-        const textInterval = setInterval(() => {
-            textIndex++; if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
-            else { clearInterval(textInterval); spinnerAnim.style.display = 'none'; loaderText.style.display = 'none'; enterBtn.style.display = 'block'; }
-        }, 800);
+        const textInterval = setInterval(() => { textIndex++; if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } else { clearInterval(textInterval); spinnerAnim.style.display = 'none'; loaderText.style.display = 'none'; enterBtn.style.display = 'block'; } }, 800);
 
         enterBtn.addEventListener('click', () => {
             loaderScreen.style.opacity = '0'; setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
             bgm.play().catch(e => console.log("Audio play error"));
-            const synth = window.speechSynthesis; const utterThis = new SpeechSynthesisUtterance("Welcome to Kellzy Hub. Connecting to secure server. Please verify your identity.");
-            utterThis.pitch = 1.2; utterThis.rate = 1.1; utterThis.lang = 'en-US'; synth.speak(utterThis);
+            const synth = window.speechSynthesis; const utterThis = new SpeechSynthesisUtterance("Welcome to Kellzy Hub. Connecting to secure server. Please verify your identity."); utterThis.pitch = 1.2; utterThis.rate = 1.1; utterThis.lang = 'en-US'; synth.speak(utterThis);
             initVisualizer();
         });
 
-        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3;
-        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
-        const interactiveBtns = document.querySelectorAll('.interactive-btn');
-        interactiveBtns.forEach(btn => {
-            btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); });
-            btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); });
-        });
+        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3; const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
+        const interactiveBtns = document.querySelectorAll('.interactive-btn'); interactiveBtns.forEach(btn => { btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); }); btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }); });
 
-        function toggleMusic() {
-            const icon = document.querySelector('#musicToggle i');
-            if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; if(!isAudioInit) initVisualizer(); } 
-            else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
-        }
-
-        function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") {
-            const toast = document.getElementById("toastBox"); const icon = document.getElementById("toastIcon"); const msg = document.getElementById("toastMsg");
-            toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`; msg.innerText = message;
-            toast.classList.add("show"); setTimeout(() => { toast.classList.remove("show"); }, 3500);
-        }
+        function toggleMusic() { const icon = document.querySelector('#musicToggle i'); if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; if(!isAudioInit) initVisualizer(); } else { bgm.pause(); icon.className = 'fa-solid fa-play'; } }
+        function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") { const toast = document.getElementById("toastBox"); const icon = document.getElementById("toastIcon"); const msg = document.getElementById("toastMsg"); toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`; msg.innerText = message; toast.classList.add("show"); setTimeout(() => { toast.classList.remove("show"); }, 3500); }
 
         let ytVerified = false; let dcVerified = false; let isScriptUnlocked = false;
+        function verifyYT() { if(ytVerified) return; window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank'); const btn = document.getElementById('ytBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7'; setTimeout(() => { ytVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock(); }, 5000); }
+        function verifyDC() { if(dcVerified) return; window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank'); const btn = document.getElementById('dcBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7'; setTimeout(() => { dcVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock(); }, 5000); }
+        function checkUnlock() { if (ytVerified && dcVerified) { isScriptUnlocked = true; const copyBtn = document.getElementById('copyBtn'); copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING'; showToast("Verification Complete! Script Unlocked.", "var(--theme-color)"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); } }
+        function copyScript() { if (!isScriptUnlocked) { showToast("Selesaikan Step 1 dan 2 dulu untuk unlock!", "#ff3333", "fa-circle-xmark"); return; } const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`; navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); }); }
 
-        function verifyYT() {
-            if(ytVerified) return; window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
-            const btn = document.getElementById('ytBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
-            setTimeout(() => { ytVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock(); }, 5000);
-        }
+        let mascotClicks = 0; function mascotClick() { mascotClicks++; const mascot = document.getElementById('mascotImg'); mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`; setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200); if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; } }
 
-        function verifyDC() {
-            if(dcVerified) return; window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank');
-            const btn = document.getElementById('dcBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
-            setTimeout(() => { dcVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock(); }, 5000);
-        }
-
-        function checkUnlock() {
-            if (ytVerified && dcVerified) { isScriptUnlocked = true; const copyBtn = document.getElementById('copyBtn'); copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING'; showToast("Verification Complete! Script Unlocked.", "var(--theme-color)"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
-        }
-
-        function copyScript() {
-            if (!isScriptUnlocked) { showToast("Selesaikan Step 1 dan 2 dulu untuk unlock!", "#ff3333", "fa-circle-xmark"); return; }
-            const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
-            navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); });
-        }
-
-        let mascotClicks = 0;
-        function mascotClick() {
-            mascotClicks++; const mascot = document.getElementById('mascotImg');
-            mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`;
-            setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200);
-            if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; }
-        }
-
-        setInterval(() => { const counter = document.getElementById('userCount'); let val = parseInt(counter.innerText.replace(',', '')); val += Math.floor(Math.random() * 5) - 2; counter.innerText = val.toLocaleString(); }, 3000);
-
-        document.onkeydown = function(e) { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { return false; } };
+        document.onkeydown = function(e) { 
+            // Trigger Reset AFK
+            resetAFK();
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { return false; } 
+        };
 
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
-        function loadVfx(mode) {
-            if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; }
-            let config = {};
-            if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; }
-            else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; }
-            else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; }
-            particlesJS('particles-js', config);
-        }
+        function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
         loadVfx('hearts');
     </script>
 </body>
