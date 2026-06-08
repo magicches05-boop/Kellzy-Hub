@@ -92,13 +92,13 @@
         .mascot-wrapper { position: absolute; top: -65px; left: 50%; transform: translateX(-50%); width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: var(--transition); z-index: 100; }
         .mascot-bubble { position: absolute; top: -110px; left: 65%; background: rgba(15, 15, 15, 0.9); border: 1px solid var(--theme-color); padding: 8px 12px; border-radius: 12px 12px 12px 0; font-size: 10px; color: #fff; font-weight: 700; white-space: nowrap; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: opacity 0.5s ease; pointer-events: none; z-index: 101; opacity: 0; }
 
-        .status-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 127, 0.1); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 20px; }
+        .status-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 127, 0.1); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 20px; transition: var(--transition); }
+        .status-badge:hover { background: rgba(0, 255, 127, 0.2); transform: scale(1.05); }
         .status-dot { width: 8px; height: 8px; background: #00ff7f; border-radius: 50%; box-shadow: 0 0 10px #00ff7f; animation: pulse 2s infinite; }
 
         h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
         .sub-text { color: #aaa; font-size: 13px; margin-bottom: 15px; }
 
-        /* --- FITUR BARU: HACKER LEVELING SYSTEM --- */
         .hacker-level-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; margin-bottom: 20px; text-align: left; }
         .level-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono'; margin-bottom: 5px; }
         .level-header #rankTitle { color: var(--theme-color); }
@@ -113,7 +113,7 @@
         .code-box { background: #000; border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ddd; text-align: left; margin-bottom: 20px; border: 1px solid #222; min-height: 70px;}
 
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn { padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase; font-size: 11px; transition: var(--transition); border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; }
+        .btn { padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase; font-size: 11px; transition: var(--transition); border: none; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; cursor: pointer;}
         .btn-yt { background: var(--youtube); color: #fff; grid-column: span 1; }
         .btn-yt:hover { box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); transform: translateY(-3px); }
         .btn-dc { background: var(--discord); color: #fff; grid-column: span 1; }
@@ -159,6 +159,37 @@
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
         .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid #ff3333; text-align: center; }
 
+        /* --- STYLING MODAL BARU (Store, Key, Changelog) --- */
+        .modal-glass { background: rgba(15, 15, 15, 0.95); width: 90%; max-width: 450px; padding: 30px; border-radius: 20px; border: 1px solid var(--theme-color); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; color: #aaa; font-size: 18px; transition: 0.3s; }
+        .close-modal:hover { color: #ff3333; }
+
+        /* Store Grid Modal */
+        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; padding-right: 5px;}
+        .store-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; }
+        .store-item:hover { border-color: var(--theme-color); transform: translateY(-3px); }
+        .store-item img { width: 100%; border-radius: 8px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
+        .store-item span { font-size: 11px; font-weight: 800; color: #fff; display: block; }
+        .store-item .price { color: #00ff7f; font-size: 10px; margin-top: 4px; font-family: 'JetBrains Mono'; }
+
+        /* Key Input Container */
+        .key-input-container { margin: 20px 0; }
+        .key-input-container input { width: 100%; padding: 15px; background: #050505; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 14px; margin-bottom: 15px; outline: none; }
+        .key-input-container input:focus { border-color: var(--theme-color); }
+
+        /* Changelog Content */
+        .changelog-content { text-align: left; background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; max-height: 250px; overflow-y: auto; margin-top: 15px;}
+        .changelog-content span.add { color: #00ff7f; }
+        .changelog-content span.fix { color: #ffaa00; }
+        .changelog-content span.del { color: #ff3333; }
+
+        /* Search Bar */
+        .search-box { width: 100%; max-width: 400px; margin: 0 auto 20px auto; position: relative; }
+        .search-box input { width: 100%; padding: 12px 15px 12px 40px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Urbanist', sans-serif; font-size: 12px; transition: var(--transition); outline: none; }
+        .search-box input:focus { border-color: var(--theme-color); box-shadow: 0 0 15px rgba(0,229,255,0.2); }
+        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 14px; transition: var(--transition); }
+        .search-box input:focus + i { color: var(--theme-color); }
+
         #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
         .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .menu-item:last-child { border-bottom: none; }
@@ -182,7 +213,6 @@
         .wheel { width: 100%; height: 100%; background: conic-gradient(#111 0% 25%, #222 25% 50%, #111 50% 75%, #222 75% 100%); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid var(--theme-color); z-index: 2; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));}
 
-        /* --- FITUR BARU: CONTROL PANEL DRAWER --- */
         .settings-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(10,10,10,0.95); border-left: 1px solid var(--theme-color); z-index: 10001; transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.8); backdrop-filter: blur(20px); display: flex; flex-direction: column; }
         .settings-drawer.open { right: 0; }
         .drawer-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
@@ -191,7 +221,6 @@
         .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .setting-item span { font-size: 12px; font-weight: 600; color: #ddd; }
         
-        /* CSS Untuk Switch Toggles */
         .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; border: 1px solid rgba(255,255,255,0.1); }
@@ -262,9 +291,83 @@
         </div>
     </div>
 
+    <!-- MODAL 1: KAELL STORE SHOWCASE -->
+    <div class="modal" id="storeModal">
+        <div class="modal-glass">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeStoreModal()"></i>
+            <h2 style="color: var(--theme-color); font-size: 22px; margin-top: 0; margin-bottom: 5px;"><i class="fa-solid fa-store"></i> KAELL STORE</h2>
+            <p style="color: #aaa; font-size: 12px; margin-top: 0;">Premium Roblox Apparel & Digital Goods</p>
+            <div class="store-grid">
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div class="store-item interactive-btn">
+                        <img src="https://i.pinimg.com/736x/8a/be/67/8abe6746f3322e17ebdf2ec2f5c71d60.jpg" alt="Cyan Hoodie">
+                        <span>Kaell Cyan Hoodie</span>
+                        <div class="price">R$ 5</div>
+                    </div>
+                </a>
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div class="store-item interactive-btn">
+                        <img src="https://i.pinimg.com/736x/91/d5/43/91d5434e3b7b2ef47e6ff82a5c9fc9df.jpg" alt="Dark Tee">
+                        <span>Kaell Hacker Tee</span>
+                        <div class="price">R$ 5</div>
+                    </div>
+                </a>
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div class="store-item interactive-btn">
+                        <img src="https://i.pinimg.com/736x/e4/df/e3/e4dfe3b3b2be0c681f21c2d28f092523.jpg" alt="Chibi Mascot">
+                        <span>Kaell Chibi Mascot</span>
+                        <div class="price">R$ 10</div>
+                    </div>
+                </a>
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div class="store-item interactive-btn">
+                        <img src="https://i.pinimg.com/736x/cf/e6/51/cfe6513813bd8e34898144eeaf27bb90.jpg" alt="Premium VIP">
+                        <span>Premium Hub Key</span>
+                        <div class="price">$ 2.99</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: KEY INPUT SYSTEM -->
+    <div class="modal" id="keyModal">
+        <div class="modal-glass">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeKeyModal()"></i>
+            <i class="fa-solid fa-shield-halved" style="font-size: 40px; color: var(--theme-color); margin-bottom: 15px;"></i>
+            <h2 style="color: #fff; margin-top: 0; font-weight: 800; font-size: 20px;">SECURITY CLEARANCE</h2>
+            <p style="color: #ccc; font-size: 12px; margin-bottom: 20px;">Silakan masukkan Key Premium Anda untuk membuka script. Dapatkan Key gratis di bawah ini (Berlaku 24 Jam).</p>
+            <div class="key-input-container">
+                <input type="text" id="scriptKeyInput" placeholder="Enter Key here...">
+                <button class="btn btn-primary interactive-btn" onclick="submitKey()" style="width: 100%;">VERIFY KEY</button>
+            </div>
+            <a href="https://link-target.net/6323111/fA6olvPyl0nD" target="_blank" class="btn interactive-btn" style="background: #222; color: #fff; border: 1px solid #444; width: 100%;"><i class="fa-solid fa-link"></i> GET KEY (LINKVERTISE)</a>
+        </div>
+    </div>
+
+    <!-- MODAL 5: CHANGELOG PATCH NOTES -->
+    <div class="modal" id="changelogModal">
+        <div class="modal-glass" style="max-width: 500px;">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeChangelogModal()"></i>
+            <h2 style="color: var(--theme-color); font-size: 20px; margin-top: 0; text-align: left;"><i class="fa-solid fa-terminal"></i> PATCH NOTES v2.0.4</h2>
+            <div class="changelog-content">
+                <strong>[UPDATE LOG - 2026-06-09]</strong><br><br>
+                <span class="add">[+]</span> Added Kaell Store Showcase UI.<br>
+                <span class="add">[+]</span> Added Advanced Search Filter for Games.<br>
+                <span class="add">[+]</span> Implemented Secure Key Input System.<br>
+                <span class="fix">[*]</span> Improved Byfron Bypass (V2 Protocol).<br>
+                <span class="fix">[*]</span> Optimized UI Animations & Particle Memory.<br>
+                <span class="del">[-]</span> Removed Patched Arceus X Exploit Method.<br><br>
+                <em>System stability: 99.9%</em><br>
+                <em>Dev Note: Keep supporting @Kellllllll-f7i!</em>
+            </div>
+        </div>
+    </div>
+
     <div id="customMenu">
         <div class="menu-title">KELLZY OS MENU</div>
         <div class="menu-item interactive-btn" onclick="toggleSettings()"><i class="fa-solid fa-sliders"></i> Open Settings</div>
+        <div class="menu-item interactive-btn" onclick="openStoreModal()"><i class="fa-solid fa-store"></i> Kaell Store</div> <!-- FITUR 1 ADDED HERE -->
         <div class="menu-item interactive-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i> Toggle Music</div>
         <div class="menu-item interactive-btn" onclick="toggleTheme()"><i class="fa-solid fa-palette"></i> Change Theme</div>
         <div class="menu-item interactive-btn" onclick="toggleVfx()"><i class="fa-solid fa-wand-magic-sparkles"></i> Switch VFX</div>
@@ -305,6 +408,8 @@
             
             <div id="mainCardContent">
                 <div class="top-controls">
+                    <!-- FITUR 1 TRIGGER ADDED HERE -->
+                    <div class="control-btn interactive-btn" onclick="openStoreModal()" title="Kaell Store"><i class="fa-solid fa-store"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleSettings()" title="Settings"><i class="fa-solid fa-gear"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme"><i class="fa-solid fa-palette"></i></div>
@@ -313,7 +418,8 @@
                 <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
                 <div class="mascot-bubble" id="mascotBubble">Hi! Welcome to Kellzy Hub!</div>
 
-                <div class="status-badge">
+                <!-- FITUR 5 TRIGGER ADDED HERE (onclick="openChangelogModal()") -->
+                <div class="status-badge interactive-btn" onclick="openChangelogModal()" style="cursor: pointer;" title="View Patch Notes">
                     <div class="status-dot"></div>
                     <span style="font-size: 11px; font-weight: 800; color: #00ff7f;">KELLZY HUB | V2.0.4 UPDATED</span>
                 </div>
@@ -347,7 +453,8 @@
                     <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
                     <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
                     <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
-                    <a href="https://link-target.net/6323111/fA6olvPyl0nD" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
+                    <!-- FITUR 3 TRIGGER ADDED HERE (onclick="openKeyModal()") -->
+                    <button onclick="openKeyModal()" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> REDEEM KEY</button>
                 </div>
 
                 <div class="catalog-container">
@@ -391,17 +498,24 @@
 
         <div class="extra-content">
             <h2>🔥 SUPPORTED GAMES</h2>
-            <p>Kellzy Hub, Script dilengkapi dengan ratusan fitur Auto-Farm, Support game saat ini!.</p>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; margin-bottom: 40px;">
-                <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+            
+            <!-- FITUR 4: SEARCH BAR FILTER -->
+            <div class="search-box">
+                <input type="text" id="gameSearch" placeholder="Search games (e.g., Lucky Blox)...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <!-- Tambahan class="game-card" untuk target script filter -->
+            <div id="gamesGrid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px; margin-bottom: 40px;">
+                <div class="game-card" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
                     <img src="https://i.pinimg.com/736x/13/82/44/13824471583ac734a97115c155c4d109.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" alt="Kick A Lucky Blox">
                     <span style="font-size: 11px; font-weight: 800; color: #fff;">Kick A Lucky Blox</span>
                 </div>
-                <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                <div class="game-card" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
                     <img src="https://i.pinimg.com/736x/08/39/ee/0839ee2b55915561c2945f3b4faf2ed6.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" alt="Inside A Brainrot">
                     <span style="font-size: 11px; font-weight: 800; color: #fff;">Inside A Brainrot</span>
                 </div>
-                <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                <div class="game-card" style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-3px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
                     <img src="https://i.pinimg.com/736x/f7/ce/bd/f7cebd9580d84773de38696abb2a4f2d.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 8px;" alt="Lucky Blox Rush">
                     <span style="font-size: 11px; font-weight: 800; color: #fff;">Lucky Blox Rush</span>
                 </div>
@@ -441,7 +555,7 @@
     </div>
 
     <script>
-        // --- FITUR BARU: SETTINGS DRAWER LOGIC ---
+        // JS EXISTING
         function toggleSettings() {
             const drawer = document.getElementById('settingsDrawer');
             drawer.classList.toggle('open');
@@ -474,12 +588,11 @@
             } else { toggleAutoTime(); }
         }
 
-        // --- FITUR BARU: HACKER EXP SYSTEM ---
         let currentExp = 0; let expMax = 100; let rankIndex = 0;
         const ranks = ["SCRIPT KIDDIE", "EXPLOITER", "PRO CODER", "GOD HACKER"];
         setInterval(() => {
             const afkClock = document.getElementById('afkClock');
-            if(afkClock.classList.contains('show')) return; // Ga nambah exp kalau AFK
+            if(afkClock.classList.contains('show')) return;
             currentExp += Math.floor(Math.random() * 8) + 2;
             if(currentExp >= expMax) {
                 currentExp = 0;
@@ -493,7 +606,6 @@
             document.getElementById('expFill').style.width = (currentExp / expMax * 100) + '%';
         }, 2000);
 
-        // --- CURSOR TRAIL ---
         const trailContainer = document.createElement('div'); document.body.appendChild(trailContainer);
         const dots = [];
         for(let i=0; i<12; i++) {
@@ -512,14 +624,12 @@
             requestAnimationFrame(drawTrail);
         } drawTrail();
 
-        // --- CLICK SHOCKWAVE ---
         document.addEventListener('click', (e) => {
             const wave = document.createElement('div'); wave.className = 'shockwave';
             wave.style.left = e.clientX + 'px'; wave.style.top = e.clientY + 'px';
             document.body.appendChild(wave); setTimeout(() => wave.remove(), 600);
         });
 
-        // --- FAKE LIVE PURCHASE POP-UP ---
         const purchaseNames = ["XXVirxXXX", "Dlwaa", "Rxyy_999", "Kell_Fans", "ShadowSlayer", "Kyzz27", "Mesndw0", "forchan2"];
         const purchaseItems = ["Key Premium", "Robux", "Premium Executor Key", "VIP Access Lifetime Days", "VIP Access 7 Days", "Vip Access 30 Days"];
         setInterval(() => {
@@ -531,7 +641,6 @@
             setTimeout(() => toast.classList.remove('show'), 4000);
         }, Math.random() * 15000 + 15000);
 
-        // --- SECRET SNAKE GAME ---
         let inSnakeGame = false; let snakeBuffer = "";
         window.addEventListener('keydown', (e) => {
             snakeBuffer += e.key.toLowerCase();
@@ -563,7 +672,6 @@
         }
         function closeSnakeGame() { inSnakeGame = false; clearInterval(snakeInterval); document.getElementById('mainCardContent').style.display = 'block'; document.getElementById('snakeGameContainer').style.display = 'none'; }
 
-        // --- ANTI INSPECT ELEMENT AGGRESSIVE ---
         function triggerSecurityBreach() {
             const breachScreen = document.getElementById('securityBreach'); breachScreen.style.display = 'flex';
             const screech = new Audio('https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3'); screech.volume = 0.5; screech.play().catch(()=>{});
@@ -574,7 +682,6 @@
             if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { triggerSecurityBreach(); return false; } 
         };
 
-        // --- FITUR LAMA UTUH ---
         let afkTimer; const afkTimeout = 15000; const uiElements = document.querySelectorAll('.fade-ui'); const afkClock = document.getElementById('afkClock');
         function resetAFK() {
             clearTimeout(afkTimer); uiElements.forEach(el => el.classList.remove('ui-hidden')); afkClock.classList.remove('show');
@@ -714,6 +821,57 @@
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
         function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
         loadVfx('hearts');
+
+        // --- JS FITUR BARU MULAI DI SINI ---
+
+        // 1. Store Modal Logic
+        function openStoreModal() { document.getElementById('storeModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); customMenu.style.display = 'none'; }
+        function closeStoreModal() { document.getElementById('storeModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
+
+        // 3. Key Modal Logic
+        function openKeyModal() { document.getElementById('keyModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
+        function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
+        function submitKey() {
+            const keyVal = document.getElementById('scriptKeyInput').value.trim();
+            // Cek jika key yang dimasukkan benar
+            if(keyVal === "KELLZY-2X5NYFU6" || keyVal === "KAELL-VIP-2026") {
+                showToast("Key Valid! Access Granted.", "#00ff7f", "fa-unlock");
+                closeKeyModal();
+                
+                // Otomatis verif yt/dc biar script langsung kebuka
+                ytVerified = true; dcVerified = true; 
+                document.getElementById('ytBtn').innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; document.getElementById('ytBtn').style.background = 'var(--theme-color)'; document.getElementById('ytBtn').style.color = '#000';
+                document.getElementById('dcBtn').innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; document.getElementById('dcBtn').style.background = 'var(--theme-color)'; document.getElementById('dcBtn').style.color = '#000';
+                
+                unlockScript();
+            } else {
+                showToast("Invalid Key! Please get a new one.", "#ff3333", "fa-xmark");
+                document.getElementById('scriptKeyInput').style.borderColor = "#ff3333";
+                setTimeout(() => document.getElementById('scriptKeyInput').style.borderColor = "rgba(255,255,255,0.2)", 2000);
+            }
+        }
+
+        // 4. Game Search Filter Logic
+        const gameSearch = document.getElementById('gameSearch');
+        if(gameSearch) {
+            gameSearch.addEventListener('input', function(e) {
+                const term = e.target.value.toLowerCase();
+                const games = document.querySelectorAll('.game-card');
+                games.forEach(game => {
+                    const title = game.querySelector('span').innerText.toLowerCase();
+                    if(title.includes(term)) {
+                        game.style.display = 'block';
+                    } else {
+                        game.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // 5. Changelog Modal Logic
+        function openChangelogModal() { document.getElementById('changelogModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
+        function closeChangelogModal() { document.getElementById('changelogModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
+
     </script>
 </body>
 </html>
