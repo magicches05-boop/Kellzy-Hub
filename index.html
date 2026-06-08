@@ -24,7 +24,6 @@
 
         * { box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
-        /* SCROLL DIBUKA: height auto & overflow-y auto */
         body {
             margin: 0; padding: 0; background-color: var(--bg-dark);
             font-family: 'Urbanist', sans-serif; color: #ffffff;
@@ -33,79 +32,44 @@
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
         }
 
-        /* Semua Background dibikin Fixed agar tidak ikut terscroll */
-        #bg-warp {
-            position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
-            background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg');
-            background-size: cover; background-position: center; z-index: -3; transition: transform 0.1s ease-out;
-        }
-
-        /* OVERLAY DAY/NIGHT */
-        #dayNightOverlay {
-            position: fixed; inset: 0; z-index: -2; pointer-events: none; transition: background 1s ease, backdrop-filter 1s ease;
-        }
-
+        #bg-warp { position: fixed; top: -5%; left: -5%; width: 110%; height: 110%; background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg'); background-size: cover; background-position: center; z-index: -3; transition: transform 0.1s ease-out; }
+        #dayNightOverlay { position: fixed; inset: 0; z-index: -2; pointer-events: none; transition: background 1s ease, backdrop-filter 1s ease; }
         body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: -1; pointer-events: none; }
 
-        .scanlines {
-            position: fixed; inset: 0; z-index: 2; pointer-events: none;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
-            background-size: 100% 4px; animation: glitch-anim 5s infinite linear; opacity: 0.5;
-        }
+        .scanlines { position: fixed; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2)); background-size: 100% 4px; animation: glitch-anim 5s infinite linear; opacity: 0.5; }
         @keyframes glitch-anim { 0% { transform: translateY(0); } 100% { transform: translateY(4px); } }
 
         #visualizer { position: fixed; bottom: 0; left: 0; width: 100%; height: 25%; z-index: 0; pointer-events: none; opacity: 0.7; }
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-
         a, button, .interactive-btn { cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important; }
 
-        /* --- FITUR TAMBAHAN: NEWS TICKER --- */
         .news-ticker { position: fixed; top: 0; left: 0; width: 100%; background: #ffaa00; color: #000; font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; z-index: 10000; padding: 4px 0; text-transform: uppercase; }
         .ticker-text { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        /* --- FITUR TAMBAHAN: PURCHASE TOAST --- */
         .purchase-toast { position: fixed; top: 40px; left: -350px; background: rgba(0,0,0,0.8); border: 1px solid var(--theme-color); padding: 10px 15px; border-radius: 8px; color: #fff; font-size: 11px; z-index: 999; display: flex; align-items: center; gap: 10px; transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 5px 15px rgba(0,0,0,0.5); backdrop-filter: blur(5px);}
         .purchase-toast.show { left: 20px; }
         .purchase-toast span { color: var(--theme-color); font-weight: 800; }
 
-        /* --- FITUR TAMBAHAN: SECURITY BREACH (ANTI INSPECT) --- */
         #securityBreach { position: fixed; inset: 0; background: red; z-index: 100000; display: none; justify-content: center; align-items: center; color: white; font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; text-align: center; animation: glitch-bg 0.1s infinite; flex-direction: column; }
         @keyframes glitch-bg { 0% { background: red; } 50% { background: #000; } 100% { background: red; } }
 
-        /* --- FITUR TAMBAHAN: CURSOR TRAIL & SHOCKWAVE --- */
         .cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--theme-color); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--theme-color); }
         .shockwave { position: fixed; border: 2px solid var(--theme-color); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 9998; animation: shockwaveAnim 0.6s ease-out forwards; }
         @keyframes shockwaveAnim { 0% { width: 0; height: 0; opacity: 1; border-width: 3px; } 100% { width: 100px; height: 100px; opacity: 0; border-width: 0px; } }
 
-        #loader {
-            position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        .loader-spinner {
-            width: 50px; height: 50px; border: 4px solid rgba(0,229,255,0.1); border-top: 4px solid var(--theme-color); border-radius: 50%;
-            animation: spin 1s linear infinite; margin-bottom: 25px; box-shadow: 0 0 20px var(--theme-color);
-        }
+        #loader { position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
+        .loader-spinner { width: 50px; height: 50px; border: 4px solid rgba(0,229,255,0.1); border-top: 4px solid var(--theme-color); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 25px; box-shadow: 0 0 20px var(--theme-color); }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .loader-text { color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
         .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--theme-color); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
 
-        /* FADE UI UNTUK AFK MODE */
         .fade-ui { transition: opacity 1.5s ease, filter 1.5s ease; }
         .ui-hidden { opacity: 0 !important; filter: blur(10px) !important; pointer-events: none !important; }
 
-        /* JAM RAKSASA AFK MODE */
-        #afkClock {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 120px; font-weight: 800; font-family: 'JetBrains Mono', monospace;
-            color: rgba(255, 255, 255, 0.1); text-shadow: 0 0 50px var(--theme-color);
-            -webkit-text-stroke: 2px var(--theme-color); z-index: 5;
-            opacity: 0; pointer-events: none; transition: opacity 1.5s ease, transform 1.5s ease;
-            transform: translate(-50%, -60%);
-        }
+        #afkClock { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -60%); font-size: 120px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: rgba(255, 255, 255, 0.1); text-shadow: 0 0 50px var(--theme-color); -webkit-text-stroke: 2px var(--theme-color); z-index: 5; opacity: 0; pointer-events: none; transition: opacity 1.5s ease, transform 1.5s ease; transform: translate(-50%, -60%); }
         #afkClock.show { opacity: 1; transform: translate(-50%, -50%); }
         
-        /* Container di-padding top 130px agar tidak tertutup News Ticker */
         .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 130px 20px 50px 20px; min-height: 100vh; }
 
         .hub-card {
@@ -115,29 +79,31 @@
             text-align: center; position: relative; 
         }
 
+        #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
+        #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
+
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
         .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; }
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
-        .perf-stats {
-            position: fixed; top: 30px; left: 20px; background: rgba(8, 8, 8, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px;
-            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--theme-color); z-index: 100; backdrop-filter: blur(5px); display: flex; gap: 15px;
-        }
+        .perf-stats { position: fixed; top: 30px; left: 20px; background: rgba(8, 8, 8, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--theme-color); z-index: 100; backdrop-filter: blur(5px); display: flex; gap: 15px; }
         .perf-stats span { color: #fff; }
 
-        /* MASCOT BUBBLE */
         .mascot-wrapper { position: absolute; top: -65px; left: 50%; transform: translateX(-50%); width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: var(--transition); z-index: 100; }
-        .mascot-bubble {
-            position: absolute; top: -110px; left: 65%; background: rgba(15, 15, 15, 0.9); border: 1px solid var(--theme-color);
-            padding: 8px 12px; border-radius: 12px 12px 12px 0; font-size: 10px; color: #fff; font-weight: 700; white-space: nowrap;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: opacity 0.5s ease; pointer-events: none; z-index: 101; opacity: 0;
-        }
+        .mascot-bubble { position: absolute; top: -110px; left: 65%; background: rgba(15, 15, 15, 0.9); border: 1px solid var(--theme-color); padding: 8px 12px; border-radius: 12px 12px 12px 0; font-size: 10px; color: #fff; font-weight: 700; white-space: nowrap; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: opacity 0.5s ease; pointer-events: none; z-index: 101; opacity: 0; }
 
         .status-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 127, 0.1); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 20px; }
         .status-dot { width: 8px; height: 8px; background: #00ff7f; border-radius: 50%; box-shadow: 0 0 10px #00ff7f; animation: pulse 2s infinite; }
 
         h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
-        .sub-text { color: #aaa; font-size: 13px; margin-bottom: 20px; }
+        .sub-text { color: #aaa; font-size: 13px; margin-bottom: 15px; }
+
+        /* --- FITUR BARU: HACKER LEVELING SYSTEM --- */
+        .hacker-level-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; margin-bottom: 20px; text-align: left; }
+        .level-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono'; margin-bottom: 5px; }
+        .level-header #rankTitle { color: var(--theme-color); }
+        .level-bar-bg { width: 100%; height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
+        .level-bar-fill { height: 100%; width: 0%; background: var(--theme-color); transition: width 0.5s ease; box-shadow: 0 0 10px var(--theme-color); }
 
         .live-counter { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 1px solid rgba(255,255,255,0.05); }
         .counter-item { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
@@ -174,20 +140,13 @@
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
         .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
-        /* RUANG TAMBAHAN DI BAWAH KARTU UTAMA BUAT SCROLL */
-        .extra-content {
-            width: 90%; max-width: 520px; margin-top: 40px; text-align: center;
-            background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px);
-            margin-bottom: 50px;
-        }
+        .extra-content { width: 90%; max-width: 520px; margin-top: 40px; text-align: center; background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); margin-bottom: 50px; }
         .extra-content h2 { color: var(--theme-color); font-size: 20px; margin-top: 0; font-weight: 800; text-transform: uppercase;}
         .extra-content p { color: #ccc; font-size: 12px; line-height: 1.6; }
 
         .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
         .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
 
-        /* CUSTOM MP3 PLAYER CONTROLS */
         .audio-controls { position: fixed; bottom: 250px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer; }
         .audio-btn { color: #fff; transition: 0.3s; font-size: 16px; }
         .audio-btn:hover { color: var(--theme-color); }
@@ -206,17 +165,8 @@
         .menu-item:hover { background: var(--theme-color); color: #000; }
         .menu-title { font-size: 9px; color: var(--theme-color); padding: 8px 15px; font-weight: 800; letter-spacing: 1px; background: rgba(0,0,0,0.5); }
 
-        /* FAKE GLOBAL LIVE CHAT */
-        .live-chat-box {
-            position: fixed; bottom: 30px; left: 30px; z-index: 50; width: 280px; height: 200px;
-            background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'Urbanist', sans-serif;
-        }
-        .chat-header {
-            padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px;
-            font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;
-        }
+        .live-chat-box { position: fixed; bottom: 30px; left: 30px; z-index: 50; width: 280px; height: 200px; background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'Urbanist', sans-serif; transition: opacity 0.5s; }
+        .chat-header { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
         .chat-header .live-dot { width: 6px; height: 6px; background: #ff0050; border-radius: 50%; animation: pulse 1.5s infinite; }
         .chat-body { flex: 1; padding: 10px 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
         .chat-body::-webkit-scrollbar { width: 0px; }
@@ -225,23 +175,29 @@
         .chat-msg strong { color: var(--theme-color); }
         .chat-msg .tag-vip { background: #ffdd00; color: #000; padding: 2px 5px; border-radius: 4px; font-size: 8px; font-weight: 800; margin-right: 5px; }
 
-        /* DAILY REWARD (SPIN THE WHEEL) */
-        .daily-reward-btn {
-            position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
-            background: rgba(15, 15, 15, 0.8); border: 1px solid var(--theme-color);
-            padding: 20px 8px; border-radius: 12px; color: var(--theme-color);
-            cursor: pointer; z-index: 50; writing-mode: vertical-rl; text-orientation: mixed;
-            font-weight: 800; font-size: 12px; letter-spacing: 2px; transition: 0.3s; box-shadow: 0 0 15px rgba(0,229,255,0.2);
-        }
+        .daily-reward-btn { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(15, 15, 15, 0.8); border: 1px solid var(--theme-color); padding: 20px 8px; border-radius: 12px; color: var(--theme-color); cursor: pointer; z-index: 50; writing-mode: vertical-rl; text-orientation: mixed; font-weight: 800; font-size: 12px; letter-spacing: 2px; transition: 0.3s; box-shadow: 0 0 15px rgba(0,229,255,0.2); }
         .daily-reward-btn:hover { background: var(--theme-color); color: #000; box-shadow: 0 0 25px var(--theme-color); }
         .wheel-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(15px); flex-direction: column;}
         .wheel-container { position: relative; width: 300px; height: 300px; margin: 20px; border-radius: 50%; border: 5px solid var(--theme-color); overflow: hidden; box-shadow: 0 0 30px var(--theme-color); }
         .wheel { width: 100%; height: 100%; background: conic-gradient(#111 0% 25%, #222 25% 50%, #111 50% 75%, #222 75% 100%); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid var(--theme-color); z-index: 2; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));}
 
-        /* --- FITUR TAMBAHAN: SNAKE GAME CONTAINER --- */
-        #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
-        #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
+        /* --- FITUR BARU: CONTROL PANEL DRAWER --- */
+        .settings-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(10,10,10,0.95); border-left: 1px solid var(--theme-color); z-index: 10001; transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.8); backdrop-filter: blur(20px); display: flex; flex-direction: column; }
+        .settings-drawer.open { right: 0; }
+        .drawer-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
+        .drawer-header h3 { margin: 0; font-size: 14px; color: var(--theme-color); font-weight: 800; display: flex; align-items: center; gap: 10px; }
+        .drawer-content { padding: 20px; flex: 1; overflow-y: auto; }
+        .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .setting-item span { font-size: 12px; font-weight: 600; color: #ddd; }
+        
+        /* CSS Untuk Switch Toggles */
+        .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; border: 1px solid rgba(255,255,255,0.1); }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--theme-color); }
+        input:checked + .slider:before { transform: translateX(18px); background-color: #000; }
 
     </style>
 </head>
@@ -257,6 +213,31 @@
         <i class="fa-solid fa-triangle-exclamation" style="font-size: 80px; margin-bottom: 20px;"></i>
         SECURITY BREACH DETECTED<br>
         <span style="font-size: 14px; font-weight: 400; margin-top: 10px;">Developer Tools Locked. Incident logged.</span>
+    </div>
+
+    <div class="settings-drawer" id="settingsDrawer">
+        <div class="drawer-header">
+            <h3><i class="fa-solid fa-sliders"></i> ADVANCED SETTINGS</h3>
+            <i class="fa-solid fa-xmark interactive-btn" style="font-size: 20px; cursor: pointer; color: #fff;" onclick="toggleSettings()"></i>
+        </div>
+        <div class="drawer-content">
+            <div class="setting-item">
+                <span>Show Fake Live Chat</span>
+                <label class="switch"><input type="checkbox" checked onchange="toggleFeature('liveChat', this)"><span class="slider"></span></label>
+            </div>
+            <div class="setting-item">
+                <span>Show Anime Mascot</span>
+                <label class="switch"><input type="checkbox" checked onchange="toggleFeature('mascotImg', this); toggleFeature('mascotBubble', this)"><span class="slider"></span></label>
+            </div>
+            <div class="setting-item">
+                <span>Auto Day/Night Sync</span>
+                <label class="switch"><input type="checkbox" checked id="autoDayNight" onchange="toggleAutoTime()"><span class="slider"></span></label>
+            </div>
+            <div class="setting-item">
+                <span>Force Dark Mode</span>
+                <label class="switch"><input type="checkbox" id="forceDark" onchange="forceDarkMode(this)"><span class="slider"></span></label>
+            </div>
+        </div>
     </div>
 
     <div id="bg-warp"></div>
@@ -283,6 +264,7 @@
 
     <div id="customMenu">
         <div class="menu-title">KELLZY OS MENU</div>
+        <div class="menu-item interactive-btn" onclick="toggleSettings()"><i class="fa-solid fa-sliders"></i> Open Settings</div>
         <div class="menu-item interactive-btn" onclick="toggleMusic()"><i class="fa-solid fa-music"></i> Toggle Music</div>
         <div class="menu-item interactive-btn" onclick="toggleTheme()"><i class="fa-solid fa-palette"></i> Change Theme</div>
         <div class="menu-item interactive-btn" onclick="toggleVfx()"><i class="fa-solid fa-wand-magic-sparkles"></i> Switch VFX</div>
@@ -323,6 +305,7 @@
             
             <div id="mainCardContent">
                 <div class="top-controls">
+                    <div class="control-btn interactive-btn" onclick="toggleSettings()" title="Settings"><i class="fa-solid fa-gear"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme"><i class="fa-solid fa-palette"></i></div>
                 </div>
@@ -336,7 +319,17 @@
                 </div>
 
                 <h1>KELLZY HUB</h1>
-                <p class="sub-text">Ultimate Roblox Script Provider & Apparel Solution.</p>
+                <p class="sub-text" style="margin-bottom: 5px;">Ultimate Roblox Script Provider & Apparel Solution.</p>
+
+                <div class="hacker-level-box">
+                    <div class="level-header">
+                        <span id="rankTitle">RANK: SCRIPT KIDDIE</span>
+                        <span id="expText">EXP: 0/100</span>
+                    </div>
+                    <div class="level-bar-bg">
+                        <div class="level-bar-fill" id="expFill"></div>
+                    </div>
+                </div>
 
                 <div class="live-counter">
                     <div class="counter-item"><span>Active Users</span><strong id="userCount">1,429</strong></div>
@@ -385,7 +378,9 @@
                 <div style="margin-top: 15px; font-size: 9px; color: #444; font-weight: 800; letter-spacing: 3px;">
                     PROTECTED BY KELLZY HUB SECURITY
                 </div>
-            </div> <div id="snakeGameContainer">
+            </div>
+
+            <div id="snakeGameContainer">
                 <h2 style="color: var(--theme-color); font-size: 16px; margin-top: 0;">🐍 KELLZY SNAKE PROTOCOL</h2>
                 <canvas id="snakeCanvas"></canvas>
                 <p style="font-size: 10px; color: #888; margin-bottom: 0;">PRESS [ESC] TO EXIT MINI-GAME</p>
@@ -446,9 +441,60 @@
     </div>
 
     <script>
-        // --- FITUR BARU: CURSOR TRAIL ---
-        const trailContainer = document.createElement('div');
-        document.body.appendChild(trailContainer);
+        // --- FITUR BARU: SETTINGS DRAWER LOGIC ---
+        function toggleSettings() {
+            const drawer = document.getElementById('settingsDrawer');
+            drawer.classList.toggle('open');
+            clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+        }
+        function toggleFeature(elementId, checkbox) {
+            const el = document.getElementById(elementId);
+            if(el) el.style.opacity = checkbox.checked ? '1' : '0';
+        }
+        let autoDayNightInterval;
+        function toggleAutoTime() {
+            const autoSwitch = document.getElementById('autoDayNight');
+            const forceDark = document.getElementById('forceDark');
+            if(autoSwitch.checked) {
+                forceDark.checked = false;
+                checkDayNight();
+                autoDayNightInterval = setInterval(checkDayNight, 60000);
+            } else {
+                clearInterval(autoDayNightInterval);
+            }
+        }
+        function forceDarkMode(checkbox) {
+            const autoSwitch = document.getElementById('autoDayNight');
+            const overlay = document.getElementById('dayNightOverlay');
+            const statusText = document.getElementById('timeStatus');
+            if(checkbox.checked) {
+                autoSwitch.checked = false; clearInterval(autoDayNightInterval);
+                overlay.style.background = 'rgba(0, 0, 15, 0.6)'; overlay.style.backdropFilter = 'brightness(0.7) contrast(1.2)';
+                if(statusText) { statusText.innerText = "🌙 NIGHT MODE"; statusText.style.color = "#8888ff"; }
+            } else { toggleAutoTime(); }
+        }
+
+        // --- FITUR BARU: HACKER EXP SYSTEM ---
+        let currentExp = 0; let expMax = 100; let rankIndex = 0;
+        const ranks = ["SCRIPT KIDDIE", "EXPLOITER", "PRO CODER", "GOD HACKER"];
+        setInterval(() => {
+            const afkClock = document.getElementById('afkClock');
+            if(afkClock.classList.contains('show')) return; // Ga nambah exp kalau AFK
+            currentExp += Math.floor(Math.random() * 8) + 2;
+            if(currentExp >= expMax) {
+                currentExp = 0;
+                if(rankIndex < ranks.length - 1) {
+                    rankIndex++; expMax = Math.floor(expMax * 1.5);
+                    showToast("LEVEL UP! Rank: " + ranks[rankIndex], "var(--theme-color)", "fa-arrow-up-right-dots");
+                    document.getElementById('rankTitle').innerText = "RANK: " + ranks[rankIndex];
+                } else { currentExp = expMax; }
+            }
+            document.getElementById('expText').innerText = `EXP: ${Math.floor(currentExp)}/${Math.floor(expMax)}`;
+            document.getElementById('expFill').style.width = (currentExp / expMax * 100) + '%';
+        }, 2000);
+
+        // --- CURSOR TRAIL ---
+        const trailContainer = document.createElement('div'); document.body.appendChild(trailContainer);
         const dots = [];
         for(let i=0; i<12; i++) {
             let dot = document.createElement('div'); dot.className = 'cursor-dot';
@@ -461,21 +507,19 @@
             dots.forEach((dot, index) => {
                 const nextDot = dots[index + 1] || dots[0];
                 dot.x = x; dot.y = y; dot.node.style.left = x + 'px'; dot.node.style.top = y + 'px';
-                dot.node.style.opacity = 1 - (index/12);
-                x += (nextDot.x - x) * 0.4; y += (nextDot.y - y) * 0.4;
+                dot.node.style.opacity = 1 - (index/12); x += (nextDot.x - x) * 0.4; y += (nextDot.y - y) * 0.4;
             });
             requestAnimationFrame(drawTrail);
-        }
-        drawTrail();
+        } drawTrail();
 
-        // --- FITUR BARU: CLICK SHOCKWAVE ---
+        // --- CLICK SHOCKWAVE ---
         document.addEventListener('click', (e) => {
             const wave = document.createElement('div'); wave.className = 'shockwave';
             wave.style.left = e.clientX + 'px'; wave.style.top = e.clientY + 'px';
             document.body.appendChild(wave); setTimeout(() => wave.remove(), 600);
         });
 
-        // --- FITUR BARU: FAKE LIVE PURCHASE POP-UP ---
+        // --- FAKE LIVE PURCHASE POP-UP ---
         const purchaseNames = ["Jipa Oren", "ExamBro_User", "Guest_999", "Kaell_Fans", "ShadowSlayer"];
         const purchaseItems = ["Kaell Store Cyan Shirt", "Eneba Roblox Gift Card", "Premium Executor Key", "VIP Access 30 Days"];
         setInterval(() => {
@@ -485,184 +529,92 @@
             toast.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> <b>${name}</b> baru saja membeli <span style="color: var(--theme-color); font-weight:800; margin-left:5px;">${item}</span>!`;
             toast.classList.add('show');
             setTimeout(() => toast.classList.remove('show'), 4000);
-        }, Math.random() * 15000 + 15000); // Muncul setiap 15-30 detik
+        }, Math.random() * 15000 + 15000);
 
-        // --- FITUR BARU: SECRET SNAKE GAME ---
-        let inSnakeGame = false;
-        let snakeBuffer = "";
+        // --- SECRET SNAKE GAME ---
+        let inSnakeGame = false; let snakeBuffer = "";
         window.addEventListener('keydown', (e) => {
             snakeBuffer += e.key.toLowerCase();
             if (snakeBuffer.length > 4) snakeBuffer = snakeBuffer.substring(1);
-            if (snakeBuffer === "play" && !inSnakeGame) {
-                startSnakeGame();
-                showToast("MINI-GAME PROTOCOL INITIATED!", "var(--theme-color)", "fa-gamepad");
-            }
+            if (snakeBuffer === "play" && !inSnakeGame) { startSnakeGame(); showToast("MINI-GAME PROTOCOL INITIATED!", "var(--theme-color)", "fa-gamepad"); }
             if (e.key === "Escape" && inSnakeGame) { closeSnakeGame(); }
         });
-
         let snakeInterval;
         function startSnakeGame() {
-            inSnakeGame = true;
-            document.getElementById('mainCardContent').style.display = 'none';
-            document.getElementById('snakeGameContainer').style.display = 'flex';
-            
-            const canvas = document.getElementById('snakeCanvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 300; canvas.height = 300;
-            const box = 15; let score = 0;
-            let snake = []; snake[0] = { x: 9 * box, y: 10 * box };
-            let food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box };
-            let d;
-            
+            inSnakeGame = true; document.getElementById('mainCardContent').style.display = 'none'; document.getElementById('snakeGameContainer').style.display = 'flex';
+            const canvas = document.getElementById('snakeCanvas'); const ctx = canvas.getContext('2d'); canvas.width = 300; canvas.height = 300;
+            const box = 15; let score = 0; let snake = []; snake[0] = { x: 9 * box, y: 10 * box };
+            let food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box }; let d;
             document.addEventListener("keydown", direction);
-            function direction(event) {
-                if(event.keyCode == 37 && d != "RIGHT") { d = "LEFT"; }
-                else if(event.keyCode == 38 && d != "DOWN") { d = "UP"; }
-                else if(event.keyCode == 39 && d != "LEFT") { d = "RIGHT"; }
-                else if(event.keyCode == 40 && d != "UP") { d = "DOWN"; }
-            }
-
+            function direction(event) { if(event.keyCode == 37 && d != "RIGHT") { d = "LEFT"; } else if(event.keyCode == 38 && d != "DOWN") { d = "UP"; } else if(event.keyCode == 39 && d != "LEFT") { d = "RIGHT"; } else if(event.keyCode == 40 && d != "UP") { d = "DOWN"; } }
             function draw() {
                 ctx.fillStyle = "#111"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-                for(let i = 0; i < snake.length; i++) {
-                    ctx.fillStyle = (i == 0) ? getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() : "white";
-                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
-                    ctx.strokeStyle = "#000"; ctx.strokeRect(snake[i].x, snake[i].y, box, box);
-                }
+                for(let i = 0; i < snake.length; i++) { ctx.fillStyle = (i == 0) ? getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() : "white"; ctx.fillRect(snake[i].x, snake[i].y, box, box); ctx.strokeStyle = "#000"; ctx.strokeRect(snake[i].x, snake[i].y, box, box); }
                 ctx.fillStyle = "red"; ctx.fillRect(food.x, food.y, box, box);
                 let snakeX = snake[0].x; let snakeY = snake[0].y;
-                if(d == "LEFT") snakeX -= box; if(d == "UP") snakeY -= box;
-                if(d == "RIGHT") snakeX += box; if(d == "DOWN") snakeY += box;
-
-                if(snakeX == food.x && snakeY == food.y) {
-                    score++; document.getElementById('snakeScore').innerText = score;
-                    food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box };
-                } else { snake.pop(); }
-
+                if(d == "LEFT") snakeX -= box; if(d == "UP") snakeY -= box; if(d == "RIGHT") snakeX += box; if(d == "DOWN") snakeY += box;
+                if(snakeX == food.x && snakeY == food.y) { score++; document.getElementById('snakeScore').innerText = score; food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box }; } else { snake.pop(); }
                 let newHead = { x: snakeX, y: snakeY };
-                if(snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
-                    clearInterval(snakeInterval); setTimeout(closeSnakeGame, 2000);
-                }
+                if(snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) { clearInterval(snakeInterval); setTimeout(closeSnakeGame, 2000); }
                 snake.unshift(newHead);
             }
-            function collision(head, array) {
-                for(let i = 0; i < array.length; i++) { if(head.x == array[i].x && head.y == array[i].y) return true; }
-                return false;
-            }
+            function collision(head, array) { for(let i = 0; i < array.length; i++) { if(head.x == array[i].x && head.y == array[i].y) return true; } return false; }
             snakeInterval = setInterval(draw, 100);
         }
+        function closeSnakeGame() { inSnakeGame = false; clearInterval(snakeInterval); document.getElementById('mainCardContent').style.display = 'block'; document.getElementById('snakeGameContainer').style.display = 'none'; }
 
-        function closeSnakeGame() {
-            inSnakeGame = false; clearInterval(snakeInterval);
-            document.getElementById('mainCardContent').style.display = 'block';
-            document.getElementById('snakeGameContainer').style.display = 'none';
-        }
-
-        // --- FITUR BARU: ANTI INSPECT ELEMENT AGGRESSIVE ---
+        // --- ANTI INSPECT ELEMENT AGGRESSIVE ---
         function triggerSecurityBreach() {
-            const breachScreen = document.getElementById('securityBreach');
-            breachScreen.style.display = 'flex';
-            const screech = new Audio('https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3');
-            screech.volume = 0.5; screech.play().catch(()=>{});
+            const breachScreen = document.getElementById('securityBreach'); breachScreen.style.display = 'flex';
+            const screech = new Audio('https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3'); screech.volume = 0.5; screech.play().catch(()=>{});
             setTimeout(() => { breachScreen.style.display = 'none'; }, 3000);
         }
-
         document.onkeydown = function(e) { 
             resetAFK();
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { 
-                triggerSecurityBreach();
-                return false; 
-            } 
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { triggerSecurityBreach(); return false; } 
         };
 
-        // --- SEMUA FITUR LAMA DI BAWAH SINI (TIDAK ADA YANG DIHAPUS) ---
-        let afkTimer;
-        const afkTimeout = 15000; 
-        const uiElements = document.querySelectorAll('.fade-ui');
-        const afkClock = document.getElementById('afkClock');
-
+        // --- FITUR LAMA UTUH ---
+        let afkTimer; const afkTimeout = 15000; const uiElements = document.querySelectorAll('.fade-ui'); const afkClock = document.getElementById('afkClock');
         function resetAFK() {
-            clearTimeout(afkTimer);
-            uiElements.forEach(el => el.classList.remove('ui-hidden'));
-            afkClock.classList.remove('show');
-            afkTimer = setTimeout(() => {
-                uiElements.forEach(el => el.classList.add('ui-hidden'));
-                afkClock.classList.add('show');
-            }, afkTimeout);
+            clearTimeout(afkTimer); uiElements.forEach(el => el.classList.remove('ui-hidden')); afkClock.classList.remove('show');
+            afkTimer = setTimeout(() => { uiElements.forEach(el => el.classList.add('ui-hidden')); afkClock.classList.add('show'); }, afkTimeout);
         }
+        setInterval(() => { const now = new Date(); afkClock.innerText = now.toLocaleTimeString('en-US', { hour12: false }); }, 1000);
+        window.addEventListener('mousemove', resetAFK); window.addEventListener('click', resetAFK); window.addEventListener('scroll', resetAFK); resetAFK(); 
 
-        setInterval(() => {
-            const now = new Date();
-            afkClock.innerText = now.toLocaleTimeString('en-US', { hour12: false });
-        }, 1000);
-
-        window.addEventListener('mousemove', resetAFK);
-        window.addEventListener('click', resetAFK);
-        window.addEventListener('scroll', resetAFK);
-        resetAFK(); 
-
-        const mascotTips = ["Follow YT Kellzy buat info update!", "Join Discord buat dapet script gratis!", "Klik logo palet warna buat ganti tema!", "Ketik rahasia K-E-L-L-Z-Y di keyboard!"];
+        const mascotTips = ["Follow YT Kellzy buat info update!", "Join Discord buat dapet script gratis!", "Klik icon Gear di kanan atas!", "Ketik rahasia P-L-A-Y di keyboard!"];
         const mascotBubble = document.getElementById('mascotBubble');
-        setInterval(() => {
-            mascotBubble.style.opacity = 0;
-            setTimeout(() => {
-                mascotBubble.innerText = mascotTips[Math.floor(Math.random() * mascotTips.length)];
-                mascotBubble.style.opacity = 1;
-            }, 500);
-        }, 8000);
+        setInterval(() => { mascotBubble.style.opacity = 0; setTimeout(() => { mascotBubble.innerText = mascotTips[Math.floor(Math.random() * mascotTips.length)]; mascotBubble.style.opacity = 1; }, 500); }, 8000);
 
         function openWheel() { document.getElementById('wheelModal').style.display = 'flex'; }
         function closeWheel() { document.getElementById('wheelModal').style.display = 'none'; }
         function spinWheel() {
-            const wheel = document.getElementById('wheel');
-            const deg = Math.floor(Math.random() * 360) + 1440;
-            wheel.style.transform = `rotate(${deg}deg)`;
-            setTimeout(() => {
-                showToast("🎉 Kamu dapat: VIP Access 1 Hari!", "var(--theme-color)", "fa-gift");
-                setTimeout(() => { closeWheel(); }, 2000);
-            }, 4000);
+            const wheel = document.getElementById('wheel'); const deg = Math.floor(Math.random() * 360) + 1440; wheel.style.transform = `rotate(${deg}deg)`;
+            setTimeout(() => { showToast("🎉 Kamu dapat: VIP Access 1 Hari!", "var(--theme-color)", "fa-gift"); setTimeout(() => { closeWheel(); }, 2000); }, 4000);
         }
 
         const fakeChatNames = ["xX_Slayer_Xx", "Jandel", "Vellyn", "Evlyn", "Kuli_Bata", "Syntx", "BocilKematian", "FarhanA1", "Sammy"];
-        const fakeChatMessages = [
-            "Bang bagi key dong, males lewat linkvertise.", "Gila script brainrot nya anjay banget! 🔥", "Auto farm nya OP parah 🚀", 
-            "Ada script buat Pet Sim 99 bang?", "Kellzy Hub emang ga ada obat", "Thanks bang, kebantu banget wwkwk.", 
-            "Ini anti ban kan bang? bypass byfron aman?", "Gimana cara makenya bang, ajarin dong.", "Wih UI nya makin keren aja Kellzy Hub 🥶", 
-            "Gacor banget min scriptnya 😎", "Auto beli key premium nih 😵‍💫",
-        ];
+        const fakeChatMessages = [ "Bang bagi key dong.", "Gila script brainrot nya anjay banget! 🔥", "Auto farm nya OP parah 🚀", "Ada script Pet Sim 99 bang?", "Kellzy Hub emang ga ada obat", "Thanks bang, kebantu banget wwkwk.", "Bypass byfron aman?", "Wih UI nya makin keren aja Kellzy Hub 🥶", "Gacor banget min scriptnya 😎", "Auto beli key premium nih 😵‍💫" ];
         const chatBody = document.getElementById('chatBody');
         setInterval(() => {
             if (afkClock.classList.contains('show')) return;
-            const isVip = Math.random() > 0.8;
-            const randomName = fakeChatNames[Math.floor(Math.random() * fakeChatNames.length)];
-            const randomMsg = fakeChatMessages[Math.floor(Math.random() * fakeChatMessages.length)];
-            const msgDiv = document.createElement('div'); msgDiv.className = 'chat-msg';
-            let vipTag = isVip ? '<span class="tag-vip">VIP</span>' : '';
-            msgDiv.innerHTML = `${vipTag}<strong>${randomName}:</strong> ${randomMsg}`;
-            chatBody.appendChild(msgDiv); chatBody.scrollTop = chatBody.scrollHeight;
+            const isVip = Math.random() > 0.8; const randomName = fakeChatNames[Math.floor(Math.random() * fakeChatNames.length)]; const randomMsg = fakeChatMessages[Math.floor(Math.random() * fakeChatMessages.length)];
+            const msgDiv = document.createElement('div'); msgDiv.className = 'chat-msg'; let vipTag = isVip ? '<span class="tag-vip">VIP</span>' : '';
+            msgDiv.innerHTML = `${vipTag}<strong>${randomName}:</strong> ${randomMsg}`; chatBody.appendChild(msgDiv); chatBody.scrollTop = chatBody.scrollHeight;
             if (chatBody.children.length > 20) chatBody.removeChild(chatBody.firstChild);
         }, Math.floor(Math.random() * 4000) + 3000);
 
         function checkDayNight() {
-            const hour = new Date().getHours();
-            const overlay = document.getElementById('dayNightOverlay');
-            const statusText = document.getElementById('timeStatus');
-            if (hour >= 6 && hour < 18) {
-                overlay.style.background = 'rgba(255, 255, 255, 0.05)'; overlay.style.backdropFilter = 'brightness(1.1)';
-                if(statusText) { statusText.innerText = "☀️ DAY MODE"; statusText.style.color = "#ffdd00"; }
-            } else {
-                overlay.style.background = 'rgba(0, 0, 15, 0.6)'; overlay.style.backdropFilter = 'brightness(0.7) contrast(1.2)';
-                if(statusText) { statusText.innerText = "🌙 NIGHT MODE"; statusText.style.color = "#8888ff"; }
-            }
+            const hour = new Date().getHours(); const overlay = document.getElementById('dayNightOverlay'); const statusText = document.getElementById('timeStatus');
+            if (hour >= 6 && hour < 18) { overlay.style.background = 'rgba(255, 255, 255, 0.05)'; overlay.style.backdropFilter = 'brightness(1.1)'; if(statusText) { statusText.innerText = "☀️ DAY MODE"; statusText.style.color = "#ffdd00"; } } 
+            else { overlay.style.background = 'rgba(0, 0, 15, 0.6)'; overlay.style.backdropFilter = 'brightness(0.7) contrast(1.2)'; if(statusText) { statusText.innerText = "🌙 NIGHT MODE"; statusText.style.color = "#8888ff"; } }
         }
-        checkDayNight(); setInterval(checkDayNight, 60000);
+        checkDayNight(); autoDayNightInterval = setInterval(checkDayNight, 60000);
 
         const customMenu = document.getElementById('customMenu');
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault(); customMenu.style.display = 'block';
-            customMenu.style.left = e.pageX + 'px'; customMenu.style.top = e.pageY + 'px';
-        });
-        document.addEventListener('click', (e) => { if (e.button !== 2) customMenu.style.display = 'none'; });
+        document.addEventListener('contextmenu', (e) => { e.preventDefault(); customMenu.style.display = 'block'; customMenu.style.left = e.pageX + 'px'; customMenu.style.top = e.pageY + 'px'; });
+        document.addEventListener('click', (e) => { if (e.button !== 2 && !e.target.closest('#settingsDrawer') && !e.target.closest('.fa-gear')) { customMenu.style.display = 'none'; document.getElementById('settingsDrawer').classList.remove('open'); } });
 
         let docTitle = " Kellzy Hub ✦ Ultimate Hub ✦ Status: Undetected ✦ ";
         setInterval(() => { docTitle = docTitle.substring(1) + docTitle[0]; if (!document.hidden) document.title = docTitle; }, 300);
@@ -670,88 +622,43 @@
 
         let isScriptUnlocked = false;
         function unlockScript() {
-            if(isScriptUnlocked) return;
-            isScriptUnlocked = true;
-            const copyBtn = document.getElementById('copyBtn');
-            copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
-            showToast("Verification Complete! Script Unlocked.", "var(--theme-color)");
-            clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-
-            const codeBox = document.getElementById('codeBoxContent');
-            codeBox.innerHTML = '';
+            if(isScriptUnlocked) return; isScriptUnlocked = true;
+            const copyBtn = document.getElementById('copyBtn'); copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
+            showToast("Verification Complete! Script Unlocked.", "var(--theme-color)"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+            const codeBox = document.getElementById('codeBoxContent'); codeBox.innerHTML = '';
             const codeToType = `<span style="color: var(--theme-color);">-- Kellzy Hub Official Loadstring</span>\ngetgenv().Key = "KELLYZ-2X5NYFU6";\nloadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
-            let i = 0;
-            let typing = setInterval(() => {
-                if(i < codeToType.length) {
-                    codeBox.innerHTML += codeToType.charAt(i) === '\n' ? '<br>' : codeToType.charAt(i);
-                    i++;
-                } else { clearInterval(typing); }
-            }, 15);
+            let i = 0; let typing = setInterval(() => { if(i < codeToType.length) { codeBox.innerHTML += codeToType.charAt(i) === '\n' ? '<br>' : codeToType.charAt(i); i++; } else { clearInterval(typing); } }, 15);
         }
 
         let secretCode = "kellzy"; let inputBufferMain = "";
         window.addEventListener('keydown', (e) => {
-            inputBufferMain += e.key.toLowerCase();
-            if (inputBufferMain.length > secretCode.length) { inputBufferMain = inputBufferMain.substring(1); }
+            inputBufferMain += e.key.toLowerCase(); if (inputBufferMain.length > secretCode.length) { inputBufferMain = inputBufferMain.substring(1); }
             if (inputBufferMain === secretCode && !isScriptUnlocked) {
-                unlockScript();
-                var duration = 3000; var end = Date.now() + duration;
-                (function frame() {
-                    confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#00e5ff', '#ffffff'] });
-                    confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#00e5ff', '#ffffff'] });
-                    if (Date.now() < end) requestAnimationFrame(frame);
-                }());
+                unlockScript(); var duration = 3000; var end = Date.now() + duration;
+                (function frame() { confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#00e5ff', '#ffffff'] }); confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#00e5ff', '#ffffff'] }); if (Date.now() < end) requestAnimationFrame(frame); }());
             }
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 50; const y = (window.innerHeight / 2 - e.pageY) / 50;
-            document.getElementById('bg-warp').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
         });
 
         let audioCtx, analyser, source, canvasCtx, visualizerCanvas; let isAudioInit = false;
         function initVisualizer() {
-            if (isAudioInit) return;
-            const audioEl = document.getElementById('bgm');
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
-            source = audioCtx.createMediaElementSource(audioEl);
-            source.connect(analyser); analyser.connect(audioCtx.destination);
-            analyser.fftSize = 256; const bufferLength = analyser.frequencyBinCount; const dataArray = new Uint8Array(bufferLength);
-            visualizerCanvas = document.getElementById('visualizer'); canvasCtx = visualizerCanvas.getContext('2d');
-            visualizerCanvas.width = window.innerWidth; visualizerCanvas.height = window.innerHeight * 0.25;
-
+            if (isAudioInit) return; const audioEl = document.getElementById('bgm'); const AudioContext = window.AudioContext || window.webkitAudioContext; audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
+            source = audioCtx.createMediaElementSource(audioEl); source.connect(analyser); analyser.connect(audioCtx.destination); analyser.fftSize = 256; const bufferLength = analyser.frequencyBinCount; const dataArray = new Uint8Array(bufferLength);
+            visualizerCanvas = document.getElementById('visualizer'); canvasCtx = visualizerCanvas.getContext('2d'); visualizerCanvas.width = window.innerWidth; visualizerCanvas.height = window.innerHeight * 0.25;
             function draw() {
-                requestAnimationFrame(draw); analyser.getByteFrequencyData(dataArray);
-                canvasCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
-                const barWidth = (visualizerCanvas.width / bufferLength) * 2.5; let barHeight; let x = 0;
-                const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || '#00e5ff';
-                for(let i = 0; i < bufferLength; i++) {
-                    barHeight = dataArray[i]; canvasCtx.fillStyle = themeColor; canvasCtx.globalAlpha = 0.5;
-                    canvasCtx.fillRect(x, visualizerCanvas.height - (barHeight / 2), barWidth, barHeight / 2); x += barWidth + 2;
-                }
-            }
-            draw(); isAudioInit = true;
+                requestAnimationFrame(draw); analyser.getByteFrequencyData(dataArray); canvasCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+                const barWidth = (visualizerCanvas.width / bufferLength) * 2.5; let barHeight; let x = 0; const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || '#00e5ff';
+                for(let i = 0; i < bufferLength; i++) { barHeight = dataArray[i]; canvasCtx.fillStyle = themeColor; canvasCtx.globalAlpha = 0.5; canvasCtx.fillRect(x, visualizerCanvas.height - (barHeight / 2), barWidth, barHeight / 2); x += barWidth + 2; }
+            } draw(); isAudioInit = true;
         }
 
         let frameCount = 0; let lastTime = performance.now(); const fpsEl = document.getElementById('fpsValue');
-        function updateFPS(now) {
-            frameCount++; if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; } requestAnimationFrame(updateFPS);
-        }
-        requestAnimationFrame(updateFPS);
-        const pingEl = document.getElementById('pingValue');
-        setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
+        function updateFPS(now) { frameCount++; if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; } requestAnimationFrame(updateFPS); }
+        requestAnimationFrame(updateFPS); const pingEl = document.getElementById('pingValue'); setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
 
         const themes = ['#00e5ff', '#39ff14', '#ff66cc']; let currentTheme = 0;
-        function toggleTheme() {
-            currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]);
-            showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-        }
+        function toggleTheme() { currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]); showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
         const vfxModes = ['hearts', 'snow', 'matrix']; const vfxNames = ['Cyan Hearts', 'Chill Snow', 'Matrix Rain']; let currentVfx = 0;
-        function toggleVfx() {
-            currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]);
-            showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-        }
+        function toggleVfx() { currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]); showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
 
         window.addEventListener('DOMContentLoaded', () => {
             const ua = navigator.userAgent; let device = "PC / Desktop"; let rec = "Pottasium / Medium";
@@ -759,135 +666,53 @@
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
         });
 
-        const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."];
-        let termIdx = 0; const termEl = document.getElementById('terminalLog');
-        setInterval(() => {
-            if(termIdx < termLogs.length) {
-                const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx];
-                termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++;
-            }
-        }, 1500);
+        const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."]; let termIdx = 0; const termEl = document.getElementById('terminalLog');
+        setInterval(() => { if(termIdx < termLogs.length) { const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx]; termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++; } }, 1500);
 
-        setTimeout(() => {
-            let ad = document.createElement('div'); ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; document.body.appendChild(ad);
-            window.setTimeout(function() { if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; } ad.remove(); }, 100);
-        }, 2500);
+        setTimeout(() => { let ad = document.createElement('div'); ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; document.body.appendChild(ad); window.setTimeout(function() { if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; } ad.remove(); }, 100); }, 2500);
 
         const loaderText = document.getElementById('loader-text'); const loaderScreen = document.getElementById('loader'); const enterBtn = document.getElementById('enterBtn'); const spinnerAnim = document.getElementById('spinnerAnim'); const bgm = document.getElementById('bgm');
         const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading Interface...", "Initialization Complete."]; let textIndex = 0;
-        const textInterval = setInterval(() => {
-            textIndex++; if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
-            else { clearInterval(textInterval); spinnerAnim.style.display = 'none'; loaderText.style.display = 'none'; enterBtn.style.display = 'block'; }
-        }, 800);
+        const textInterval = setInterval(() => { textIndex++; if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } else { clearInterval(textInterval); spinnerAnim.style.display = 'none'; loaderText.style.display = 'none'; enterBtn.style.display = 'block'; } }, 800);
 
-        enterBtn.addEventListener('click', () => {
-            loaderScreen.style.opacity = '0'; setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
-            bgm.play().catch(e => console.log("Audio play error"));
-            const synth = window.speechSynthesis; const utterThis = new SpeechSynthesisUtterance("Welcome to Kellzy Hub. Connecting to secure server. Please verify your identity.");
-            utterThis.pitch = 1.2; utterThis.rate = 1.1; utterThis.lang = 'en-US'; synth.speak(utterThis);
-            initVisualizer();
-        });
+        enterBtn.addEventListener('click', () => { loaderScreen.style.opacity = '0'; setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800); bgm.play().catch(e => console.log("Audio play error")); const synth = window.speechSynthesis; const utterThis = new SpeechSynthesisUtterance("Welcome to Kellzy Hub. Connecting to secure server. Please verify your identity."); utterThis.pitch = 1.2; utterThis.rate = 1.1; utterThis.lang = 'en-US'; synth.speak(utterThis); initVisualizer(); });
 
-        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3;
-        const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
-        const interactiveBtns = document.querySelectorAll('.interactive-btn');
-        interactiveBtns.forEach(btn => {
-            btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); });
-            btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); });
-        });
+        const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3; const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
+        const interactiveBtns = document.querySelectorAll('.interactive-btn'); interactiveBtns.forEach(btn => { btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); }); btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }); });
 
-        const playlist = [
-            { src: "musik.mp3", name: "TRACK 1 - LOFI" },
-            { src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3", name: "TRACK 2 - CHILL" },
-            { src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", name: "TRACK 3 - EDM" }
-        ];
-        let currentTrack = 0;
-        const trackNameEl = document.getElementById('trackName');
+        const playlist = [ { src: "musik.mp3", name: "TRACK 1 - LOFI" }, { src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3", name: "TRACK 2 - CHILL" }, { src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", name: "TRACK 3 - EDM" } ];
+        let currentTrack = 0; const trackNameEl = document.getElementById('trackName');
+        function loadTrack(index) { bgm.src = playlist[index].src; trackNameEl.innerText = playlist[index].name; if(!bgm.paused) { bgm.play().catch(e=>{}); } }
+        function nextTrack(e) { e.stopPropagation(); currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); bgm.play(); document.querySelector('#musicToggle i').className = 'fa-solid fa-pause'; }
+        function prevTrack(e) { e.stopPropagation(); currentTrack = (currentTrack - 1 + playlist.length) % playlist.length; loadTrack(currentTrack); bgm.play(); document.querySelector('#musicToggle i').className = 'fa-solid fa-pause'; }
+        function toggleMusic(e) { if(e) e.stopPropagation(); const icon = document.querySelector('#musicToggle i'); if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; if(!isAudioInit) initVisualizer(); } else { bgm.pause(); icon.className = 'fa-solid fa-play'; } }
 
-        function loadTrack(index) {
-            bgm.src = playlist[index].src;
-            trackNameEl.innerText = playlist[index].name;
-            if(!bgm.paused) { bgm.play().catch(e=>{}); }
-        }
-        function nextTrack(e) {
-            e.stopPropagation(); currentTrack = (currentTrack + 1) % playlist.length;
-            loadTrack(currentTrack); bgm.play(); document.querySelector('#musicToggle i').className = 'fa-solid fa-pause';
-        }
-        function prevTrack(e) {
-            e.stopPropagation(); currentTrack = (currentTrack - 1 + playlist.length) % playlist.length;
-            loadTrack(currentTrack); bgm.play(); document.querySelector('#musicToggle i').className = 'fa-solid fa-pause';
-        }
-        function toggleMusic(e) {
-            if(e) e.stopPropagation();
-            const icon = document.querySelector('#musicToggle i');
-            if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; if(!isAudioInit) initVisualizer(); } 
-            else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
-        }
-
-        function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") {
-            const toast = document.getElementById("toastBox"); const icon = document.getElementById("toastIcon"); const msg = document.getElementById("toastMsg");
-            toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`; msg.innerText = message;
-            toast.classList.add("show"); setTimeout(() => { toast.classList.remove("show"); }, 3500);
-        }
+        function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") { const toast = document.getElementById("toastBox"); const icon = document.getElementById("toastIcon"); const msg = document.getElementById("toastMsg"); toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`; msg.innerText = message; toast.classList.add("show"); setTimeout(() => { toast.classList.remove("show"); }, 3500); }
 
         let ytVerified = false; let dcVerified = false;
-        function verifyYT() {
-            if(ytVerified) return; window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
-            const btn = document.getElementById('ytBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
-            setTimeout(() => { ytVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; 
-                if (ytVerified && dcVerified) unlockScript(); 
-            }, 5000);
-        }
-        function verifyDC() {
-            if(dcVerified) return; window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank');
-            const btn = document.getElementById('dcBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
-            setTimeout(() => { dcVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; 
-                if (ytVerified && dcVerified) unlockScript(); 
-            }, 5000);
-        }
+        function verifyYT() { if(ytVerified) return; window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank'); const btn = document.getElementById('ytBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7'; setTimeout(() => { ytVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; if (ytVerified && dcVerified) unlockScript(); }, 5000); }
+        function verifyDC() { if(dcVerified) return; window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank'); const btn = document.getElementById('dcBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7'; setTimeout(() => { dcVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; if (ytVerified && dcVerified) unlockScript(); }, 5000); }
 
-        // --- FITUR BARU: FAKE COMPILE SCRIPT ---
         let isCompiling = false;
         function copyScript() {
             if (!isScriptUnlocked) { showToast("Selesaikan Step 1 dan 2 dulu untuk unlock!", "#ff3333", "fa-circle-xmark"); return; }
-            if (isCompiling) return;
-            isCompiling = true;
-            const btn = document.getElementById('copyBtn');
-            btn.innerHTML = 'COMPILING [0%]'; btn.style.background = '#ffaa00'; btn.style.color = '#000';
-            let progress = 0;
-            let compileInterval = setInterval(() => {
-                progress += Math.floor(Math.random() * 15) + 5;
+            if (isCompiling) return; isCompiling = true; const btn = document.getElementById('copyBtn'); btn.innerHTML = 'COMPILING [0%]'; btn.style.background = '#ffaa00'; btn.style.color = '#000';
+            let progress = 0; let compileInterval = setInterval(() => { progress += Math.floor(Math.random() * 15) + 5;
                 if(progress >= 100) {
-                    progress = 100; clearInterval(compileInterval);
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i> SCRIPT COPIED'; btn.style.background = '#00ff7f';
+                    progress = 100; clearInterval(compileInterval); btn.innerHTML = '<i class="fa-solid fa-check"></i> SCRIPT COPIED'; btn.style.background = '#00ff7f';
                     const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
                     navigator.clipboard.writeText(code).then(() => { showToast("Script Compiled & Copied!", "var(--theme-color)", "fa-circle-check"); });
                     setTimeout(() => { isCompiling = false; btn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; }, 3000);
-                } else {
-                    let bars = '|'.repeat(Math.floor(progress/10)); btn.innerHTML = `COMPILING ${bars} ${progress}%`;
-                }
+                } else { let bars = '|'.repeat(Math.floor(progress/10)); btn.innerHTML = `COMPILING ${bars} ${progress}%`; }
             }, 200);
         }
 
-        let mascotClicks = 0;
-        function mascotClick() {
-            mascotClicks++; const mascot = document.getElementById('mascotImg');
-            mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`;
-            setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200);
-            if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Free Key Vip : KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; }
-        }
+        let mascotClicks = 0; function mascotClick() { mascotClicks++; const mascot = document.getElementById('mascotImg'); mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`; setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200); if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Free Key Vip : KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; } }
 
         setInterval(() => { const counter = document.getElementById('userCount'); let val = parseInt(counter.innerText.replace(',', '')); val += Math.floor(Math.random() * 5) - 2; counter.innerText = val.toLocaleString(); }, 3000);
 
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
-        function loadVfx(mode) {
-            if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; }
-            let config = {};
-            if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; }
-            else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; }
-            else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; }
-            particlesJS('particles-js', config);
-        }
+        function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
         loadVfx('hearts');
     </script>
 </body>
