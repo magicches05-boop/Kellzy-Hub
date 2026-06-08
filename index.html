@@ -199,7 +199,7 @@
 </head>
 <body>
 
-    <div id="bg-warp"></div>
+   <div id="bg-warp"></div>
     <div id="dayNightOverlay"></div>
     <canvas id="visualizer"></canvas>
     <div class="scanlines" id="scanlinesOverlay"></div>
@@ -220,29 +220,21 @@
         <div class="loader-enter-btn" id="enterBtn"><i class="fa-solid fa-power-off"></i> CLICK HERE TO ENTER</div>
     </div>
 
-    <div class="perf-stats" title="Server Performance">
+    <div class="perf-stats fade-ui" title="Server Performance">
         <div>Ping <span id="pingValue">24</span>ms</div>
         <div>FPS <span id="fpsValue">60</span></div>
         <div id="timeStatus" style="color: #ffaa00; margin-left: 10px;">☀️ DAY MODE</div>
     </div>
 
-    <div class="custom-toast" id="toastBox">
+    <div class="custom-toast fade-ui" id="toastBox">
         <i class="fa-solid fa-circle-info" id="toastIcon" style="color: var(--theme-color); font-size: 18px;"></i>
         <span id="toastMsg">Notification</span>
-    </div>
-
-    <div class="modal" id="adblockModal">
-        <div class="modal-content">
-            <i class="fa-solid fa-shield-halved" style="font-size: 50px; color: #ff3333; margin-bottom: 20px;"></i>
-            <h2 style="color: #ff3333; margin-top: 0; font-weight: 800;">ADBLOCK DETECTED!</h2>
-            <p style="color: #ccc; font-size: 14px; line-height: 1.5;">Tolong matikan AdBlock kamu untuk menggunakan Kellzy Hub dan dukung kami terus berkarya. Refresh halaman setelah dimatikan.</p>
-        </div>
     </div>
 
     <audio id="bgm" loop crossorigin="anonymous"><source src="musik.mp3" type="audio/mpeg"></audio>
     <div id="particles-js"></div>
 
-    <div class="slide-container">
+    <div class="slide-container fade-ui">
         
         <div class="hub-card">
             <div class="top-controls">
