@@ -83,6 +83,8 @@
         #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
 
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
+        /* TAMBAHKAN KODE INI DI BAWAHNYA */
+        .top-controls-left { position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; z-index: 100; }
         .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; }
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
@@ -406,10 +408,17 @@
         
         <div class="hub-card">
             
-            <div id="mainCardContent">
+<div id="mainCardContent">
+                
+                <!-- TOMBOL TOKO PINDAH KE KIRI ATAS -->
+                <div class="top-controls-left">
+                    <div class="control-btn interactive-btn" onclick="openStoreModal()" title="Kaell Store" style="font-weight: 800; font-size: 11px; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-store"></i> KAELL STORE
+                    </div>
+                </div>
+
+                <!-- TOMBOL SETTING, VFX, TEMA TETAP DI KANAN ATAS -->
                 <div class="top-controls">
-                    <!-- FITUR 1 TRIGGER ADDED HERE -->
-                    <div class="control-btn interactive-btn" onclick="openStoreModal()" title="Kaell Store"><i class="fa-solid fa-store"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleSettings()" title="Settings"><i class="fa-solid fa-gear"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                     <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme"><i class="fa-solid fa-palette"></i></div>
@@ -417,7 +426,7 @@
 
                 <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
                 <div class="mascot-bubble" id="mascotBubble">Hi! Welcome to Kellzy Hub!</div>
-
+    
                 <!-- FITUR 5 TRIGGER ADDED HERE (onclick="openChangelogModal()") -->
                 <div class="status-badge interactive-btn" onclick="openChangelogModal()" style="cursor: pointer;" title="View Patch Notes">
                     <div class="status-dot"></div>
