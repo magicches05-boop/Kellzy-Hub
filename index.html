@@ -24,18 +24,28 @@
 
         * { box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
+        /* SCROLL DIBUKA: height auto & overflow-y auto */
         body {
             margin: 0; padding: 0; background-color: var(--bg-dark);
             font-family: 'Urbanist', sans-serif; color: #ffffff;
-            height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
+            min-height: 100vh; display: flex; flex-direction: column; 
+            overflow-x: hidden; overflow-y: auto;
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
         }
 
+        /* Semua Background dibikin Fixed agar tidak ikut terscroll */
         #bg-warp {
             position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg');
-            background-size: cover; background-position: center; z-index: -2; transition: transform 0.1s ease-out;
+            background-size: cover; background-position: center; z-index: -3; transition: transform 0.1s ease-out;
         }
+
+        /* OVERLAY DAY/NIGHT */
+        #dayNightOverlay {
+            position: fixed; inset: 0; z-index: -2; pointer-events: none; transition: background 1s ease, backdrop-filter 1s ease;
+        }
+
+        body::before { content: ''; position: fixed; inset: 0; background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: -1; pointer-events: none; }
 
         .scanlines {
             position: fixed; inset: 0; z-index: 2; pointer-events: none;
@@ -45,10 +55,9 @@
         @keyframes glitch-anim { 0% { transform: translateY(0); } 100% { transform: translateY(4px); } }
 
         #visualizer { position: fixed; bottom: 0; left: 0; width: 100%; height: 25%; z-index: 0; pointer-events: none; opacity: 0.7; }
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
 
         a, button, .interactive-btn { cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important; }
-
-        body::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: -1; }
 
         #loader {
             position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
@@ -62,16 +71,16 @@
         .loader-text { color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
         .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--theme-color); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
 
-        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        .slide-container { position: relative; z-index: 10; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        /* Container sekarang mengakomodasi scroll (margin-top dan bottom) */
+        .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 100px 20px 50px 20px; min-height: 100vh; }
 
         .hub-card {
-            background: var(--card-glass); width: 90%; max-width: 520px; padding: 45px 50px 30px 50px;
+            background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px;
             border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1);
-            text-align: center; position: relative; max-height: 95vh; overflow-y: auto;
+            text-align: center; position: relative; 
+            /* Dihapus max-height agar menyesuaikan isi dan membiarkan body yang scroll */
         }
-        .hub-card::-webkit-scrollbar { width: 0px; }
 
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
         .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; }
@@ -126,6 +135,16 @@
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
         .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
+        /* RUANG TAMBAHAN DI BAWAH KARTU UTAMA BUAT SCROLL */
+        .extra-content {
+            width: 90%; max-width: 520px; margin-top: 40px; text-align: center;
+            background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px);
+            margin-bottom: 50px;
+        }
+        .extra-content h2 { color: var(--theme-color); font-size: 24px; margin-top: 0; }
+        .extra-content p { color: #ccc; font-size: 13px; line-height: 1.6; }
+
         .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
         .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
 
@@ -139,19 +158,17 @@
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
         .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid #ff3333; text-align: center; }
 
-        /* CUSTOM RIGHT CLICK MENU */
-        #customMenu {
-            position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color);
-            border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif;
-        }
+        #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
         .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .menu-item:last-child { border-bottom: none; }
         .menu-item:hover { background: var(--theme-color); color: #000; }
         .menu-title { font-size: 9px; color: var(--theme-color); padding: 8px 15px; font-weight: 800; letter-spacing: 1px; background: rgba(0,0,0,0.5); }
     </style>
 </head>
-<body> <div id="bg-warp"></div>
+<body>
+
+    <div id="bg-warp"></div>
+    <div id="dayNightOverlay"></div>
     <canvas id="visualizer"></canvas>
     <div class="scanlines" id="scanlinesOverlay"></div>
 
@@ -172,6 +189,7 @@
     <div class="perf-stats" title="Server Performance">
         <div>Ping <span id="pingValue">24</span>ms</div>
         <div>FPS <span id="fpsValue">60</span></div>
+        <div id="timeStatus" style="color: #ffaa00; margin-left: 10px;">☀️ DAY MODE</div>
     </div>
 
     <div class="custom-toast" id="toastBox">
@@ -191,15 +209,11 @@
     <div id="particles-js"></div>
 
     <div class="slide-container">
+        
         <div class="hub-card">
-            
             <div class="top-controls">
-                <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-                <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme">
-                    <i class="fa-solid fa-palette"></i>
-                </div>
+                <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme"><i class="fa-solid fa-palette"></i></div>
             </div>
 
             <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
@@ -226,16 +240,9 @@
             </div>
 
             <div class="btn-grid">
-                <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()">
-                    <i class="fa-brands fa-youtube"></i> 1. YOUTUBE
-                </button>
-                <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()">
-                    <i class="fa-brands fa-discord"></i> 2. DISCORD
-                </button>
-                
-                <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()">
-                    <i class="fa-solid fa-lock"></i> SCRIPT LOCKED
-                </button>
+                <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
+                <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
+                <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
                 <a href="LINK_GET_KEY_KAMU_DISINI" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
             </div>
 
@@ -268,11 +275,17 @@
                 PROTECTED BY KELLZY HUB SECURITY
             </div>
         </div>
-    </div>
 
-    <div class="terminal-box" id="terminalLog">
-        <div>[SYSTEM] Initializing Kellzy Engine v2.0.4...</div>
-    </div>
+        <div class="extra-content">
+            <h2>Why Choose Kellzy Hub?</h2>
+            <p>
+                Kellzy Store menyediakan *script hub* terbaik dengan proteksi Anti-Cheat *Byfron Bypass*. 
+                Scroll ke atas untuk menyalin script atau kunjungi katalog Eneba dan Roblox Apparel kami untuk desain paling keren. 
+                Sistem kami selalu ter-update secara *real-time* untuk memastikan pengalaman *gaming* Anda aman.
+            </p>
+        </div>
+
+    </div> <div class="terminal-box" id="terminalLog"><div>[SYSTEM] Initializing Kellzy Engine v2.0.4...</div></div>
 
     <div class="audio-controls interactive-btn" onclick="toggleMusic()">
         <div class="audio-btn" id="musicToggle"><i class="fa-solid fa-pause"></i></div>
@@ -280,17 +293,42 @@
     </div>
 
     <script>
+        // --- REAL-TIME DAY/NIGHT SYNC ---
+        function checkDayNight() {
+            const hour = new Date().getHours();
+            const overlay = document.getElementById('dayNightOverlay');
+            const statusText = document.getElementById('timeStatus');
+            
+            // Jam 06:00 pagi sampai 17:59 sore = Day Mode
+            if (hour >= 6 && hour < 18) {
+                overlay.style.background = 'rgba(255, 255, 255, 0.05)';
+                overlay.style.backdropFilter = 'brightness(1.1)';
+                if(statusText) {
+                    statusText.innerText = "☀️ DAY MODE";
+                    statusText.style.color = "#ffdd00";
+                }
+            } else {
+                // Jam 18:00 malam sampai 05:59 pagi = Night Mode
+                overlay.style.background = 'rgba(0, 0, 15, 0.6)';
+                overlay.style.backdropFilter = 'brightness(0.7) contrast(1.2)';
+                if(statusText) {
+                    statusText.innerText = "🌙 NIGHT MODE";
+                    statusText.style.color = "#8888ff";
+                }
+            }
+        }
+        checkDayNight();
+        // Cek ulang setiap menit
+        setInterval(checkDayNight, 60000);
+
         // --- CUSTOM RIGHT CLICK MENU ---
         const customMenu = document.getElementById('customMenu');
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             customMenu.style.display = 'block';
-            customMenu.style.left = e.pageX + 'px';
-            customMenu.style.top = e.pageY + 'px';
+            customMenu.style.left = e.pageX + 'px'; customMenu.style.top = e.pageY + 'px';
         });
-        document.addEventListener('click', (e) => {
-            if (e.button !== 2) customMenu.style.display = 'none';
-        });
+        document.addEventListener('click', (e) => { if (e.button !== 2) customMenu.style.display = 'none'; });
 
         // --- SCROLLING TAB TITLE ---
         let docTitle = " Kellzy Store ✦ Ultimate Hub ✦ Status: Undetected ✦ ";
@@ -298,29 +336,19 @@
             docTitle = docTitle.substring(1) + docTitle[0];
             if (!document.hidden) document.title = docTitle;
         }, 300);
-
-        document.addEventListener("visibilitychange", function() {
-            if (document.hidden) { document.title = "⚠️ Hei, Scriptnya Belum Di-copy!"; } 
-        });
+        document.addEventListener("visibilitychange", function() { if (document.hidden) { document.title = "⚠️ Hei, Scriptnya Belum Di-copy!"; } });
 
         // --- SECRET KONAMI CHEAT CODE ("KELLZY") ---
-        let secretCode = "kellzy";
-        let inputBuffer = "";
+        let secretCode = "kellzy"; let inputBuffer = "";
         window.addEventListener('keydown', (e) => {
             inputBuffer += e.key.toLowerCase();
-            if (inputBuffer.length > secretCode.length) {
-                inputBuffer = inputBuffer.substring(1);
-            }
+            if (inputBuffer.length > secretCode.length) { inputBuffer = inputBuffer.substring(1); }
             if (inputBuffer === secretCode) {
                 isScriptUnlocked = true;
                 const copyBtn = document.getElementById('copyBtn');
-                copyBtn.classList.remove('btn-locked');
-                copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
-                
+                copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
                 showToast("CHEAT ACTIVATED! Script Unlocked.", "var(--theme-color)", "fa-unlock-keyhole");
                 clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-                
-                // Efek Confetti Meledak
                 var duration = 3000; var end = Date.now() + duration;
                 (function frame() {
                     confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#00e5ff', '#ffffff'] });
@@ -338,160 +366,91 @@
         });
 
         // --- AUDIO VISUALIZER ---
-        let audioCtx, analyser, source, canvasCtx, visualizerCanvas;
-        let isAudioInit = false;
-
+        let audioCtx, analyser, source, canvasCtx, visualizerCanvas; let isAudioInit = false;
         function initVisualizer() {
             if (isAudioInit) return;
             const audioEl = document.getElementById('bgm');
             const AudioContext = window.AudioContext || window.webkitAudioContext;
-            audioCtx = new AudioContext();
-            analyser = audioCtx.createAnalyser();
-            
+            audioCtx = new AudioContext(); analyser = audioCtx.createAnalyser();
             source = audioCtx.createMediaElementSource(audioEl);
-            source.connect(analyser);
-            analyser.connect(audioCtx.destination);
-            
-            analyser.fftSize = 256;
-            const bufferLength = analyser.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-            
-            visualizerCanvas = document.getElementById('visualizer');
-            canvasCtx = visualizerCanvas.getContext('2d');
-            visualizerCanvas.width = window.innerWidth;
-            visualizerCanvas.height = window.innerHeight * 0.25;
+            source.connect(analyser); analyser.connect(audioCtx.destination);
+            analyser.fftSize = 256; const bufferLength = analyser.frequencyBinCount; const dataArray = new Uint8Array(bufferLength);
+            visualizerCanvas = document.getElementById('visualizer'); canvasCtx = visualizerCanvas.getContext('2d');
+            visualizerCanvas.width = window.innerWidth; visualizerCanvas.height = window.innerHeight * 0.25;
 
             function draw() {
-                requestAnimationFrame(draw);
-                analyser.getByteFrequencyData(dataArray);
+                requestAnimationFrame(draw); analyser.getByteFrequencyData(dataArray);
                 canvasCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
-                
-                const barWidth = (visualizerCanvas.width / bufferLength) * 2.5;
-                let barHeight; let x = 0;
+                const barWidth = (visualizerCanvas.width / bufferLength) * 2.5; let barHeight; let x = 0;
                 const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || '#00e5ff';
-                
                 for(let i = 0; i < bufferLength; i++) {
-                    barHeight = dataArray[i];
-                    canvasCtx.fillStyle = themeColor;
-                    canvasCtx.globalAlpha = 0.5;
+                    barHeight = dataArray[i]; canvasCtx.fillStyle = themeColor; canvasCtx.globalAlpha = 0.5;
                     canvasCtx.fillRect(x, visualizerCanvas.height - (barHeight / 2), barWidth, barHeight / 2);
                     x += barWidth + 2;
                 }
             }
-            draw();
-            isAudioInit = true;
+            draw(); isAudioInit = true;
         }
 
         // --- FPS & PING COUNTER ---
-        let frameCount = 0; let lastTime = performance.now();
-        const fpsEl = document.getElementById('fpsValue');
+        let frameCount = 0; let lastTime = performance.now(); const fpsEl = document.getElementById('fpsValue');
         function updateFPS(now) {
-            frameCount++;
-            if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; }
+            frameCount++; if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; }
             requestAnimationFrame(updateFPS);
         }
         requestAnimationFrame(updateFPS);
-
         const pingEl = document.getElementById('pingValue');
         setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
 
         // --- THEME & VFX SWITCHER ---
-        const themes = ['#00e5ff', '#39ff14', '#ff66cc']; 
-        let currentTheme = 0;
+        const themes = ['#00e5ff', '#39ff14', '#ff66cc']; let currentTheme = 0;
         function toggleTheme() {
-            currentTheme = (currentTheme + 1) % themes.length;
-            document.documentElement.style.setProperty('--theme-color', themes[currentTheme]);
-            showToast("Theme Changed!", themes[currentTheme], "fa-palette");
-            clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+            currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]);
+            showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
         }
-
-        const vfxModes = ['hearts', 'snow', 'matrix'];
-        const vfxNames = ['Cyan Hearts', 'Chill Snow', 'Matrix Rain'];
-        let currentVfx = 0;
+        const vfxModes = ['hearts', 'snow', 'matrix']; const vfxNames = ['Cyan Hearts', 'Chill Snow', 'Matrix Rain']; let currentVfx = 0;
         function toggleVfx() {
-            currentVfx = (currentVfx + 1) % vfxModes.length;
-            loadVfx(vfxModes[currentVfx]);
-            showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles");
-            clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
+            currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]);
+            showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
         }
 
-        // --- AUTO-DEVICE DETECTOR ---
         window.addEventListener('DOMContentLoaded', () => {
-            const ua = navigator.userAgent;
-            let device = "PC / Desktop"; let rec = "Wave / Krampus";
-            if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; }
-            else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
-            document.getElementById('deviceType').innerText = device;
-            document.getElementById('recExec').innerText = rec;
+            const ua = navigator.userAgent; let device = "PC / Desktop"; let rec = "Wave / Krampus";
+            if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; } else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
+            document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
         });
 
-        // --- TERMINAL LOG ---
-        const termLogs = [
-            "[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS",
-            "[SYSTEM] Fetching Kellzy Key API... OK",
-            "[SYSTEM] Securing Connection... ENCRYPTED",
-            "[SYSTEM] Injecting Modules... READY",
-            "[SYSTEM] Awaiting User Execution..."
-        ];
-        let termIdx = 0;
-        const termEl = document.getElementById('terminalLog');
+        const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."];
+        let termIdx = 0; const termEl = document.getElementById('terminalLog');
         setInterval(() => {
             if(termIdx < termLogs.length) {
-                const newLog = document.createElement('div');
-                newLog.innerText = termLogs[termIdx];
-                termEl.appendChild(newLog);
-                termEl.scrollTop = termEl.scrollHeight;
-                termIdx++;
+                const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx];
+                termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++;
             }
         }, 1500);
 
-        // --- ANTI-ADBLOCK ---
         setTimeout(() => {
-            let ad = document.createElement('div');
-            ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; 
-            document.body.appendChild(ad);
-            window.setTimeout(function() {
-              if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; }
-              ad.remove();
-            }, 100);
+            let ad = document.createElement('div'); ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; document.body.appendChild(ad);
+            window.setTimeout(function() { if (ad.offsetHeight === 0) { document.getElementById('adblockModal').style.display = 'flex'; } ad.remove(); }, 100);
         }, 2500);
 
-        // --- LOADING SCREEN & AI VOICE ---
-        const loaderText = document.getElementById('loader-text');
-        const loaderScreen = document.getElementById('loader');
-        const enterBtn = document.getElementById('enterBtn');
-        const spinnerAnim = document.getElementById('spinnerAnim');
-        const bgm = document.getElementById('bgm');
-        
-        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading Interface...", "Initialization Complete."];
-        let textIndex = 0;
+        const loaderText = document.getElementById('loader-text'); const loaderScreen = document.getElementById('loader'); const enterBtn = document.getElementById('enterBtn'); const spinnerAnim = document.getElementById('spinnerAnim'); const bgm = document.getElementById('bgm');
+        const loadingTexts = ["Connecting to secure server...", "Bypassing Anti-Cheat...", "Loading Interface...", "Initialization Complete."]; let textIndex = 0;
         const textInterval = setInterval(() => {
-            textIndex++;
-            if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
-            else { 
-                clearInterval(textInterval); spinnerAnim.style.display = 'none';
-                loaderText.style.display = 'none'; enterBtn.style.display = 'block'; 
-            }
+            textIndex++; if (textIndex < loadingTexts.length) { loaderText.innerText = loadingTexts[textIndex]; } 
+            else { clearInterval(textInterval); spinnerAnim.style.display = 'none'; loaderText.style.display = 'none'; enterBtn.style.display = 'block'; }
         }, 800);
 
         enterBtn.addEventListener('click', () => {
-            loaderScreen.style.opacity = '0'; 
-            setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
+            loaderScreen.style.opacity = '0'; setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
             bgm.play().catch(e => console.log("Audio play error"));
-            
-            // Trigger AI Voice Greeting
-            const synth = window.speechSynthesis;
-            const utterThis = new SpeechSynthesisUtterance("Welcome to Kellzy Hub. Connecting to secure server. Please verify your identity.");
-            utterThis.pitch = 1.2; utterThis.rate = 1.1; utterThis.lang = 'en-US';
-            synth.speak(utterThis);
-
+            const synth = window.speechSynthesis; const utterThis = new SpeechSynthesisUtterance("Welcome to Kellzy Hub. Connecting to secure server. Please verify your identity.");
+            utterThis.pitch = 1.2; utterThis.rate = 1.1; utterThis.lang = 'en-US'; synth.speak(utterThis);
             initVisualizer();
         });
 
-        // --- AUDIO ENGINE ---
         const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3;
         const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
-
         const interactiveBtns = document.querySelectorAll('.interactive-btn');
         interactiveBtns.forEach(btn => {
             btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); });
@@ -500,59 +459,32 @@
 
         function toggleMusic() {
             const icon = document.querySelector('#musicToggle i');
-            if (bgm.paused) { 
-                bgm.play(); icon.className = 'fa-solid fa-pause'; 
-                if(!isAudioInit) initVisualizer();
-            } else { 
-                bgm.pause(); icon.className = 'fa-solid fa-play'; 
-            }
+            if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; if(!isAudioInit) initVisualizer(); } 
+            else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
         }
 
         function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") {
-            const toast = document.getElementById("toastBox");
-            const icon = document.getElementById("toastIcon");
-            const msg = document.getElementById("toastMsg");
-            toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`;
-            msg.innerText = message;
-            toast.classList.add("show");
-            setTimeout(() => { toast.classList.remove("show"); }, 3500);
+            const toast = document.getElementById("toastBox"); const icon = document.getElementById("toastIcon"); const msg = document.getElementById("toastMsg");
+            toast.style.borderLeftColor = color; icon.style.color = color; icon.className = `fa-solid ${iconClass}`; msg.innerText = message;
+            toast.classList.add("show"); setTimeout(() => { toast.classList.remove("show"); }, 3500);
         }
 
-        // --- 2-STEP GATEWAY (YOUTUBE & DISCORD) ---
         let ytVerified = false; let dcVerified = false; let isScriptUnlocked = false;
 
         function verifyYT() {
-            if(ytVerified) return;
-            window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
-            const btn = document.getElementById('ytBtn');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
-            setTimeout(() => {
-                ytVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
-                btn.style.background = 'var(--theme-color)'; btn.style.color = '#000';
-                btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock();
-            }, 5000);
+            if(ytVerified) return; window.open('https://youtube.com/@kellllllll-f7i?si=WXg01yPiOYD4DJqA', '_blank');
+            const btn = document.getElementById('ytBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
+            setTimeout(() => { ytVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock(); }, 5000);
         }
 
         function verifyDC() {
-            if(dcVerified) return;
-            window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank');
-            const btn = document.getElementById('dcBtn');
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
-            setTimeout(() => {
-                dcVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED';
-                btn.style.background = 'var(--theme-color)'; btn.style.color = '#000';
-                btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock();
-            }, 5000);
+            if(dcVerified) return; window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank');
+            const btn = document.getElementById('dcBtn'); btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> WAIT...'; btn.style.opacity = '0.7';
+            setTimeout(() => { dcVerified = true; btn.innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; btn.style.opacity = '1'; btn.style.pointerEvents = 'none'; checkUnlock(); }, 5000);
         }
 
         function checkUnlock() {
-            if (ytVerified && dcVerified) {
-                isScriptUnlocked = true;
-                const copyBtn = document.getElementById('copyBtn');
-                copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING';
-                showToast("Verification Complete! Script Unlocked.", "var(--theme-color)");
-                clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
-            }
+            if (ytVerified && dcVerified) { isScriptUnlocked = true; const copyBtn = document.getElementById('copyBtn'); copyBtn.classList.remove('btn-locked'); copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING'; showToast("Verification Complete! Script Unlocked.", "var(--theme-color)"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
         }
 
         function copyScript() {
@@ -561,43 +493,27 @@
             navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); });
         }
 
-        // --- EASTER EGG MASKOT ---
         let mascotClicks = 0;
         function mascotClick() {
-            mascotClicks++;
-            const mascot = document.getElementById('mascotImg');
+            mascotClicks++; const mascot = document.getElementById('mascotImg');
             mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`;
             setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200);
             if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Promo Diskon Eneba: KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; }
         }
 
-        setInterval(() => {
-            const counter = document.getElementById('userCount');
-            let val = parseInt(counter.innerText.replace(',', ''));
-            val += Math.floor(Math.random() * 5) - 2; 
-            counter.innerText = val.toLocaleString();
-        }, 3000);
+        setInterval(() => { const counter = document.getElementById('userCount'); let val = parseInt(counter.innerText.replace(',', '')); val += Math.floor(Math.random() * 5) - 2; counter.innerText = val.toLocaleString(); }, 3000);
 
-        document.onkeydown = function(e) {
-            // Abaikan pencegahan F12 dkk kalo lagi ngetik cheat code
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { return false; }
-        };
+        document.onkeydown = function(e) { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { return false; } };
 
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
-        
         function loadVfx(mode) {
             if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; }
             let config = {};
-            if(mode === 'hearts') {
-                config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true };
-            } else if(mode === 'snow') {
-                config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true };
-            } else if(mode === 'matrix') {
-                config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true };
-            }
+            if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; }
+            else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; }
+            else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; }
             particlesJS('particles-js', config);
         }
-
         loadVfx('hearts');
     </script>
 </body>
