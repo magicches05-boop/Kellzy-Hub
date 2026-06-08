@@ -24,6 +24,7 @@
 
         * { box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
 
+        /* SCROLL DIBUKA: height auto & overflow-y auto */
         body {
             margin: 0; padding: 0; background-color: var(--bg-dark);
             font-family: 'Urbanist', sans-serif; color: #ffffff;
@@ -32,12 +33,14 @@
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
         }
 
+        /* Semua Background dibikin Fixed agar tidak ikut terscroll */
         #bg-warp {
             position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
             background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg');
             background-size: cover; background-position: center; z-index: -3; transition: transform 0.1s ease-out;
         }
 
+        /* OVERLAY DAY/NIGHT */
         #dayNightOverlay {
             position: fixed; inset: 0; z-index: -2; pointer-events: none; transition: background 1s ease, backdrop-filter 1s ease;
         }
@@ -56,6 +59,25 @@
 
         a, button, .interactive-btn { cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important; }
 
+        /* --- FITUR TAMBAHAN: NEWS TICKER --- */
+        .news-ticker { position: fixed; top: 0; left: 0; width: 100%; background: #ffaa00; color: #000; font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; z-index: 10000; padding: 4px 0; text-transform: uppercase; }
+        .ticker-text { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* --- FITUR TAMBAHAN: PURCHASE TOAST --- */
+        .purchase-toast { position: fixed; top: 40px; left: -350px; background: rgba(0,0,0,0.8); border: 1px solid var(--theme-color); padding: 10px 15px; border-radius: 8px; color: #fff; font-size: 11px; z-index: 999; display: flex; align-items: center; gap: 10px; transition: 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 5px 15px rgba(0,0,0,0.5); backdrop-filter: blur(5px);}
+        .purchase-toast.show { left: 20px; }
+        .purchase-toast span { color: var(--theme-color); font-weight: 800; }
+
+        /* --- FITUR TAMBAHAN: SECURITY BREACH (ANTI INSPECT) --- */
+        #securityBreach { position: fixed; inset: 0; background: red; z-index: 100000; display: none; justify-content: center; align-items: center; color: white; font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; text-align: center; animation: glitch-bg 0.1s infinite; flex-direction: column; }
+        @keyframes glitch-bg { 0% { background: red; } 50% { background: #000; } 100% { background: red; } }
+
+        /* --- FITUR TAMBAHAN: CURSOR TRAIL & SHOCKWAVE --- */
+        .cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--theme-color); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--theme-color); }
+        .shockwave { position: fixed; border: 2px solid var(--theme-color); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 9998; animation: shockwaveAnim 0.6s ease-out forwards; }
+        @keyframes shockwaveAnim { 0% { width: 0; height: 0; opacity: 1; border-width: 3px; } 100% { width: 100px; height: 100px; opacity: 0; border-width: 0px; } }
+
         #loader {
             position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s ease;
@@ -68,19 +90,23 @@
         .loader-text { color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 2px; font-weight: 700; transition: 0.3s; }
         .loader-enter-btn { display: none; margin-top: 20px; font-size: 14px; color: #000; background: var(--theme-color); padding: 10px 20px; border-radius: 8px; font-weight: 800; cursor: pointer; animation: pulse 2s infinite; }
 
+        /* FADE UI UNTUK AFK MODE */
         .fade-ui { transition: opacity 1.5s ease, filter 1.5s ease; }
         .ui-hidden { opacity: 0 !important; filter: blur(10px) !important; pointer-events: none !important; }
 
+        /* JAM RAKSASA AFK MODE */
         #afkClock {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -60%);
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 120px; font-weight: 800; font-family: 'JetBrains Mono', monospace;
             color: rgba(255, 255, 255, 0.1); text-shadow: 0 0 50px var(--theme-color);
             -webkit-text-stroke: 2px var(--theme-color); z-index: 5;
             opacity: 0; pointer-events: none; transition: opacity 1.5s ease, transform 1.5s ease;
+            transform: translate(-50%, -60%);
         }
         #afkClock.show { opacity: 1; transform: translate(-50%, -50%); }
         
-        .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 100px 20px 50px 20px; min-height: 100vh; }
+        /* Container di-padding top 130px agar tidak tertutup News Ticker */
+        .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 130px 20px 50px 20px; min-height: 100vh; }
 
         .hub-card {
             background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px;
@@ -94,12 +120,12 @@
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
         .perf-stats {
-            position: fixed; top: 20px; left: 20px; background: rgba(8, 8, 8, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px;
+            position: fixed; top: 30px; left: 20px; background: rgba(8, 8, 8, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px;
             font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--theme-color); z-index: 100; backdrop-filter: blur(5px); display: flex; gap: 15px;
         }
         .perf-stats span { color: #fff; }
 
-        /* FITUR 1: MASCOT BUBBLE */
+        /* MASCOT BUBBLE */
         .mascot-wrapper { position: absolute; top: -65px; left: 50%; transform: translateX(-50%); width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: var(--transition); z-index: 100; }
         .mascot-bubble {
             position: absolute; top: -110px; left: 65%; background: rgba(15, 15, 15, 0.9); border: 1px solid var(--theme-color);
@@ -148,6 +174,7 @@
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
         .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
+        /* RUANG TAMBAHAN DI BAWAH KARTU UTAMA BUAT SCROLL */
         .extra-content {
             width: 90%; max-width: 520px; margin-top: 40px; text-align: center;
             background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px;
@@ -160,7 +187,7 @@
         .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
         .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
 
-        /* FITUR 3: CUSTOM MP3 PLAYER CONTROLS */
+        /* CUSTOM MP3 PLAYER CONTROLS */
         .audio-controls { position: fixed; bottom: 250px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer; }
         .audio-btn { color: #fff; transition: 0.3s; font-size: 16px; }
         .audio-btn:hover { color: var(--theme-color); }
@@ -179,6 +206,7 @@
         .menu-item:hover { background: var(--theme-color); color: #000; }
         .menu-title { font-size: 9px; color: var(--theme-color); padding: 8px 15px; font-weight: 800; letter-spacing: 1px; background: rgba(0,0,0,0.5); }
 
+        /* FAKE GLOBAL LIVE CHAT */
         .live-chat-box {
             position: fixed; bottom: 30px; left: 30px; z-index: 50; width: 280px; height: 200px;
             background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); border-radius: 12px;
@@ -197,7 +225,7 @@
         .chat-msg strong { color: var(--theme-color); }
         .chat-msg .tag-vip { background: #ffdd00; color: #000; padding: 2px 5px; border-radius: 4px; font-size: 8px; font-weight: 800; margin-right: 5px; }
 
-        /* FITUR 2: DAILY REWARD (SPIN THE WHEEL) */
+        /* DAILY REWARD (SPIN THE WHEEL) */
         .daily-reward-btn {
             position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
             background: rgba(15, 15, 15, 0.8); border: 1px solid var(--theme-color);
@@ -210,9 +238,26 @@
         .wheel-container { position: relative; width: 300px; height: 300px; margin: 20px; border-radius: 50%; border: 5px solid var(--theme-color); overflow: hidden; box-shadow: 0 0 30px var(--theme-color); }
         .wheel { width: 100%; height: 100%; background: conic-gradient(#111 0% 25%, #222 25% 50%, #111 50% 75%, #222 75% 100%); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid var(--theme-color); z-index: 2; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));}
+
+        /* --- FITUR TAMBAHAN: SNAKE GAME CONTAINER --- */
+        #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
+        #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
+
     </style>
 </head>
 <body>
+
+    <div class="news-ticker">
+        <div class="ticker-text">🔥 [NEWS] Update Byfron Bypass V2.0.4 Live! ✦ Bantu tembusin followers TikTok @kellllllll-f7i biar bisa Live Streaming! ✦ Gunakan kode KAELL-VIP di Kaell Store via Eneba! ✦ Status Server: AMAN 🔥</div>
+    </div>
+
+    <div id="purchaseToast" class="purchase-toast"><i class="fa-solid fa-cart-shopping"></i> <span></span></div>
+
+    <div id="securityBreach">
+        <i class="fa-solid fa-triangle-exclamation" style="font-size: 80px; margin-bottom: 20px;"></i>
+        SECURITY BREACH DETECTED<br>
+        <span style="font-size: 14px; font-weight: 400; margin-top: 10px;">Developer Tools Locked. Incident logged.</span>
+    </div>
 
     <div id="bg-warp"></div>
     <div id="dayNightOverlay"></div>
@@ -275,69 +320,78 @@
     <div class="slide-container fade-ui">
         
         <div class="hub-card">
-            <div class="top-controls">
-                <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme"><i class="fa-solid fa-palette"></i></div>
-            </div>
-
-            <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
-            <div class="mascot-bubble" id="mascotBubble">Hi! Welcome to Kellzy Hub!</div>
-
-            <div class="status-badge">
-                <div class="status-dot"></div>
-                <span style="font-size: 11px; font-weight: 800; color: #00ff7f;">KELLZY HUB | V2.0.4 UPDATED</span>
-            </div>
-
-            <h1>KELLZY HUB</h1>
-            <p class="sub-text">Ultimate Roblox Script Provider & Apparel Solution.</p>
-
-            <div class="live-counter">
-                <div class="counter-item"><span>Active Users</span><strong id="userCount">1,429</strong></div>
-                <div class="counter-item"><span>Server Status</span><strong style="color: var(--theme-color);">STABLE</strong></div>
-                <div class="counter-item"><span>Your Device</span><strong id="deviceType" style="color: var(--theme-color);">Checking..</strong></div>
-                <div class="counter-item"><span>Recommended</span><strong id="recExec">Checking..</strong></div>
-            </div>
-
-            <div class="code-box" id="codeBoxContent">
-                <span style="color: var(--theme-color);">-- Kellzy Hub Official Loadstring</span><br>
-                -- Tolong verifikasi YouTube dan Discord untuk Unlock Script!
-            </div>
-
-            <div class="btn-grid">
-                <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
-                <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
-                <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
-                <a href="https://link-target.net/6323111/fA6olvPyl0nD" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
-            </div>
-
-            <div class="catalog-container">
-                <div class="catalog-title"><i class="fa-solid fa-bag-shopping"></i> Kellzy Hub Info + Group + Store</div>
-                <div class="catalog-scroll">
-                    <a href="https://discord.gg/9dBpy9Knr8" target="_blank" class="catalog-item interactive-btn">
-                        <img src="https://i.pinimg.com/736x/92/f8/fd/92f8fdfcd1c235625c8bf757392b19ec.jpg" alt="Discord">
-                        <span>My First Discord</span><div class="price">R$ Join To First Dc</div>
-                    </a>
-                    <a href="https://www.roblox.com/share/g/506706077" target="_blank" class="catalog-item interactive-btn">
-                        <img src="https://i.pinimg.com/736x/24/d1/6c/24d16c60a40726d34ccd01e9bba733f4.jpg" alt="Group">
-                        <span>Comunity Roblox</span><div class="price">R$ Join To Comunity Roblox</div>
-                    </a>
-                    <a href="https://www.g2g.com/Kaellstoree" target="_blank" class="catalog-item interactive-btn">
-                        <img src="https://i.pinimg.com/1200x/af/65/69/af6569f66882eee6916504052481d832.jpg" alt="Store">
-                        <span>Store</span><div class="price">$ My Store</div>
-                    </a>
+            
+            <div id="mainCardContent">
+                <div class="top-controls">
+                    <div class="control-btn interactive-btn" onclick="toggleVfx()" title="Change VFX"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div class="control-btn interactive-btn" onclick="toggleTheme()" title="Change Theme"><i class="fa-solid fa-palette"></i></div>
                 </div>
+
+                <img src="https://i.pinimg.com/736x/30/ba/61/30ba61e8c2ff44b4f1591259adf1fc7e.jpg" class="mascot-wrapper interactive-btn" id="mascotImg" alt="Mascot" onclick="mascotClick()">
+                <div class="mascot-bubble" id="mascotBubble">Hi! Welcome to Kellzy Hub!</div>
+
+                <div class="status-badge">
+                    <div class="status-dot"></div>
+                    <span style="font-size: 11px; font-weight: 800; color: #00ff7f;">KELLZY HUB | V2.0.4 UPDATED</span>
+                </div>
+
+                <h1>KELLZY HUB</h1>
+                <p class="sub-text">Ultimate Roblox Script Provider & Apparel Solution.</p>
+
+                <div class="live-counter">
+                    <div class="counter-item"><span>Active Users</span><strong id="userCount">1,429</strong></div>
+                    <div class="counter-item"><span>Server Status</span><strong style="color: var(--theme-color);">STABLE</strong></div>
+                    <div class="counter-item"><span>Your Device</span><strong id="deviceType" style="color: var(--theme-color);">Checking..</strong></div>
+                    <div class="counter-item"><span>Recommended</span><strong id="recExec">Checking..</strong></div>
+                </div>
+
+                <div class="code-box" id="codeBoxContent">
+                    <span style="color: var(--theme-color);">-- Kellzy Hub Official Loadstring</span><br>
+                    -- Tolong verifikasi YouTube dan Discord untuk Unlock Script!
+                </div>
+
+                <div class="btn-grid">
+                    <button class="btn btn-yt interactive-btn" id="ytBtn" onclick="verifyYT()"><i class="fa-brands fa-youtube"></i> 1. YOUTUBE</button>
+                    <button class="btn btn-dc interactive-btn" id="dcBtn" onclick="verifyDC()"><i class="fa-brands fa-discord"></i> 2. DISCORD</button>
+                    <button class="btn btn-primary btn-locked interactive-btn" id="copyBtn" onclick="copyScript()"><i class="fa-solid fa-lock"></i> SCRIPT LOCKED</button>
+                    <a href="https://link-target.net/6323111/fA6olvPyl0nD" target="_blank" class="btn btn-key interactive-btn"><i class="fa-solid fa-key"></i> GET KEY</a>
+                </div>
+
+                <div class="catalog-container">
+                    <div class="catalog-title"><i class="fa-solid fa-bag-shopping"></i> Kellzy Hub Info + Group + Store</div>
+                    <div class="catalog-scroll">
+                        <a href="https://discord.gg/9dBpy9Knr8" target="_blank" class="catalog-item interactive-btn">
+                            <img src="https://i.pinimg.com/736x/92/f8/fd/92f8fdfcd1c235625c8bf757392b19ec.jpg" alt="Discord">
+                            <span>My First Discord</span><div class="price">R$ Join To First Dc</div>
+                        </a>
+                        <a href="https://www.roblox.com/share/g/506706077" target="_blank" class="catalog-item interactive-btn">
+                            <img src="https://i.pinimg.com/736x/24/d1/6c/24d16c60a40726d34ccd01e9bba733f4.jpg" alt="Group">
+                            <span>Comunity Roblox</span><div class="price">R$ Join To Comunity Roblox</div>
+                        </a>
+                        <a href="https://www.g2g.com/Kaellstoree" target="_blank" class="catalog-item interactive-btn">
+                            <img src="https://i.pinimg.com/1200x/af/65/69/af6569f66882eee6916504052481d832.jpg" alt="Store">
+                            <span>Store</span><div class="price">$ My Store</div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="executor-status">
+                    <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Pottasium(PC)</div>
+                    <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Delta</div>
+                    <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Fluxxus</div>
+                    <div class="exec-badge"><i class="fa-solid fa-circle status-patched"></i> Arceus X</div>
+                </div>
+
+                <div style="margin-top: 15px; font-size: 9px; color: #444; font-weight: 800; letter-spacing: 3px;">
+                    PROTECTED BY KELLZY HUB SECURITY
+                </div>
+            </div> <div id="snakeGameContainer">
+                <h2 style="color: var(--theme-color); font-size: 16px; margin-top: 0;">🐍 KELLZY SNAKE PROTOCOL</h2>
+                <canvas id="snakeCanvas"></canvas>
+                <p style="font-size: 10px; color: #888; margin-bottom: 0;">PRESS [ESC] TO EXIT MINI-GAME</p>
+                <p style="font-size: 10px; color: var(--theme-color); font-weight: 800; margin-top: 5px;">SCORE: <span id="snakeScore">0</span></p>
             </div>
 
-            <div class="executor-status">
-                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Pottasium(PC)</div>
-                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Delta</div>
-                <div class="exec-badge"><i class="fa-solid fa-circle status-working"></i> Fluxxus</div>
-                <div class="exec-badge"><i class="fa-solid fa-circle status-patched"></i> Arceus X</div>
-            </div>
-
-            <div style="margin-top: 15px; font-size: 9px; color: #444; font-weight: 800; letter-spacing: 3px;">
-                PROTECTED BY KELLZY HUB SECURITY
-            </div>
         </div>
 
         <div class="extra-content">
@@ -392,7 +446,136 @@
     </div>
 
     <script>
-        // --- AFK SCREEN SAVER MODE ---
+        // --- FITUR BARU: CURSOR TRAIL ---
+        const trailContainer = document.createElement('div');
+        document.body.appendChild(trailContainer);
+        const dots = [];
+        for(let i=0; i<12; i++) {
+            let dot = document.createElement('div'); dot.className = 'cursor-dot';
+            trailContainer.appendChild(dot); dots.push({x:0, y:0, node: dot});
+        }
+        let mouseX = 0, mouseY = 0;
+        window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+        function drawTrail() {
+            let x = mouseX, y = mouseY;
+            dots.forEach((dot, index) => {
+                const nextDot = dots[index + 1] || dots[0];
+                dot.x = x; dot.y = y; dot.node.style.left = x + 'px'; dot.node.style.top = y + 'px';
+                dot.node.style.opacity = 1 - (index/12);
+                x += (nextDot.x - x) * 0.4; y += (nextDot.y - y) * 0.4;
+            });
+            requestAnimationFrame(drawTrail);
+        }
+        drawTrail();
+
+        // --- FITUR BARU: CLICK SHOCKWAVE ---
+        document.addEventListener('click', (e) => {
+            const wave = document.createElement('div'); wave.className = 'shockwave';
+            wave.style.left = e.clientX + 'px'; wave.style.top = e.clientY + 'px';
+            document.body.appendChild(wave); setTimeout(() => wave.remove(), 600);
+        });
+
+        // --- FITUR BARU: FAKE LIVE PURCHASE POP-UP ---
+        const purchaseNames = ["Jipa Oren", "ExamBro_User", "Guest_999", "Kaell_Fans", "ShadowSlayer"];
+        const purchaseItems = ["Kaell Store Cyan Shirt", "Eneba Roblox Gift Card", "Premium Executor Key", "VIP Access 30 Days"];
+        setInterval(() => {
+            const toast = document.getElementById('purchaseToast');
+            const name = purchaseNames[Math.floor(Math.random() * purchaseNames.length)];
+            const item = purchaseItems[Math.floor(Math.random() * purchaseItems.length)];
+            toast.innerHTML = `<i class="fa-solid fa-cart-shopping"></i> <b>${name}</b> baru saja membeli <span style="color: var(--theme-color); font-weight:800; margin-left:5px;">${item}</span>!`;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }, Math.random() * 15000 + 15000); // Muncul setiap 15-30 detik
+
+        // --- FITUR BARU: SECRET SNAKE GAME ---
+        let inSnakeGame = false;
+        let snakeBuffer = "";
+        window.addEventListener('keydown', (e) => {
+            snakeBuffer += e.key.toLowerCase();
+            if (snakeBuffer.length > 4) snakeBuffer = snakeBuffer.substring(1);
+            if (snakeBuffer === "play" && !inSnakeGame) {
+                startSnakeGame();
+                showToast("MINI-GAME PROTOCOL INITIATED!", "var(--theme-color)", "fa-gamepad");
+            }
+            if (e.key === "Escape" && inSnakeGame) { closeSnakeGame(); }
+        });
+
+        let snakeInterval;
+        function startSnakeGame() {
+            inSnakeGame = true;
+            document.getElementById('mainCardContent').style.display = 'none';
+            document.getElementById('snakeGameContainer').style.display = 'flex';
+            
+            const canvas = document.getElementById('snakeCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 300; canvas.height = 300;
+            const box = 15; let score = 0;
+            let snake = []; snake[0] = { x: 9 * box, y: 10 * box };
+            let food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box };
+            let d;
+            
+            document.addEventListener("keydown", direction);
+            function direction(event) {
+                if(event.keyCode == 37 && d != "RIGHT") { d = "LEFT"; }
+                else if(event.keyCode == 38 && d != "DOWN") { d = "UP"; }
+                else if(event.keyCode == 39 && d != "LEFT") { d = "RIGHT"; }
+                else if(event.keyCode == 40 && d != "UP") { d = "DOWN"; }
+            }
+
+            function draw() {
+                ctx.fillStyle = "#111"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                for(let i = 0; i < snake.length; i++) {
+                    ctx.fillStyle = (i == 0) ? getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() : "white";
+                    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+                    ctx.strokeStyle = "#000"; ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+                }
+                ctx.fillStyle = "red"; ctx.fillRect(food.x, food.y, box, box);
+                let snakeX = snake[0].x; let snakeY = snake[0].y;
+                if(d == "LEFT") snakeX -= box; if(d == "UP") snakeY -= box;
+                if(d == "RIGHT") snakeX += box; if(d == "DOWN") snakeY += box;
+
+                if(snakeX == food.x && snakeY == food.y) {
+                    score++; document.getElementById('snakeScore').innerText = score;
+                    food = { x: Math.floor(Math.random() * 19 + 1) * box, y: Math.floor(Math.random() * 19 + 1) * box };
+                } else { snake.pop(); }
+
+                let newHead = { x: snakeX, y: snakeY };
+                if(snakeX < 0 || snakeX >= canvas.width || snakeY < 0 || snakeY >= canvas.height || collision(newHead, snake)) {
+                    clearInterval(snakeInterval); setTimeout(closeSnakeGame, 2000);
+                }
+                snake.unshift(newHead);
+            }
+            function collision(head, array) {
+                for(let i = 0; i < array.length; i++) { if(head.x == array[i].x && head.y == array[i].y) return true; }
+                return false;
+            }
+            snakeInterval = setInterval(draw, 100);
+        }
+
+        function closeSnakeGame() {
+            inSnakeGame = false; clearInterval(snakeInterval);
+            document.getElementById('mainCardContent').style.display = 'block';
+            document.getElementById('snakeGameContainer').style.display = 'none';
+        }
+
+        // --- FITUR BARU: ANTI INSPECT ELEMENT AGGRESSIVE ---
+        function triggerSecurityBreach() {
+            const breachScreen = document.getElementById('securityBreach');
+            breachScreen.style.display = 'flex';
+            const screech = new Audio('https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3');
+            screech.volume = 0.5; screech.play().catch(()=>{});
+            setTimeout(() => { breachScreen.style.display = 'none'; }, 3000);
+        }
+
+        document.onkeydown = function(e) { 
+            resetAFK();
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { 
+                triggerSecurityBreach();
+                return false; 
+            } 
+        };
+
+        // --- SEMUA FITUR LAMA DI BAWAH SINI (TIDAK ADA YANG DIHAPUS) ---
         let afkTimer;
         const afkTimeout = 15000; 
         const uiElements = document.querySelectorAll('.fade-ui');
@@ -414,12 +597,10 @@
         }, 1000);
 
         window.addEventListener('mousemove', resetAFK);
-        window.addEventListener('keydown', resetAFK);
         window.addEventListener('click', resetAFK);
         window.addEventListener('scroll', resetAFK);
         resetAFK(); 
 
-        // --- SMART MASCOT BUBBLE ---
         const mascotTips = ["Follow YT Kellzy buat info update!", "Join Discord buat dapet script gratis!", "Klik logo palet warna buat ganti tema!", "Ketik rahasia K-E-L-L-Z-Y di keyboard!"];
         const mascotBubble = document.getElementById('mascotBubble');
         setInterval(() => {
@@ -430,12 +611,11 @@
             }, 500);
         }, 8000);
 
-        // --- DAILY REWARD WHEEL ---
         function openWheel() { document.getElementById('wheelModal').style.display = 'flex'; }
         function closeWheel() { document.getElementById('wheelModal').style.display = 'none'; }
         function spinWheel() {
             const wheel = document.getElementById('wheel');
-            const deg = Math.floor(Math.random() * 360) + 1440; // Putar kencang minimal 4x
+            const deg = Math.floor(Math.random() * 360) + 1440;
             wheel.style.transform = `rotate(${deg}deg)`;
             setTimeout(() => {
                 showToast("🎉 Kamu dapat: VIP Access 1 Hari!", "var(--theme-color)", "fa-gift");
@@ -443,7 +623,6 @@
             }, 4000);
         }
 
-        // --- FAKE GLOBAL LIVE CHAT ---
         const fakeChatNames = ["xX_Slayer_Xx", "Jandel", "Vellyn", "Evlyn", "Kuli_Bata", "Syntx", "BocilKematian", "FarhanA1", "Sammy"];
         const fakeChatMessages = [
             "Bang bagi key dong, males lewat linkvertise.", "Gila script brainrot nya anjay banget! 🔥", "Auto farm nya OP parah 🚀", 
@@ -464,7 +643,6 @@
             if (chatBody.children.length > 20) chatBody.removeChild(chatBody.firstChild);
         }, Math.floor(Math.random() * 4000) + 3000);
 
-        // --- REAL-TIME DAY/NIGHT SYNC ---
         function checkDayNight() {
             const hour = new Date().getHours();
             const overlay = document.getElementById('dayNightOverlay');
@@ -479,7 +657,6 @@
         }
         checkDayNight(); setInterval(checkDayNight, 60000);
 
-        // --- CUSTOM RIGHT CLICK MENU ---
         const customMenu = document.getElementById('customMenu');
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault(); customMenu.style.display = 'block';
@@ -487,12 +664,10 @@
         });
         document.addEventListener('click', (e) => { if (e.button !== 2) customMenu.style.display = 'none'; });
 
-        // --- SCROLLING TAB TITLE ---
         let docTitle = " Kellzy Hub ✦ Ultimate Hub ✦ Status: Undetected ✦ ";
         setInterval(() => { docTitle = docTitle.substring(1) + docTitle[0]; if (!document.hidden) document.title = docTitle; }, 300);
         document.addEventListener("visibilitychange", function() { if (document.hidden) { document.title = "⚠️ Hei, Scriptnya Belum Di-copy!"; } });
 
-        // --- SCRIPT UNLOCK ENGINE (AUTO TYPING) ---
         let isScriptUnlocked = false;
         function unlockScript() {
             if(isScriptUnlocked) return;
@@ -502,7 +677,6 @@
             showToast("Verification Complete! Script Unlocked.", "var(--theme-color)");
             clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
 
-            // Auto-Typing Effect
             const codeBox = document.getElementById('codeBoxContent');
             codeBox.innerHTML = '';
             const codeToType = `<span style="color: var(--theme-color);">-- Kellzy Hub Official Loadstring</span>\ngetgenv().Key = "KELLYZ-2X5NYFU6";\nloadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
@@ -515,12 +689,11 @@
             }, 15);
         }
 
-        // --- SECRET KONAMI CHEAT CODE ("KELLZY") ---
-        let secretCode = "kellzy"; let inputBuffer = "";
+        let secretCode = "kellzy"; let inputBufferMain = "";
         window.addEventListener('keydown', (e) => {
-            inputBuffer += e.key.toLowerCase();
-            if (inputBuffer.length > secretCode.length) { inputBuffer = inputBuffer.substring(1); }
-            if (inputBuffer === secretCode && !isScriptUnlocked) {
+            inputBufferMain += e.key.toLowerCase();
+            if (inputBufferMain.length > secretCode.length) { inputBufferMain = inputBufferMain.substring(1); }
+            if (inputBufferMain === secretCode && !isScriptUnlocked) {
                 unlockScript();
                 var duration = 3000; var end = Date.now() + duration;
                 (function frame() {
@@ -531,13 +704,11 @@
             }
         });
 
-        // --- PARALLAX WARP BACKGROUND ---
         document.addEventListener('mousemove', (e) => {
             const x = (window.innerWidth / 2 - e.pageX) / 50; const y = (window.innerHeight / 2 - e.pageY) / 50;
             document.getElementById('bg-warp').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
         });
 
-        // --- AUDIO VISUALIZER ---
         let audioCtx, analyser, source, canvasCtx, visualizerCanvas; let isAudioInit = false;
         function initVisualizer() {
             if (isAudioInit) return;
@@ -563,7 +734,6 @@
             draw(); isAudioInit = true;
         }
 
-        // --- FPS & PING COUNTER ---
         let frameCount = 0; let lastTime = performance.now(); const fpsEl = document.getElementById('fpsValue');
         function updateFPS(now) {
             frameCount++; if (now - lastTime >= 1000) { fpsEl.innerText = frameCount; frameCount = 0; lastTime = now; } requestAnimationFrame(updateFPS);
@@ -572,7 +742,6 @@
         const pingEl = document.getElementById('pingValue');
         setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
 
-        // --- THEME & VFX SWITCHER ---
         const themes = ['#00e5ff', '#39ff14', '#ff66cc']; let currentTheme = 0;
         function toggleTheme() {
             currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]);
@@ -627,7 +796,6 @@
             btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); });
         });
 
-        // --- CUSTOM MINI MP3 PLAYER SYSTEM ---
         const playlist = [
             { src: "musik.mp3", name: "TRACK 1 - LOFI" },
             { src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3", name: "TRACK 2 - CHILL" },
@@ -678,10 +846,27 @@
             }, 5000);
         }
 
+        // --- FITUR BARU: FAKE COMPILE SCRIPT ---
+        let isCompiling = false;
         function copyScript() {
             if (!isScriptUnlocked) { showToast("Selesaikan Step 1 dan 2 dulu untuk unlock!", "#ff3333", "fa-circle-xmark"); return; }
-            const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
-            navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); });
+            if (isCompiling) return;
+            isCompiling = true;
+            const btn = document.getElementById('copyBtn');
+            btn.innerHTML = 'COMPILING [0%]'; btn.style.background = '#ffaa00'; btn.style.color = '#000';
+            let progress = 0;
+            let compileInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 5;
+                if(progress >= 100) {
+                    progress = 100; clearInterval(compileInterval);
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> SCRIPT COPIED'; btn.style.background = '#00ff7f';
+                    const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
+                    navigator.clipboard.writeText(code).then(() => { showToast("Script Compiled & Copied!", "var(--theme-color)", "fa-circle-check"); });
+                    setTimeout(() => { isCompiling = false; btn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; }, 3000);
+                } else {
+                    let bars = '|'.repeat(Math.floor(progress/10)); btn.innerHTML = `COMPILING ${bars} ${progress}%`;
+                }
+            }, 200);
         }
 
         let mascotClicks = 0;
@@ -692,10 +877,7 @@
             if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Free Key Vip : KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; }
         }
 
-        document.onkeydown = function(e) { 
-            resetAFK();
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) { return false; } 
-        };
+        setInterval(() => { const counter = document.getElementById('userCount'); let val = parseInt(counter.innerText.replace(',', '')); val += Math.floor(Math.random() * 5) - 2; counter.innerText = val.toLocaleString(); }, 3000);
 
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
         function loadVfx(mode) {
