@@ -26,18 +26,38 @@
         body {
             margin: 0; padding: 0;
             background-color: var(--bg-dark);
-            background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed;
             font-family: 'Urbanist', sans-serif; color: #ffffff;
             height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden;
             cursor: url('https://cdn.custom-cursor.com/db/9753/32/neon-cyan-cursor.png'), auto;
+        }
+
+        /* EFEK WARP BACKGROUND (INTERAKTIF) */
+        #bg-warp {
+            position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
+            background-image: url('https://images8.alphacoders.com/114/thumb-1920-1146918.jpg');
+            background-size: cover; background-position: center;
+            z-index: -2; transition: transform 0.1s ease-out;
+        }
+
+        /* EFEK SCANLINE GLITCH TEMA HACKER */
+        .scanlines {
+            position: fixed; inset: 0; z-index: 2; pointer-events: none;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.2));
+            background-size: 100% 4px; animation: glitch-anim 5s infinite linear; opacity: 0.5;
+        }
+        @keyframes glitch-anim { 0% { transform: translateY(0); } 100% { transform: translateY(4px); } }
+
+        /* AUDIO VISUALIZER KANVAS */
+        #visualizer {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 25%;
+            z-index: 0; pointer-events: none; opacity: 0.7;
         }
 
         a, button, .interactive-btn { cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important; }
 
         body::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: 0;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,0.85) 100%); z-index: -1;
         }
 
         #loader {
@@ -65,9 +85,7 @@
         }
         .hub-card::-webkit-scrollbar { width: 0px; }
 
-        .top-controls {
-            position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;
-        }
+        .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
         .control-btn {
             background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); 
             padding: 8px 12px; border-radius: 12px; color: var(--theme-color); 
@@ -99,7 +117,6 @@
         h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
         .sub-text { color: #aaa; font-size: 13px; margin-bottom: 20px; }
 
-        /* LIVE COUNTER LENGKAP (GRID 4 KOTAK) */
         .live-counter {
             background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; margin-bottom: 15px;
             display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 1px solid rgba(255,255,255,0.05);
@@ -113,7 +130,6 @@
             font-size: 11px; color: #ddd; text-align: left; margin-bottom: 20px; border: 1px solid #222;
         }
 
-        /* 2-STEP VERIFICATION BUTTONS */
         .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .btn {
             padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase;
@@ -123,7 +139,6 @@
         
         .btn-yt { background: var(--youtube); color: #fff; grid-column: span 1; }
         .btn-yt:hover { box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); transform: translateY(-3px); }
-        
         .btn-dc { background: var(--discord); color: #fff; grid-column: span 1; }
         .btn-dc:hover { box-shadow: 0 0 20px rgba(88, 101, 242, 0.5); transform: translateY(-3px); }
 
@@ -188,6 +203,12 @@
 </head>
 <body oncontextmenu="return false;">
 
+    <div id="bg-warp"></div>
+    
+    <canvas id="visualizer"></canvas>
+
+    <div class="scanlines" id="scanlinesOverlay"></div>
+
     <div id="loader">
         <div class="loader-spinner" id="spinnerAnim"></div>
         <div class="loader-text" id="loader-text">Connecting to secure server...</div>
@@ -212,7 +233,7 @@
         </div>
     </div>
 
-    <audio id="bgm" loop autoplay><source src="musik.mp3" type="audio/mpeg"></audio>
+    <audio id="bgm" loop crossorigin="anonymous"><source src="musik.mp3" type="audio/mpeg"></audio>
     <div id="particles-js"></div>
 
     <div class="slide-container">
@@ -305,6 +326,62 @@
     </div>
 
     <script>
+        // --- PARALLAX WARP BACKGROUND ---
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            document.getElementById('bg-warp').style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+        });
+
+        // --- AUDIO VISUALIZER ---
+        let audioCtx, analyser, source, canvasCtx, visualizerCanvas;
+        let isAudioInit = false;
+
+        function initVisualizer() {
+            if (isAudioInit) return;
+            const audioEl = document.getElementById('bgm');
+            // Menghindari error browser jika audio context dibuat sebelum user interact
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContext();
+            analyser = audioCtx.createAnalyser();
+            
+            source = audioCtx.createMediaElementSource(audioEl);
+            source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            
+            analyser.fftSize = 256;
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            
+            visualizerCanvas = document.getElementById('visualizer');
+            canvasCtx = visualizerCanvas.getContext('2d');
+            visualizerCanvas.width = window.innerWidth;
+            visualizerCanvas.height = window.innerHeight * 0.25;
+
+            function draw() {
+                requestAnimationFrame(draw);
+                analyser.getByteFrequencyData(dataArray);
+                canvasCtx.clearRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+                
+                const barWidth = (visualizerCanvas.width / bufferLength) * 2.5;
+                let barHeight;
+                let x = 0;
+                
+                // Ambil warna tema yang lagi aktif buat warna visualizernya
+                const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || '#00e5ff';
+                
+                for(let i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i];
+                    canvasCtx.fillStyle = themeColor;
+                    canvasCtx.globalAlpha = 0.5;
+                    canvasCtx.fillRect(x, visualizerCanvas.height - (barHeight / 2), barWidth, barHeight / 2);
+                    x += barWidth + 2;
+                }
+            }
+            draw();
+            isAudioInit = true;
+        }
+
         // --- FPS & PING COUNTER ---
         let frameCount = 0;
         let lastTime = performance.now();
@@ -342,7 +419,6 @@
             clickSfx.currentTime = 0; clickSfx.play().catch(e => {});
         }
 
-        // --- AUTO-DEVICE DETECTOR ---
         window.addEventListener('DOMContentLoaded', () => {
             const ua = navigator.userAgent;
             let device = "PC / Desktop"; let rec = "Wave / Krampus";
@@ -352,7 +428,6 @@
             document.getElementById('recExec').innerText = rec;
         });
 
-        // --- TERMINAL LOG ---
         const termLogs = [
             "[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS",
             "[SYSTEM] Fetching Kellzy Key API... OK",
@@ -372,7 +447,6 @@
             }
         }, 1500);
 
-        // --- ANTI-ADBLOCK ---
         setTimeout(() => {
             let ad = document.createElement('div');
             ad.innerHTML = '&nbsp;'; ad.className = 'adsbox'; 
@@ -383,7 +457,6 @@
             }, 100);
         }, 2500);
 
-        // --- LOADING SCREEN ---
         const loaderText = document.getElementById('loader-text');
         const loaderScreen = document.getElementById('loader');
         const enterBtn = document.getElementById('enterBtn');
@@ -401,10 +474,14 @@
             }
         }, 800);
 
+        // ENTRY POINT BUTTON (Menjalankan Audio & Visualizer)
         enterBtn.addEventListener('click', () => {
             loaderScreen.style.opacity = '0'; 
             setTimeout(() => { loaderScreen.style.visibility = 'hidden'; }, 800);
             bgm.play().catch(e => console.log("Audio play error"));
+            
+            // Inisialisasi Audio Visualizer setelah layar di-klik
+            initVisualizer();
         });
 
         let originalTitle = document.title;
@@ -413,7 +490,6 @@
             else { document.title = originalTitle; }
         });
 
-        // --- AUDIO ENGINE ---
         const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3;
         const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
 
@@ -425,8 +501,12 @@
 
         function toggleMusic() {
             const icon = document.querySelector('#musicToggle i');
-            if (bgm.paused) { bgm.play(); icon.className = 'fa-solid fa-pause'; } 
-            else { bgm.pause(); icon.className = 'fa-solid fa-play'; }
+            if (bgm.paused) { 
+                bgm.play(); icon.className = 'fa-solid fa-pause'; 
+                if(!isAudioInit) initVisualizer(); // Jaga-jaga kalau belum diinit
+            } else { 
+                bgm.pause(); icon.className = 'fa-solid fa-play'; 
+            }
         }
 
         function showToast(message, color = "var(--theme-color)", iconClass = "fa-circle-check") {
@@ -439,7 +519,6 @@
             setTimeout(() => { toast.classList.remove("show"); }, 3500);
         }
 
-        // --- 2-STEP GATEWAY (YOUTUBE & DISCORD) ---
         let ytVerified = false;
         let dcVerified = false;
         let isScriptUnlocked = false;
@@ -497,7 +576,6 @@
             navigator.clipboard.writeText(code).then(() => { showToast("Script Copied Successfully!", "var(--theme-color)", "fa-circle-check"); });
         }
 
-        // --- EASTER EGG ---
         let mascotClicks = 0;
         function mascotClick() {
             mascotClicks++;
@@ -511,7 +589,6 @@
             }
         }
 
-        // --- ACTIVE USERS COUNTER ANIMATION ---
         setInterval(() => {
             const counter = document.getElementById('userCount');
             let val = parseInt(counter.innerText.replace(',', ''));
@@ -519,7 +596,6 @@
             counter.innerText = val.toLocaleString();
         }, 3000);
 
-        // --- SECURITY ---
         document.onkeydown = function(e) {
             if(e.keyCode == 123) { return false; }
             if(e.ctrlKey && e.shiftKey && e.keyCode == 73) { return false; }
@@ -527,7 +603,6 @@
             if(e.ctrlKey && e.keyCode == 85) { return false; }
         };
 
-        // --- PARTICLES ENGINE ---
         const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
         
         function loadVfx(mode) {
@@ -538,28 +613,15 @@
             
             let config = {};
             if(mode === 'hearts') {
-                config = {
-                    "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } },
-                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } },
-                    "retina_detect": true
-                };
+                config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true };
             } else if(mode === 'snow') {
-                config = {
-                    "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } },
-                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-                    "retina_detect": true
-                };
+                config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true };
             } else if(mode === 'matrix') {
-                config = {
-                    "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } },
-                    "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } },
-                    "retina_detect": true
-                };
+                config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true };
             }
             particlesJS('particles-js', config);
         }
 
-        // Initialize default VFX
         loadVfx('hearts');
     </script>
 </body>
