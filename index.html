@@ -43,6 +43,7 @@
         #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
         a, button, .interactive-btn { cursor: url('https://cdn.custom-cursor.com/db/9752/32/neon-cyan-pointer.png'), pointer !important; }
 
+        /* HEADER TICKER & ALERTS */
         .news-ticker { position: fixed; top: 0; left: 0; width: 100%; background: #ffaa00; color: #000; font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; z-index: 10000; padding: 4px 0; text-transform: uppercase; }
         .ticker-text { display: inline-block; padding-left: 100%; animation: ticker 25s linear infinite; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
@@ -54,6 +55,7 @@
         #securityBreach { position: fixed; inset: 0; background: red; z-index: 100000; display: none; justify-content: center; align-items: center; color: white; font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; text-align: center; animation: glitch-bg 0.1s infinite; flex-direction: column; }
         @keyframes glitch-bg { 0% { background: red; } 50% { background: #000; } 100% { background: red; } }
 
+        /* CURSOR & EFFECTS */
         .cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: background 0.3s, box-shadow 0.3s; }
         .shockwave { position: fixed; border: 2px solid var(--theme-color); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 9998; animation: shockwaveAnim 0.6s ease-out forwards; }
         @keyframes shockwaveAnim { 0% { width: 0; height: 0; opacity: 1; border-width: 3px; } 100% { width: 100px; height: 100px; opacity: 0; border-width: 0px; } }
@@ -69,27 +71,32 @@
 
         #afkClock { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -60%); font-size: 120px; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: rgba(255, 255, 255, 0.1); text-shadow: 0 0 50px var(--theme-color); -webkit-text-stroke: 2px var(--theme-color); z-index: 5; opacity: 0; pointer-events: none; transition: opacity 1.5s ease, transform 1.5s ease; transform: translate(-50%, -60%); }
         #afkClock.show { opacity: 1; transform: translate(-50%, -50%); }
-        
+
+        /* LAYOUT CONTAINERS */
         .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 130px 20px 50px 20px; min-height: 100vh; }
-
-        /* UI TENGAH KECIL */
+        
+        /* 1. NARROW MIDDLE CARD */
         .hub-card { background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1); text-align: center; position: relative; margin-bottom: 30px;}
+        
+        .extra-content { width: 90%; max-width: 520px; text-align: center; background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); margin-bottom: 30px; }
+        .extra-content h2 { color: var(--theme-color); font-size: 20px; margin-top: 0; font-weight: 800; text-transform: uppercase;}
+        .extra-content p { color: #ccc; font-size: 12px; line-height: 1.6; }
 
-        #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
-        #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
+        /* 2. WIDE DASHBOARD BOTTOM */
+        .wide-dashboard { width: 95%; max-width: 1000px; background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; margin-bottom: 30px; backdrop-filter: blur(15px); text-align: center; }
+        .wide-dashboard h2 { color: var(--theme-color); font-size: 24px; margin-top: 0; font-weight: 800; text-transform: uppercase; letter-spacing: -1px;}
+        .wide-dashboard p { color: #aaa; font-size: 13px; margin-top: -10px; margin-bottom: 30px; }
 
+        /* HUB CARD INTERNALS */
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
         .top-controls-left { position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; z-index: 100; }
         .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; }
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
-        .perf-stats { position: fixed; top: 30px; left: 20px; background: rgba(8, 8, 8, 0.6); border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: var(--theme-color); z-index: 100; backdrop-filter: blur(5px); display: flex; gap: 15px; }
-        .perf-stats span { color: #fff; }
-
         .mascot-wrapper { position: absolute; top: -65px; left: 50%; transform: translateX(-50%); width: 110px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); transition: var(--transition); z-index: 100; }
         .mascot-bubble { position: absolute; top: -110px; left: 65%; background: rgba(15, 15, 15, 0.9); border: 1px solid var(--theme-color); padding: 8px 12px; border-radius: 12px 12px 12px 0; font-size: 10px; color: #fff; font-weight: 700; white-space: nowrap; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: opacity 0.5s ease; pointer-events: none; z-index: 101; opacity: 0; }
 
-        .status-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 127, 0.1); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 20px; transition: var(--transition); }
+        .status-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 127, 0.1); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0, 255, 127, 0.3); margin-bottom: 20px; transition: var(--transition); cursor: pointer;}
         .status-badge:hover { background: rgba(0, 255, 127, 0.2); transform: scale(1.05); }
         .status-dot { width: 8px; height: 8px; background: #00ff7f; border-radius: 50%; box-shadow: 0 0 10px #00ff7f; animation: pulse 2s infinite; }
 
@@ -130,85 +137,28 @@
         .btn-key { background: #1a1a1a; color: #fff; border: 1px solid #333; grid-column: span 2;}
         .btn-key:hover { border-color: var(--theme-color); color: var(--theme-color); }
 
-        .catalog-container { margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .catalog-title { font-size: 10px; font-weight: 800; color: var(--theme-color); margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
-        .catalog-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: thin; scrollbar-color: var(--theme-color) #111; }
-        .catalog-scroll::-webkit-scrollbar { height: 4px; }
-        .catalog-scroll::-webkit-scrollbar-thumb { background: var(--theme-color); border-radius: 10px; }
-        .catalog-item { min-width: 100px; background: rgba(0,0,0,0.5); border: 1px solid #222; border-radius: 10px; padding: 8px; transition: var(--transition); display: block; text-decoration: none; }
-        .catalog-item:hover { border-color: var(--theme-color); transform: translateY(-5px); background: rgba(255,255,255,0.05); }
-        .catalog-item img { width: 100%; border-radius: 6px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
-        .catalog-item span { font-size: 9px; color: #fff; font-weight: 600; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .catalog-item .price { color: var(--theme-color); font-size: 10px; font-weight: 800; margin-top: 4px; }
+        #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
+        #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
 
-        .executor-status { margin-top: 15px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
-        .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
+        /* --- FEATURES IN EXTRA CONTENT (NARROW) --- */
+        .search-box { width: 100%; max-width: 400px; margin: 0 auto 20px auto; position: relative; }
+        .search-box input { width: 100%; padding: 12px 15px 12px 40px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Urbanist', sans-serif; font-size: 12px; transition: var(--transition); outline: none; }
+        .search-box input:focus { border-color: var(--theme-color); box-shadow: 0 0 15px rgba(0,229,255,0.2); }
+        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 14px; transition: var(--transition); }
+        .search-box input:focus + i { color: var(--theme-color); }
 
-        /* CONTENT AREAS TENGAH (NARROW) */
-        .extra-content { width: 90%; max-width: 520px; text-align: center; background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); margin-bottom: 20px; }
-        .extra-content h2 { color: var(--theme-color); font-size: 20px; margin-top: 0; font-weight: 800; text-transform: uppercase;}
-        .extra-content p { color: #ccc; font-size: 12px; line-height: 1.6; }
-
-        /* --- UI BAWAH LEBAR (FULL WIDTH) --- */
-        .wide-dashboard { width: 95%; max-width: 1000px; background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; margin-bottom: 20px; backdrop-filter: blur(15px); text-align: center; }
-        .wide-dashboard h2 { color: var(--theme-color); font-size: 24px; margin-top: 0; font-weight: 800; text-transform: uppercase; letter-spacing: -1px;}
-        .wide-dashboard p { color: #aaa; font-size: 13px; margin-top: -10px; margin-bottom: 30px; }
-
-        /* CSS Pricing & Servers */
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left; }
-        .pricing-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 25px; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;}
-        .pricing-card:hover { border-color: var(--theme-color); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,229,255,0.1); }
-        .pricing-card.popular { border-color: var(--theme-color); background: rgba(0, 229, 255, 0.05); }
-        .pricing-card.popular::before { content: 'BEST SELLER'; position: absolute; top: 15px; right: -30px; background: var(--theme-color); color: #000; font-size: 9px; font-weight: 800; padding: 5px 30px; transform: rotate(45deg); letter-spacing: 1px;}
-        .pricing-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 5px; }
-        .pricing-price { font-size: 28px; font-family: 'JetBrains Mono', monospace; font-weight: 800; color: var(--theme-color); margin-bottom: 15px; }
-        .pricing-price span { font-size: 12px; color: #888; font-weight: 400; }
-        .pricing-features { list-style: none; padding: 0; margin: 0 0 25px 0; flex: 1; }
-        .pricing-features li { font-size: 12px; color: #ccc; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .pricing-features li i { color: #00ff7f; font-size: 14px; }
-        .pricing-features li.disabled { color: #555; }
-        .pricing-features li.disabled i { color: #555; }
+        /* --- FEATURES IN WIDE DASHBOARD --- */
         
-        .server-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px; }
-        .server-node { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; text-align: left; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; cursor: default; }
-        .server-node:hover { background: rgba(255,255,255,0.05); }
-        .node-info { display: flex; align-items: center; gap: 12px; }
-        .node-icon { font-size: 20px; color: #888; }
-        .node-name { font-size: 12px; font-weight: 800; color: #fff; display: block; }
-        .node-ping { font-family: 'JetBrains Mono'; font-size: 10px; color: #00ff7f; }
+        /* 1. Interactive Terminal (FULL WIDTH) */
+        .wide-terminal { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #ccc; text-align: left; height: 350px; display: flex; flex-direction: column; margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); transition: var(--transition); }
+        .wide-terminal:hover { border-color: var(--theme-color); box-shadow: inset 0 0 30px rgba(0,229,255,0.2); }
+        .term-output { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 5px; scrollbar-width: none; line-height: 1.5;}
+        .term-output::-webkit-scrollbar { display: none; }
+        .term-input-line { display: flex; align-items: center; gap: 8px; margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px; }
+        .term-input-line span { color: var(--theme-color); font-weight: 800; }
+        .term-input-line input { background: transparent; border: none; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; flex: 1; outline: none; }
 
-        /* Feed & Compat */
-        .feed-container { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; height: 180px; overflow: hidden; position: relative; margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);}
-        .feed-list { padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; display: flex; flex-direction: column; gap: 8px; animation: feedScroll 25s linear infinite; }
-        @keyframes feedScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
-        .feed-item { display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 6px; }
-        .feed-item .user { color: var(--theme-color); width: 30%; text-align: left;}
-        .feed-item .game { color: #fff; font-weight: bold; width: 40%; text-align: center;}
-        .feed-item .status { color: #00ff7f; width: 30%; text-align: right;}
-
-        .compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; text-align: left; margin-bottom: 20px;}
-        .compat-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; transition: 0.3s; }
-        .compat-card:hover { border-color: var(--theme-color); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,229,255,0.1);}
-        .compat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .compat-name { font-weight: 800; color: #fff; font-size: 14px; }
-        .compat-platform { font-size: 9px; color: #aaa; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;}
-        .compat-status { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: bold; font-family: 'JetBrains Mono'; margin-bottom: 8px;}
-        .compat-bar-bg { width: 100%; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
-        .compat-bar-fill { height: 100%; transition: width 1s ease; box-shadow: 0 0 5px currentColor;}
-
-        .radar-box { width: 100%; max-width: 600px; height: 350px; margin: 0 auto 40px auto; background: radial-gradient(circle at center, rgba(0,229,255,0.1) 0%, rgba(0,0,0,0.8) 70%); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; position: relative; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,229,255,0.2), 0 0 20px rgba(0,0,0,0.5); }
-        .radar-grid { position: absolute; inset: 0; background: 
-            linear-gradient(rgba(0,229,255,0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,229,255,0.2) 1px, transparent 1px);
-            background-size: 40px 40px; border-radius: 50%; pointer-events: none; opacity: 0.3;}
-        .radar-sweep { position: absolute; top: 50%; left: 50%; width: 50%; height: 2px; background: linear-gradient(90deg, transparent, var(--theme-color)); transform-origin: left center; animation: radarSpin 3s linear infinite; box-shadow: 0 0 10px var(--theme-color); z-index: 2;}
-        .radar-sweep::after { content: ''; position: absolute; top: -100px; right: 0; width: 100px; height: 200px; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.1)); transform: skewX(-45deg); transform-origin: bottom right;}
-        @keyframes radarSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .radar-target { position: absolute; width: 6px; height: 6px; background: #ff0050; border-radius: 50%; box-shadow: 0 0 10px #ff0050, 0 0 20px #ff0050; animation: targetPing 2s ease-out forwards; z-index: 3;}
-        .radar-label { position: absolute; color: #fff; font-size: 9px; font-family: 'JetBrains Mono', monospace; padding-left: 12px; pointer-events: none; white-space: nowrap; text-shadow: 0 0 5px #000;}
-        @keyframes targetPing { 0% { transform: scale(1); opacity: 1; } 80% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
-
+        /* 2. Decrypter */
         .decrypter-container { width: 100%; max-width: 800px; margin: 0 auto 50px auto; background: #050505; border: 1px solid var(--theme-color); border-radius: 12px; padding: 20px; text-align: left; cursor: crosshair; position: relative; box-shadow: inset 0 0 30px rgba(0,229,255,0.1); overflow: hidden; }
         .decrypter-container::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.1), transparent); transform: skewX(-20deg); transition: 0.5s; }
         .decrypter-container:hover::before { left: 200%; transition: 1.5s; }
@@ -217,6 +167,22 @@
         .decrypter-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; opacity: 1; transition: 0.3s; z-index: 10; font-family: 'Urbanist'; letter-spacing: 2px;}
         .decrypter-container:hover .decrypter-overlay { opacity: 0; pointer-events: none; }
 
+        /* 3. Script Status Table */
+        .script-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: left; }
+        .script-table th { background: rgba(0,229,255,0.1); color: var(--theme-color); padding: 12px; border-bottom: 1px solid rgba(0,229,255,0.2); text-transform: uppercase;}
+        .script-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+        .script-table tr:hover td { background: rgba(255,255,255,0.02); color: #fff; }
+        .st-working { color: #00ff7f; background: rgba(0,255,127,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .st-updating { color: #ffaa00; background: rgba(255,170,0,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+
+        /* 4. Diagnostics */
+        .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; margin-bottom: 40px;}
+        .diag-card { background: #000; border: 1px dashed rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; transition: 0.3s; text-transform: uppercase;}
+        .diag-card:hover { border-color: var(--theme-color); box-shadow: inset 0 0 15px rgba(0,229,255,0.1); transform: translateY(-3px);}
+        .diag-card i { font-size: 24px; color: #555; transition: 0.3s; }
+        .diag-card:hover i { color: var(--theme-color); }
+
+        /* 5. Roadmap */
         .roadmap-wrap { width: 100%; max-width: 900px; margin: 0 auto 40px auto; position: relative; padding: 40px 0; }
         .roadmap-line { position: absolute; top: 50px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
         .roadmap-line-fill { position: absolute; top: 50px; left: 10%; width: 60%; height: 2px; background: var(--theme-color); z-index: 2; box-shadow: 0 0 10px var(--theme-color); }
@@ -231,73 +197,38 @@
         .roadmap-step.active .rm-title { color: var(--theme-color); }
         .rm-desc { font-size: 11px; color: #888; padding: 0 15px; }
 
-        /* --- FITUR TERBARU: SCRIPT TABLE & DIAGNOSTICS --- */
-        .script-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: left; }
-        .script-table th { background: rgba(0,229,255,0.1); color: var(--theme-color); padding: 12px; border-bottom: 1px solid rgba(0,229,255,0.2); text-transform: uppercase;}
-        .script-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
-        .script-table tr:hover td { background: rgba(255,255,255,0.02); color: #fff; }
-        .st-working { color: #00ff7f; background: rgba(0,255,127,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
-        .st-updating { color: #ffaa00; background: rgba(255,170,0,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        /* 6. Pricing, Servers, dll */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left; }
+        .pricing-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 25px; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;}
+        .pricing-card:hover { border-color: var(--theme-color); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,229,255,0.1); }
+        .pricing-card.popular { border-color: var(--theme-color); background: rgba(0, 229, 255, 0.05); }
+        .pricing-card.popular::before { content: 'BEST SELLER'; position: absolute; top: 15px; right: -30px; background: var(--theme-color); color: #000; font-size: 9px; font-weight: 800; padding: 5px 30px; transform: rotate(45deg); letter-spacing: 1px;}
+        .pricing-title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+        .pricing-price { font-size: 28px; font-family: 'JetBrains Mono', monospace; font-weight: 800; color: var(--theme-color); margin-bottom: 15px; }
+        .pricing-price span { font-size: 12px; color: #888; font-weight: 400; }
+        .pricing-features { list-style: none; padding: 0; margin: 0 0 25px 0; flex: 1; }
+        .pricing-features li { font-size: 12px; color: #ccc; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .pricing-features li i { color: #00ff7f; font-size: 14px; }
+        .pricing-features li.disabled { color: #555; }
+        
+        .server-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px; }
+        .server-node { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; text-align: left; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; cursor: default; }
+        .server-node:hover { background: rgba(255,255,255,0.05); }
+        .node-info { display: flex; align-items: center; gap: 12px; }
+        .node-icon { font-size: 20px; color: #888; }
+        .node-name { font-size: 12px; font-weight: 800; color: #fff; display: block; }
+        .node-ping { font-family: 'JetBrains Mono'; font-size: 10px; color: #00ff7f; }
 
-        .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; margin-bottom: 40px;}
-        .diag-card { background: #000; border: 1px dashed rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; transition: 0.3s; }
-        .diag-card:hover { border-color: var(--theme-color); box-shadow: inset 0 0 15px rgba(0,229,255,0.1); transform: translateY(-3px);}
-        .diag-card i { font-size: 24px; color: #555; transition: 0.3s; }
-        .diag-card:hover i { color: var(--theme-color); }
+        .compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; text-align: left; margin-bottom: 20px;}
+        .compat-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; transition: 0.3s; }
+        .compat-card:hover { border-color: var(--theme-color); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,229,255,0.1);}
+        .compat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .compat-name { font-weight: 800; color: #fff; font-size: 14px; }
+        .compat-platform { font-size: 9px; color: #aaa; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;}
+        .compat-status { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: bold; font-family: 'JetBrains Mono'; margin-bottom: 8px;}
+        .compat-bar-bg { width: 100%; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+        .compat-bar-fill { height: 100%; transition: width 1s ease; box-shadow: 0 0 5px currentColor;}
 
-        /* MEGA FOOTER LEBAR */
-        .mega-footer { width: 95%; max-width: 1000px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; text-align: left; font-size: 11px; color: #888; margin-bottom: 50px; backdrop-filter: blur(15px); }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
-        .footer-col h4 { color: #fff; margin: 0 0 15px 0; font-size: 14px; font-weight: 800; letter-spacing: 1px; }
-        .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;}
-        .footer-links a i { width: 15px; text-align: center; }
-        .footer-links a:hover { color: var(--theme-color); padding-left: 5px; }
-
-        /* CSS LAIN-LAIN */
-        .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
-        .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
-        .audio-controls { position: fixed; bottom: 250px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer; }
-        .audio-btn { color: #fff; transition: 0.3s; font-size: 16px; }
-        .audio-btn:hover { color: var(--theme-color); }
-        .mini-btn { font-size: 12px; color: #aaa; transition: 0.3s; }
-        .mini-btn:hover { color: #fff; }
-        .custom-toast { position: fixed; top: -100px; right: 30px; background: rgba(15, 15, 15, 0.95); border-left: 4px solid var(--theme-color); color: #fff; padding: 15px 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; font-size: 13px; font-family: 'Urbanist', sans-serif; display: flex; align-items: center; gap: 12px; z-index: 1000; transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px); }
-        .custom-toast.show { top: 80px; }
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
-        .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid #ff3333; text-align: center; }
-        .modal-glass { background: rgba(15, 15, 15, 0.95); width: 90%; max-width: 450px; padding: 30px; border-radius: 20px; border: 1px solid var(--theme-color); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; }
-        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; color: #aaa; font-size: 18px; transition: 0.3s; }
-        .close-modal:hover { color: #ff3333; }
-        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; padding-right: 5px;}
-        .store-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; }
-        .store-item:hover { border-color: var(--theme-color); transform: translateY(-3px); }
-        .store-item img { width: 100%; border-radius: 8px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
-        .store-item span { font-size: 11px; font-weight: 800; color: #fff; display: block; }
-        .store-item .price { color: #00ff7f; font-size: 10px; margin-top: 4px; font-family: 'JetBrains Mono'; }
-        .key-input-container { margin: 20px 0; }
-        .key-input-container input { width: 100%; padding: 15px; background: #050505; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 14px; margin-bottom: 15px; outline: none; }
-        .key-input-container input:focus { border-color: var(--theme-color); }
-        .changelog-content { text-align: left; background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; max-height: 250px; overflow-y: auto; margin-top: 15px;}
-        .changelog-content span.add { color: #00ff7f; }
-        .changelog-content span.fix { color: #ffaa00; }
-        .changelog-content span.del { color: #ff3333; }
-        .search-box { width: 100%; max-width: 400px; margin: 0 auto 20px auto; position: relative; }
-        .search-box input { width: 100%; padding: 12px 15px 12px 40px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Urbanist', sans-serif; font-size: 12px; transition: var(--transition); outline: none; }
-        .search-box input:focus { border-color: var(--theme-color); box-shadow: 0 0 15px rgba(0,229,255,0.2); }
-        .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 14px; transition: var(--transition); }
-        .search-box input:focus + i { color: var(--theme-color); }
-        .dll-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; margin-bottom: 40px; text-align: left; }
-        .dll-item { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
-        .dll-item:hover { border-color: var(--theme-color); transform: translateX(5px); background: rgba(0, 229, 255, 0.05); }
-        .dll-info { display: flex; align-items: center; gap: 15px; }
-        .dll-icon { font-size: 24px; color: var(--theme-color); width: 30px; text-align: center; }
-        .dll-text { display: flex; flex-direction: column; }
-        .dll-name { font-size: 13px; font-weight: 800; color: #fff; }
-        .dll-desc { font-size: 10px; color: #888; font-family: 'JetBrains Mono', monospace; }
-        .dll-status-badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .bg-working { background: rgba(0, 255, 127, 0.2); color: #00ff7f; border: 1px solid #00ff7f; }
-        .bg-patched { background: rgba(255, 51, 51, 0.2); color: #ff3333; border: 1px solid #ff3333; }
         .vip-leaderboard { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; margin-top: 20px; }
         .lb-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; align-items: center; }
         .lb-row:last-child { border-bottom: none; }
@@ -306,30 +237,16 @@
         .rank-1 { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
         .rank-2 { color: #c0c0c0; }
         .rank-3 { color: #cd7f32; }
-        @keyframes scrollTestimonials { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .testi-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; min-width: 250px; text-align: left; }
-        .testi-user { color: var(--theme-color); font-weight: 800; font-size: 12px; margin-bottom: 5px; display: flex; align-items: center; gap: 5px;}
-        .testi-text { color: #ccc; font-size: 11px; line-height: 1.4; font-style: italic; }
-        #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
-        .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .menu-item:last-child { border-bottom: none; }
-        .menu-item:hover { background: var(--theme-color); color: #000; }
-        .menu-title { font-size: 9px; color: var(--theme-color); padding: 8px 15px; font-weight: 800; letter-spacing: 1px; background: rgba(0,0,0,0.5); }
-        .live-chat-box { position: fixed; bottom: 30px; left: 30px; z-index: 50; width: 280px; height: 200px; background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'Urbanist', sans-serif; transition: opacity 0.5s; }
-        .chat-header { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
-        .chat-header .live-dot { width: 6px; height: 6px; background: #ff0050; border-radius: 50%; animation: pulse 1.5s infinite; }
-        .chat-body { flex: 1; padding: 10px 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-        .chat-body::-webkit-scrollbar { width: 0px; }
-        .chat-msg { font-size: 11px; line-height: 1.4; color: #ccc; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
-        .chat-msg strong { color: var(--theme-color); }
-        .chat-msg .tag-vip { background: #ffdd00; color: #000; padding: 2px 5px; border-radius: 4px; font-size: 8px; font-weight: 800; margin-right: 5px; }
-        .daily-reward-btn { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(15, 15, 15, 0.8); border: 1px solid var(--theme-color); padding: 20px 8px; border-radius: 12px; color: var(--theme-color); cursor: pointer; z-index: 50; writing-mode: vertical-rl; text-orientation: mixed; font-weight: 800; font-size: 12px; letter-spacing: 2px; transition: 0.3s; box-shadow: 0 0 15px rgba(0,229,255,0.2); }
-        .daily-reward-btn:hover { background: var(--theme-color); color: #000; box-shadow: 0 0 25px var(--theme-color); }
-        .wheel-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(15px); flex-direction: column;}
-        .wheel-container { position: relative; width: 300px; height: 300px; margin: 20px; border-radius: 50%; border: 5px solid var(--theme-color); overflow: hidden; box-shadow: 0 0 30px var(--theme-color); }
-        .wheel { width: 100%; height: 100%; background: conic-gradient(#111 0% 25%, #222 25% 50%, #111 50% 75%, #222 75% 100%); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
-        .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid var(--theme-color); z-index: 2; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));}
+
+        /* MEGA FOOTER LEBAR */
+        .mega-footer { width: 95%; max-width: 1000px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; text-align: left; font-size: 11px; color: #888; margin-bottom: 50px; backdrop-filter: blur(15px); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
+        .footer-col h4 { color: #fff; margin: 0 0 15px 0; font-size: 14px; font-weight: 800; letter-spacing: 1px; }
+        .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px;}
+        .footer-links a:hover { color: var(--theme-color); padding-left: 5px; }
+
+        /* GLOBAL COMPONENTS */
         .settings-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(10,10,10,0.95); border-left: 1px solid var(--theme-color); z-index: 10001; transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.8); backdrop-filter: blur(20px); display: flex; flex-direction: column; }
         .settings-drawer.open { right: 0; }
         .drawer-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
@@ -344,6 +261,51 @@
         input:checked + .slider { background-color: var(--theme-color); }
         input:checked + .slider:before { transform: translateX(18px); background-color: #000; }
         .custom-select { background: #111; color: var(--theme-color); border: 1px solid rgba(255,255,255,0.1); padding: 5px; border-radius: 4px; font-family: 'Urbanist', sans-serif; font-size: 11px; outline: none; font-weight: 800; cursor: pointer;}
+        
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
+        .modal-glass { background: rgba(15, 15, 15, 0.95); width: 90%; max-width: 450px; padding: 30px; border-radius: 20px; border: 1px solid var(--theme-color); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; }
+        .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; color: #aaa; font-size: 18px; transition: 0.3s; }
+        .close-modal:hover { color: #ff3333; }
+        
+        .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; padding-right: 5px;}
+        .store-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; }
+        .store-item:hover { border-color: var(--theme-color); transform: translateY(-3px); }
+        .store-item img { width: 100%; border-radius: 8px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
+        .store-item span { font-size: 11px; font-weight: 800; color: #fff; display: block; }
+        .store-item .price { color: #00ff7f; font-size: 10px; margin-top: 4px; font-family: 'JetBrains Mono'; }
+
+        .key-input-container { margin: 20px 0; }
+        .key-input-container input { width: 100%; padding: 15px; background: #050505; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 14px; margin-bottom: 15px; outline: none; }
+        
+        .changelog-content { text-align: left; background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; max-height: 250px; overflow-y: auto; margin-top: 15px;}
+        .changelog-content span.add { color: #00ff7f; }
+        .changelog-content span.fix { color: #ffaa00; }
+
+        .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
+        
+        .audio-controls { position: fixed; bottom: 250px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer; }
+        .audio-btn { color: #fff; transition: 0.3s; font-size: 16px; }
+        .audio-btn:hover { color: var(--theme-color); }
+        .mini-btn { font-size: 12px; color: #aaa; transition: 0.3s; }
+        .mini-btn:hover { color: #fff; }
+
+        .custom-toast { position: fixed; top: -100px; right: 30px; background: rgba(15, 15, 15, 0.95); border-left: 4px solid var(--theme-color); color: #fff; padding: 15px 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; font-size: 13px; font-family: 'Urbanist', sans-serif; display: flex; align-items: center; gap: 12px; z-index: 1000; transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px); }
+        .custom-toast.show { top: 80px; }
+
+        #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
+        .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .menu-item:hover { background: var(--theme-color); color: #000; }
+        .menu-title { font-size: 9px; color: var(--theme-color); padding: 8px 15px; font-weight: 800; letter-spacing: 1px; background: rgba(0,0,0,0.5); }
+
+        .live-chat-box { position: fixed; bottom: 30px; left: 30px; z-index: 50; width: 280px; height: 200px; background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'Urbanist', sans-serif; transition: opacity 0.5s; }
+        .chat-header { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .chat-header .live-dot { width: 6px; height: 6px; background: #ff0050; border-radius: 50%; animation: pulse 1.5s infinite; }
+        .chat-body { flex: 1; padding: 10px 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+        .chat-body::-webkit-scrollbar { width: 0px; }
+        .chat-msg { font-size: 11px; line-height: 1.4; color: #ccc; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+        .chat-msg strong { color: var(--theme-color); }
+        .chat-msg .tag-vip { background: #ffdd00; color: #000; padding: 2px 5px; border-radius: 4px; font-size: 8px; font-weight: 800; margin-right: 5px; }
     </style>
 </head>
 <body>
@@ -473,14 +435,14 @@
             <i class="fa-solid fa-xmark close-modal" onclick="closeChangelogModal()"></i>
             <h2 style="color: var(--theme-color); font-size: 20px; margin-top: 0; text-align: left;"><i class="fa-solid fa-terminal"></i> PATCH NOTES v2.0.4</h2>
             <div class="changelog-content">
-                <strong>[UPDATE LOG - FINAL EDITION]</strong><br><br>
+                <strong>[UPDATE LOG - ULTIMATE EDITION]</strong><br><br>
                 <span class="add">[+]</span> Added Script Database Status Table.<br>
                 <span class="add">[+]</span> Added Advanced System Diagnostics.<br>
-                <span class="add">[+]</span> Added Global Cyber Radar System.<br>
-                <span class="add">[+]</span> Added Premium Code Decrypter.<br>
+                <span class="add">[+]</span> Added Interactive Terminal Command Center.<br>
+                <span class="add">[+]</span> Added Premium Code Decrypter Engine.<br>
                 <span class="add">[+]</span> Added Kellzy Evolution Roadmap.<br>
-                <span class="fix">[*]</span> Improved Byfron Bypass (V2 Protocol).<br>
-                <span class="del">[-]</span> Removed Patched Arceus X Exploit Method.<br><br>
+                <span class="fix">[*]</span> Re-enabled Background Particle VFX.<br>
+                <span class="del">[-]</span> Removed Radar (Replaced by Terminal).<br><br>
                 <em>System stability: 99.9%</em><br>
                 <em>Dev Note: Keep supporting @Kellllllll-f7i!</em>
             </div>
@@ -640,16 +602,9 @@
         </div>
 
         <!-- ============================================== -->
-        <!-- KONTEN BAWAH (SEMPIT - TIDAK DIOTAK-ATIK)       -->
+        <!-- KONTEN BAWAH (SEMPIT - FITUR DEFAULT)           -->
         <!-- ============================================== -->
         <div class="extra-content">
-
-            <h2>📊 SERVER TELEMETRY</h2>
-            <p style="margin-top: -10px; margin-bottom: 15px;">Byfron Bypass Uptime & Latency Monitor</p>
-            <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; margin-bottom: 40px; position: relative;">
-                <div style="position: absolute; top: 15px; left: 15px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--theme-color); font-weight: bold;" id="telemetryStatus">PING: 24ms | STATUS: STABLE</div>
-                <canvas id="telemetryCanvas" style="width: 100%; height: 100px; display: block; border-bottom: 1px solid rgba(255,255,255,0.05);"></canvas>
-            </div>
 
             <h2>🔥 SUPPORTED GAMES</h2>
             <div class="search-box">
@@ -707,110 +662,8 @@
                 </div>
             </div>
 
-            <h2>📥 RECOMMENDED EXECUTORS</h2>
-            <p style="margin-top: -10px; margin-bottom: 20px;">Download executor yang aman dan teruji untuk Kellzy Hub.</p>
-            <div class="dll-list">
-                <div class="dll-item interactive-btn">
-                    <div class="dll-info">
-                        <i class="fa-brands fa-windows dll-icon"></i>
-                        <div class="dll-text">
-                            <span class="dll-name">Potassium Injector</span>
-                            <span class="dll-desc">Level 8 Exec | Windows 10/11</span>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="dll-status-badge bg-working">WORKING</span>
-                        <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 10px;"><i class="fa-solid fa-download"></i></a>
-                    </div>
-                </div>
-                <div class="dll-item interactive-btn">
-                    <div class="dll-info">
-                        <i class="fa-brands fa-android dll-icon"></i>
-                        <div class="dll-text">
-                            <span class="dll-name">Delta Executor</span>
-                            <span class="dll-desc">Mobile Bypass | Android 9+</span>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="dll-status-badge bg-working">WORKING</span>
-                        <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 10px;"><i class="fa-solid fa-download"></i></a>
-                    </div>
-                </div>
-                <div class="dll-item interactive-btn" style="opacity: 0.6;">
-                    <div class="dll-info">
-                        <i class="fa-brands fa-apple dll-icon"></i>
-                        <div class="dll-text">
-                            <span class="dll-name">Arceus X (iOS)</span>
-                            <span class="dll-desc">Mobile Bypass | iOS 14+</span>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span class="dll-status-badge bg-patched">PATCHED</span>
-                        <button class="btn" style="padding: 8px 15px; font-size: 10px; background: #333; color: #666; cursor: not-allowed;"><i class="fa-solid fa-ban"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <h2>🏆 VIP HALL OF FAME</h2>
-            <p style="margin-top: -10px;">Top user dan pendukung setia Kellzy Hub bulan ini.</p>
-            <div class="vip-leaderboard" style="margin-bottom: 40px;">
-                <div class="lb-row lb-header">
-                    <span>RANK</span>
-                    <span style="flex: 1; text-align: left; margin-left: 20px;">USERNAME</span>
-                    <span>TIER</span>
-                </div>
-                <div class="lb-row interactive-btn">
-                    <span class="lb-rank rank-1">#1</span>
-                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">ShadowSlayer_99</span>
-                    <span style="color: #ffd700; font-weight: 800; font-size: 10px;"><i class="fa-solid fa-crown"></i> LIFETIME VIP</span>
-                </div>
-                <div class="lb-row interactive-btn">
-                    <span class="lb-rank rank-2">#2</span>
-                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">Kuli_BataX</span>
-                    <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 30D</span>
-                </div>
-                <div class="lb-row interactive-btn">
-                    <span class="lb-rank rank-3">#3</span>
-                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">VellynCute</span>
-                    <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 7D</span>
-                </div>
-            </div>
-
-            <h2>🛒 KAELL STORE SHOWCASE</h2>
-            <p style="margin-top: -10px; margin-bottom: 20px;">Support developer dengan membeli Official Merchandise & VIP Access!</p>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; padding-bottom: 40px;">
-                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
-                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
-                        <img src="https://i.pinimg.com/736x/8a/be/67/8abe6746f3322e17ebdf2ec2f5c71d60.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Cyan Hoodie">
-                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Kaell Cyan Hoodie</span>
-                        <span style="color: #00ff7f; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">R$ 5</span>
-                    </div>
-                </a>
-                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
-                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
-                        <img src="https://i.pinimg.com/736x/91/d5/43/91d5434e3b7b2ef47e6ff82a5c9fc9df.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Hacker Tee">
-                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Kaell Hacker Tee</span>
-                        <span style="color: #00ff7f; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">R$ 5</span>
-                    </div>
-                </a>
-                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
-                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
-                        <img src="https://i.pinimg.com/736x/e4/df/e3/e4dfe3b3b2be0c681f21c2d28f092523.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Chibi Mascot">
-                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Kaell Chibi Mascot</span>
-                        <span style="color: #00ff7f; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">R$ 10</span>
-                    </div>
-                </a>
-                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
-                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
-                        <img src="https://i.pinimg.com/736x/cf/e6/51/cfe6513813bd8e34898144eeaf27bb90.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Premium VIP">
-                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Premium Hub Key</span>
-                        <span style="color: #00e5ff; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">$ 2.99</span>
-                    </div>
-                </a>
-            </div>
-
             <h2>⭐ USER REVIEWS</h2>
-            <div style="overflow: hidden; width: 100%; margin-bottom: 50px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+            <div style="overflow: hidden; width: 100%; margin-bottom: 10px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
                 <div class="testimonial-track" style="display: flex; gap: 15px; width: max-content; animation: scrollTestimonials 25s linear infinite;">
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
@@ -822,34 +675,26 @@
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
                 </div>
             </div>
+        </div>
 
+        <!-- ============================================== -->
+        <!-- UI BAWAH LEBAR (FULL WIDTH DASHBOARD)          -->
+        <!-- ============================================== -->
+        <div class="wide-dashboard fade-ui">
+            
+            <!-- FITUR TERMINAL DIPINDAH KE SINI (MAKIN LEBAR) -->
             <h2>💻 KAELL-OS COMMAND CENTER</h2>
-            <p style="margin-top: -10px; margin-bottom: 15px;">Terminal eksekusi langsung. Ketik <strong>help</strong> untuk memulai.</p>
-            <div class="wide-terminal interactive-btn" onclick="document.getElementById('termInput').focus()">
+            <p style="margin-top: -10px; margin-bottom: 25px;">Terminal eksekusi jaringan. Ketik <strong>help</strong> untuk memulai.</p>
+            <div class="wide-terminal interactive-btn" onclick="document.getElementById('termInput').focus()" style="height: 300px;">
                 <div class="term-output" id="termOutput">
                     <div>[System] Kaell-OS v2.0.4 Initialized.</div>
-                    <div>[System] Secure connection established.</div>
+                    <div>[System] Secure connection established to Master Node.</div>
                     <div style="color: var(--theme-color);">Type 'help' to see available commands.</div>
                 </div>
                 <div class="term-input-line">
                     <span>root@kellzy:~#</span>
                     <input type="text" id="termInput" autocomplete="off" spellcheck="false">
                 </div>
-            </div>
-            
-        </div>
-
-        <!-- ============================================== -->
-        <!-- UI BAWAH LEBAR (FULL WIDTH)                    -->
-        <!-- ============================================== -->
-        <div class="wide-dashboard fade-ui">
-            
-            <!-- GLOBAL CYBER RADAR -->
-            <h2>🌍 GLOBAL CYBER RADAR</h2>
-            <p>Live tracking system detecting Kellzy Script executions worldwide.</p>
-            <div class="radar-box" id="radarBox">
-                <div class="radar-grid"></div>
-                <div class="radar-sweep"></div>
             </div>
 
             <!-- PREMIUM DECRYPTER -->
@@ -863,6 +708,106 @@
 0x1C 0x3B 0x6E 0x8A 0x2D 0x55 0x7F 0x9C 0x14 0x3A 0x6B 0x82
 0x4D 0x1E 0x9F 0x2C 0x5B 0x7A 0x38 0x81 0x6C 0x4A 0x1D 0x9E
 0x2B 0x7C 0x5D 0x8E 0x3F 0x1A 0x4B 0x6D 0x9C 0x2E 0x7A 0x5F
+                </div>
+            </div>
+
+            <!-- SCRIPT DATABASE STATUS -->
+            <h2 style="margin-top: 50px;">📂 SCRIPT DATABASE STATUS</h2>
+            <p>Real-time monitoring network untuk mendeteksi status script di dalam in-game.</p>
+            <div style="overflow-x: auto; margin-bottom: 40px;">
+                <table class="script-table">
+                    <thead>
+                        <tr>
+                            <th>ROBLOX GAME</th>
+                            <th>ENGINE VERSION</th>
+                            <th>LIVE STATUS</th>
+                            <th>LAST PATCHED</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blox Fruits</td>
+                            <td>v3.1.2</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>Just now</td>
+                        </tr>
+                        <tr>
+                            <td>Pet Simulator 99</td>
+                            <td>v1.0.5</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>2 hrs ago</td>
+                        </tr>
+                        <tr>
+                            <td>Blade Ball</td>
+                            <td>v2.2.0</td>
+                            <td><span class="st-updating">UPDATING</span></td>
+                            <td>Yesterday</td>
+                        </tr>
+                        <tr>
+                            <td>Da Hood</td>
+                            <td>v1.8.4</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>3 days ago</td>
+                        </tr>
+                        <tr>
+                            <td>Arsenal</td>
+                            <td>v1.9.9</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>5 days ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SYSTEM DIAGNOSTICS -->
+            <h2>🖥️ TARGET SYSTEM DIAGNOSTICS</h2>
+            <p>Membaca footprint perangkat dan jaringan lokal Anda secara real-time.</p>
+            <div class="diag-grid">
+                <div class="diag-card">
+                    <i class="fa-brands fa-windows"></i> 
+                    <span id="diagOS">Scanning OS...</span>
+                </div>
+                <div class="diag-card">
+                    <i class="fa-brands fa-chrome"></i> 
+                    <span id="diagBrowser">Scanning Engine...</span>
+                </div>
+                <div class="diag-card">
+                    <i class="fa-solid fa-expand"></i> 
+                    <span id="diagRes">Scanning Display...</span>
+                </div>
+                <div class="diag-card">
+                    <i class="fa-solid fa-microchip"></i> 
+                    <span id="diagCores">Scanning CPU...</span>
+                </div>
+            </div>
+
+            <!-- ROADMAP TIMELINE -->
+            <h2 style="margin-top: 60px;">🚀 KELLZY HUB EVOLUTION</h2>
+            <p>Sejarah dan rencana masa depan pengembangan Kellzy Hub.</p>
+            <div class="roadmap-wrap">
+                <div class="roadmap-line"></div>
+                <div class="roadmap-line-fill"></div>
+                <div class="roadmap-grid">
+                    <div class="roadmap-step active">
+                        <div class="rm-dot"></div>
+                        <div class="rm-title">V1.0 BETA</div>
+                        <div class="rm-desc">Initial release dengan basic UI dan auto-farm.</div>
+                    </div>
+                    <div class="roadmap-step active">
+                        <div class="rm-dot"></div>
+                        <div class="rm-title">V1.5 UPDATE</div>
+                        <div class="rm-desc">Penambahan Key System dan UI Glassmorphism.</div>
+                    </div>
+                    <div class="roadmap-step active pulse">
+                        <div class="rm-dot"></div>
+                        <div class="rm-title">V2.0 LIVE</div>
+                        <div class="rm-desc">Byfron Bypass, Terminal Command, Premium Store.</div>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="rm-dot"></div>
+                        <div class="rm-title">V3.0 (COMING)</div>
+                        <div class="rm-desc">AI Aimbot System & Multi-language support.</div>
+                    </div>
                 </div>
             </div>
 
@@ -908,113 +853,6 @@
                         <li><i class="fa-solid fa-check"></i> Free Kaell Merch Mascot</li>
                     </ul>
                     <a href="https://www.g2g.com/Kaellstoree" target="_blank" class="btn btn-key interactive-btn" style="border-color: #ffd700; color: #ffd700;">BUY LIFETIME</a>
-                </div>
-            </div>
-
-            <!-- ROADMAP TIMELINE -->
-            <h2 style="margin-top: 60px;">🚀 KELLZY HUB EVOLUTION</h2>
-            <p>Sejarah dan rencana masa depan pengembangan Kellzy Hub.</p>
-            <div class="roadmap-wrap">
-                <div class="roadmap-line"></div>
-                <div class="roadmap-line-fill"></div>
-                <div class="roadmap-grid">
-                    <div class="roadmap-step active">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V1.0 BETA</div>
-                        <div class="rm-desc">Initial release dengan basic UI dan auto-farm.</div>
-                    </div>
-                    <div class="roadmap-step active">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V1.5 UPDATE</div>
-                        <div class="rm-desc">Penambahan Key System dan UI Glassmorphism.</div>
-                    </div>
-                    <div class="roadmap-step active pulse">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V2.0 LIVE</div>
-                        <div class="rm-desc">Byfron Bypass, Global Radar, Premium Store.</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V3.0 (COMING)</div>
-                        <div class="rm-desc">AI Aimbot System & Multi-language support.</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- ============================================== -->
-        <!-- UI BAWAH LEBAR 2 (FITUR FINAL EDITION)         -->
-        <!-- ============================================== -->
-        <div class="wide-dashboard fade-ui">
-            
-            <!-- FITUR FINAL 1: SCRIPT DATABASE STATUS -->
-            <h2>📂 SCRIPT DATABASE STATUS</h2>
-            <p>Real-time monitoring network untuk mendeteksi status script di dalam in-game.</p>
-            <div style="overflow-x: auto;">
-                <table class="script-table">
-                    <thead>
-                        <tr>
-                            <th>ROBLOX GAME</th>
-                            <th>ENGINE VERSION</th>
-                            <th>LIVE STATUS</th>
-                            <th>LAST PATCHED</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Blox Fruits</td>
-                            <td>v3.1.2</td>
-                            <td><span class="st-working">WORKING</span></td>
-                            <td>Just now</td>
-                        </tr>
-                        <tr>
-                            <td>Pet Simulator 99</td>
-                            <td>v1.0.5</td>
-                            <td><span class="st-working">WORKING</span></td>
-                            <td>2 hrs ago</td>
-                        </tr>
-                        <tr>
-                            <td>Blade Ball</td>
-                            <td>v2.2.0</td>
-                            <td><span class="st-updating">UPDATING</span></td>
-                            <td>Yesterday</td>
-                        </tr>
-                        <tr>
-                            <td>Da Hood</td>
-                            <td>v1.8.4</td>
-                            <td><span class="st-working">WORKING</span></td>
-                            <td>3 days ago</td>
-                        </tr>
-                        <tr>
-                            <td>Arsenal</td>
-                            <td>v1.9.9</td>
-                            <td><span class="st-working">WORKING</span></td>
-                            <td>5 days ago</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- FITUR FINAL 2: SYSTEM DIAGNOSTICS -->
-            <h2 style="margin-top: 60px;">🖥️ TARGET SYSTEM DIAGNOSTICS</h2>
-            <p>Membaca footprint perangkat dan jaringan lokal target secara real-time.</p>
-            <div class="diag-grid">
-                <div class="diag-card">
-                    <i class="fa-brands fa-windows"></i> 
-                    <span id="diagOS">Scanning OS...</span>
-                </div>
-                <div class="diag-card">
-                    <i class="fa-brands fa-chrome"></i> 
-                    <span id="diagBrowser">Scanning Engine...</span>
-                </div>
-                <div class="diag-card">
-                    <i class="fa-solid fa-expand"></i> 
-                    <span id="diagRes">Scanning Display...</span>
-                </div>
-                <div class="diag-card">
-                    <i class="fa-solid fa-microchip"></i> 
-                    <span id="diagCores">Scanning CPU...</span>
                 </div>
             </div>
 
@@ -1070,23 +908,8 @@
         <span id="trackName" style="font-size: 10px; font-weight: 800; color: #888; margin-left: 5px;">TRACK 1 - LOFI</span>
     </div>
 
-    <style>
-        /* CSS TAMBAHAN UNTUK FITUR FINAL (TABLE & DIAGNOSTICS) */
-        .script-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: left; }
-        .script-table th { background: rgba(0,229,255,0.1); color: var(--theme-color); padding: 12px; border-bottom: 1px solid rgba(0,229,255,0.2); text-transform: uppercase;}
-        .script-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
-        .script-table tr:hover td { background: rgba(255,255,255,0.02); color: #fff; }
-        .st-working { color: #00ff7f; background: rgba(0,255,127,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
-        .st-updating { color: #ffaa00; background: rgba(255,170,0,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
-
-        .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; margin-bottom: 40px;}
-        .diag-card { background: #000; border: 1px dashed rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; transition: 0.3s; text-transform: uppercase;}
-        .diag-card:hover { border-color: var(--theme-color); box-shadow: inset 0 0 15px rgba(0,229,255,0.1); transform: translateY(-3px);}
-        .diag-card i { font-size: 24px; color: #555; transition: 0.3s; }
-        .diag-card:hover i { color: var(--theme-color); }
-    </style>
-
     <script>
+        // MAIN SCRIPTS
         function toggleSettings() {
             const drawer = document.getElementById('settingsDrawer');
             drawer.classList.toggle('open');
@@ -1313,15 +1136,18 @@
         const vfxModes = ['hearts', 'snow', 'matrix']; const vfxNames = ['Cyan Hearts', 'Chill Snow', 'Matrix Rain']; let currentVfx = 0;
         function toggleVfx() { currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]); showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
 
+        // --- VENDORS & VFX ---
+        function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+", "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
+
         window.addEventListener('DOMContentLoaded', () => {
             const ua = navigator.userAgent; let device = "PC / Desktop"; let rec = "Pottasium / Medium";
             if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; } else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
             
+            loadVfx('hearts');
             initDailyStreak();
-            initRadar(); 
             
-            // --- INIT JS FITUR FINAL DIAGNOSTICS ---
+            // SYSTEM DIAGNOSTICS INIT
             try {
                 let osName = "Unknown OS";
                 if (navigator.userAgent.indexOf("Win") != -1) osName = "Windows OS";
@@ -1392,33 +1218,7 @@
             }
         }
 
-        function initRadar() {
-            const radarBox = document.getElementById('radarBox');
-            if(!radarBox) return;
-            const games = ["Blox Fruits", "Pet Simulator 99", "Blade Ball", "Da Hood"];
-            setInterval(() => {
-                if(document.hidden) return;
-                const target = document.createElement('div');
-                target.className = 'radar-target';
-                const angle = Math.random() * Math.PI * 2;
-                const radius = Math.random() * 120 + 20; 
-                const x = 300 + Math.cos(angle) * radius - 3; 
-                const y = 175 + Math.sin(angle) * radius - 3; 
-                
-                target.style.left = `${Math.max(10, Math.min(x, radarBox.clientWidth - 20))}px`;
-                target.style.top = `${y}px`;
-
-                const label = document.createElement('div');
-                label.className = 'radar-label';
-                label.innerText = `LOCKED: ${games[Math.floor(Math.random() * games.length)]}`;
-                target.appendChild(label);
-                
-                radarBox.appendChild(target);
-                
-                setTimeout(() => { if(target.parentNode) target.remove(); }, 2000);
-            }, 1500);
-        }
-
+        // DECRYPTER LOGIC
         const originalText = `0x8F 0x2A 0x4C 0x9B 0x11 0x7E 0x3D 0x5A 0x88 0x21 0x90 0x4F\n0x1C 0x3B 0x6E 0x8A 0x2D 0x55 0x7F 0x9C 0x14 0x3A 0x6B 0x82\n0x4D 0x1E 0x9F 0x2C 0x5B 0x7A 0x38 0x81 0x6C 0x4A 0x1D 0x9E\n0x2B 0x7C 0x5D 0x8E 0x3F 0x1A 0x4B 0x6D 0x9C 0x2E 0x7A 0x5F`;
         const trueLuaCode = `-- [Kellzy VIP Script Engine v2.0]\ngetgenv().SecureMode = true\n\nlocal function BypassByfron()\n    print("Hooking into memory...")\n    task.wait(0.5)\n    warn("Bypass Successful. Welcome to God Mode.")\nend\n\nBypassByfron()\nloadstring(game:HttpGet("https://kellzyy-hub/vip"))()`;
         
@@ -1539,6 +1339,7 @@
         function openChangelogModal() { document.getElementById('changelogModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
         function closeChangelogModal() { document.getElementById('changelogModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
 
+        // TERMINAL LOGIC
         const termInput = document.getElementById('termInput');
         const termOutput = document.getElementById('termOutput');
         if(termInput) {
@@ -1579,7 +1380,6 @@
                 }
             });
         }
-
     </script>
 </body>
 </html>
