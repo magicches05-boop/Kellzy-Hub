@@ -304,20 +304,7 @@
         input:checked + .slider { background-color: var(--theme-color); }
         input:checked + .slider:before { transform: translateX(18px); background-color: #000; }
         .custom-select { background: #111; color: var(--theme-color); border: 1px solid rgba(255,255,255,0.1); padding: 5px; border-radius: 4px; font-family: 'Urbanist', sans-serif; font-size: 11px; outline: none; font-weight: 800; cursor: pointer;}
-    /* --- FITUR ROADMAP TIMELINE --- */
-        .roadmap-wrap { width: 100%; max-width: 900px; margin: 0 auto 40px auto; position: relative; padding: 40px 0; }
-        .roadmap-line { position: absolute; top: 50px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
-        .roadmap-line-fill { position: absolute; top: 50px; left: 10%; width: 60%; height: 2px; background: var(--theme-color); z-index: 2; box-shadow: 0 0 10px var(--theme-color); }
-        .roadmap-grid { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; z-index: 3; }
-        .roadmap-step { text-align: center; }
-        .rm-dot { width: 20px; height: 20px; background: #111; border: 2px solid #444; border-radius: 50%; margin: 0 auto 15px auto; transition: 0.3s; position: relative; }
-        .rm-dot::after { content: ''; position: absolute; inset: 2px; background: #444; border-radius: 50%; }
-        .roadmap-step.active .rm-dot { border-color: var(--theme-color); box-shadow: 0 0 15px var(--theme-color); }
-        .roadmap-step.active .rm-dot::after { background: var(--theme-color); }
-        .roadmap-step.pulse .rm-dot::after { animation: pulse 2s infinite; }
-        .rm-title { font-weight: 800; color: #fff; font-size: 14px; margin-bottom: 5px; }
-        .roadmap-step.active .rm-title { color: var(--theme-color); }
-        .rm-desc { font-size: 11px; color: #888; padding: 0 15px; }
+    </style>
 </head>
 <body>
 
@@ -895,35 +882,6 @@
             </div>
         </div>
 
-        <!-- FITUR: ROADMAP TIMELINE EVOLUTION -->
-            <h2 style="margin-top: 60px;">🚀 KELLZY HUB EVOLUTION</h2>
-            <p>Sejarah dan rancangan lini masa rilis update Kellzy Engine.</p>
-            <div class="roadmap-wrap">
-                <div class="roadmap-line"></div>
-                <div class="roadmap-line-fill"></div>
-                <div class="roadmap-grid">
-                    <div class="roadmap-step active">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V1.0 BETA</div>
-                        <div class="rm-desc">Initial release basic UI.</div>
-                    </div>
-                    <div class="roadmap-step active">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V1.5 UPDATE</div>
-                        <div class="rm-desc">UI Glassmorphism.</div>
-                    </div>
-                    <div class="roadmap-step active pulse">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V2.0 LIVE</div>
-                        <div class="rm-desc">Terminal Command & VIP Store.</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="rm-dot"></div>
-                        <div class="rm-title">V3.0 UPCOMING</div>
-                        <div class="rm-desc">AI Core System integration.</div>
-                    </div>
-                </div>
-            </div>
         <div class="wide-dashboard fade-ui">
             
             <h2>📡 GLOBAL INJECTION FEED</h2>
