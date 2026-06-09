@@ -72,6 +72,7 @@
         
         .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 130px 20px 50px 20px; min-height: 100vh; }
 
+        /* UI TENGAH KECIL (TIDAK DIOTAK-ATIK) */
         .hub-card { background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1); text-align: center; position: relative; margin-bottom: 30px;}
 
         #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
@@ -144,17 +145,17 @@
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
         .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
-        /* --- CONTENT AREAS --- */
+        /* CONTENT AREAS TENGAH (NARROW) */
         .extra-content { width: 90%; max-width: 520px; text-align: center; background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); margin-bottom: 20px; }
         .extra-content h2 { color: var(--theme-color); font-size: 20px; margin-top: 0; font-weight: 800; text-transform: uppercase;}
         .extra-content p { color: #ccc; font-size: 12px; line-height: 1.6; }
 
-        /* --- FITUR BARU 1: UI DASHBOARD LEBAR (FULL WIDTH) --- */
+        /* --- UI BAWAH LEBAR (FULL WIDTH) --- */
         .wide-dashboard { width: 95%; max-width: 1000px; background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; margin-bottom: 20px; backdrop-filter: blur(15px); text-align: center; }
         .wide-dashboard h2 { color: var(--theme-color); font-size: 24px; margin-top: 0; font-weight: 800; text-transform: uppercase; letter-spacing: -1px;}
         .wide-dashboard p { color: #aaa; font-size: 13px; margin-top: -10px; margin-bottom: 30px; }
 
-        /* Grid Pricing 3 Kolom */
+        /* CSS FITUR LAMA LEBAR (PRICING & SERVERS) */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; text-align: left; }
         .pricing-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 25px; transition: 0.3s; position: relative; overflow: hidden; display: flex; flex-direction: column;}
         .pricing-card:hover { border-color: var(--theme-color); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,229,255,0.1); }
@@ -169,7 +170,6 @@
         .pricing-features li.disabled { color: #555; }
         .pricing-features li.disabled i { color: #555; }
         
-        /* Grid Server Nodes 4 Kolom */
         .server-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 10px; }
         .server-node { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; text-align: left; display: flex; align-items: center; justify-content: space-between; transition: 0.3s; cursor: default; }
         .server-node:hover { background: rgba(255,255,255,0.05); }
@@ -177,6 +177,25 @@
         .node-icon { font-size: 20px; color: #888; }
         .node-name { font-size: 12px; font-weight: 800; color: #fff; display: block; }
         .node-ping { font-family: 'JetBrains Mono'; font-size: 10px; color: #00ff7f; }
+
+        /* --- CSS FITUR BARU LEBAR (GLOBAL FEED & COMPATIBILITY) --- */
+        .feed-container { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; height: 180px; overflow: hidden; position: relative; margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);}
+        .feed-list { padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; display: flex; flex-direction: column; gap: 8px; animation: feedScroll 25s linear infinite; }
+        @keyframes feedScroll { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+        .feed-item { display: flex; justify-content: space-between; border-bottom: 1px dashed rgba(255,255,255,0.05); padding-bottom: 6px; }
+        .feed-item .user { color: var(--theme-color); width: 30%; text-align: left;}
+        .feed-item .game { color: #fff; font-weight: bold; width: 40%; text-align: center;}
+        .feed-item .status { color: #00ff7f; width: 30%; text-align: right;}
+
+        .compat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; text-align: left; margin-bottom: 20px;}
+        .compat-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; transition: 0.3s; }
+        .compat-card:hover { border-color: var(--theme-color); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,229,255,0.1);}
+        .compat-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .compat-name { font-weight: 800; color: #fff; font-size: 14px; }
+        .compat-platform { font-size: 9px; color: #aaa; background: rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 4px; letter-spacing: 1px;}
+        .compat-status { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: bold; font-family: 'JetBrains Mono'; margin-bottom: 8px;}
+        .compat-bar-bg { width: 100%; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
+        .compat-bar-fill { height: 100%; transition: width 1s ease; box-shadow: 0 0 5px currentColor;}
 
         .wide-terminal { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; text-align: left; height: 200px; display: flex; flex-direction: column; margin-bottom: 10px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); transition: var(--transition); }
         .wide-terminal:hover { border-color: var(--theme-color); }
@@ -186,7 +205,7 @@
         .term-input-line span { color: var(--theme-color); font-weight: 800; }
         .term-input-line input { background: transparent; border: none; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex: 1; outline: none; }
 
-        /* --- FITUR BARU 2: MEGA FOOTER LEBAR --- */
+        /* MEGA FOOTER LEBAR */
         .mega-footer { width: 95%; max-width: 1000px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; text-align: left; font-size: 11px; color: #888; margin-bottom: 50px; backdrop-filter: blur(15px); }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px; }
         .footer-col h4 { color: #fff; margin: 0 0 15px 0; font-size: 14px; font-weight: 800; letter-spacing: 1px; }
@@ -195,49 +214,39 @@
         .footer-links a i { width: 15px; text-align: center; }
         .footer-links a:hover { color: var(--theme-color); padding-left: 5px; }
 
+        /* CSS LAIN-LAIN (TIDAK DIUBAH) */
         .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
         .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
-
         .audio-controls { position: fixed; bottom: 250px; left: 30px; background: rgba(0,0,0,0.6); padding: 10px 15px; border-radius: 50px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); z-index: 100; cursor: pointer; }
         .audio-btn { color: #fff; transition: 0.3s; font-size: 16px; }
         .audio-btn:hover { color: var(--theme-color); }
         .mini-btn { font-size: 12px; color: #aaa; transition: 0.3s; }
         .mini-btn:hover { color: #fff; }
-
         .custom-toast { position: fixed; top: -100px; right: 30px; background: rgba(15, 15, 15, 0.95); border-left: 4px solid var(--theme-color); color: #fff; padding: 15px 25px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-weight: 600; font-size: 13px; font-family: 'Urbanist', sans-serif; display: flex; align-items: center; gap: 12px; z-index: 1000; transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); backdrop-filter: blur(10px); }
         .custom-toast.show { top: 80px; }
-
         .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
         .modal-content { background: #111; width: 90%; max-width: 400px; padding: 40px; border-radius: 20px; border: 1px solid #ff3333; text-align: center; }
-
-        /* --- STYLING MODAL (Store, Key, Changelog) --- */
         .modal-glass { background: rgba(15, 15, 15, 0.95); width: 90%; max-width: 450px; padding: 30px; border-radius: 20px; border: 1px solid var(--theme-color); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; }
         .close-modal { position: absolute; top: 15px; right: 15px; cursor: pointer; color: #aaa; font-size: 18px; transition: 0.3s; }
         .close-modal:hover { color: #ff3333; }
-
         .store-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; max-height: 300px; overflow-y: auto; padding-right: 5px;}
         .store-item { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px; transition: 0.3s; }
         .store-item:hover { border-color: var(--theme-color); transform: translateY(-3px); }
         .store-item img { width: 100%; border-radius: 8px; margin-bottom: 8px; aspect-ratio: 1/1; object-fit: cover; }
         .store-item span { font-size: 11px; font-weight: 800; color: #fff; display: block; }
         .store-item .price { color: #00ff7f; font-size: 10px; margin-top: 4px; font-family: 'JetBrains Mono'; }
-
         .key-input-container { margin: 20px 0; }
         .key-input-container input { width: 100%; padding: 15px; background: #050505; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; text-align: center; font-size: 14px; margin-bottom: 15px; outline: none; }
         .key-input-container input:focus { border-color: var(--theme-color); }
-
         .changelog-content { text-align: left; background: #000; padding: 15px; border-radius: 8px; border: 1px solid #333; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; max-height: 250px; overflow-y: auto; margin-top: 15px;}
         .changelog-content span.add { color: #00ff7f; }
         .changelog-content span.fix { color: #ffaa00; }
         .changelog-content span.del { color: #ff3333; }
-
         .search-box { width: 100%; max-width: 400px; margin: 0 auto 20px auto; position: relative; }
         .search-box input { width: 100%; padding: 12px 15px 12px 40px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #fff; font-family: 'Urbanist', sans-serif; font-size: 12px; transition: var(--transition); outline: none; }
         .search-box input:focus { border-color: var(--theme-color); box-shadow: 0 0 15px rgba(0,229,255,0.2); }
         .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 14px; transition: var(--transition); }
         .search-box input:focus + i { color: var(--theme-color); }
-
-        /* --- CSS UNTUK FITUR SCROLL BAWAH --- */
         .dll-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; margin-bottom: 40px; text-align: left; }
         .dll-item { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; transition: var(--transition); }
         .dll-item:hover { border-color: var(--theme-color); transform: translateX(5px); background: rgba(0, 229, 255, 0.05); }
@@ -249,7 +258,6 @@
         .dll-status-badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .bg-working { background: rgba(0, 255, 127, 0.2); color: #00ff7f; border: 1px solid #00ff7f; }
         .bg-patched { background: rgba(255, 51, 51, 0.2); color: #ff3333; border: 1px solid #ff3333; }
-
         .vip-leaderboard { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; margin-top: 20px; }
         .lb-row { display: flex; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; align-items: center; }
         .lb-row:last-child { border-bottom: none; }
@@ -258,19 +266,15 @@
         .rank-1 { color: #ffd700; text-shadow: 0 0 10px rgba(255,215,0,0.5); }
         .rank-2 { color: #c0c0c0; }
         .rank-3 { color: #cd7f32; }
-
-        /* --- USER REVIEWS TICKER CSS --- */
         @keyframes scrollTestimonials { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .testi-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; min-width: 250px; text-align: left; }
         .testi-user { color: var(--theme-color); font-weight: 800; font-size: 12px; margin-bottom: 5px; display: flex; align-items: center; gap: 5px;}
         .testi-text { color: #ccc; font-size: 11px; line-height: 1.4; font-style: italic; }
-
         #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
         .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .menu-item:last-child { border-bottom: none; }
         .menu-item:hover { background: var(--theme-color); color: #000; }
         .menu-title { font-size: 9px; color: var(--theme-color); padding: 8px 15px; font-weight: 800; letter-spacing: 1px; background: rgba(0,0,0,0.5); }
-
         .live-chat-box { position: fixed; bottom: 30px; left: 30px; z-index: 50; width: 280px; height: 200px; background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.5); font-family: 'Urbanist', sans-serif; transition: opacity 0.5s; }
         .chat-header { padding: 10px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 11px; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
         .chat-header .live-dot { width: 6px; height: 6px; background: #ff0050; border-radius: 50%; animation: pulse 1.5s infinite; }
@@ -280,14 +284,12 @@
         @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
         .chat-msg strong { color: var(--theme-color); }
         .chat-msg .tag-vip { background: #ffdd00; color: #000; padding: 2px 5px; border-radius: 4px; font-size: 8px; font-weight: 800; margin-right: 5px; }
-
         .daily-reward-btn { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(15, 15, 15, 0.8); border: 1px solid var(--theme-color); padding: 20px 8px; border-radius: 12px; color: var(--theme-color); cursor: pointer; z-index: 50; writing-mode: vertical-rl; text-orientation: mixed; font-weight: 800; font-size: 12px; letter-spacing: 2px; transition: 0.3s; box-shadow: 0 0 15px rgba(0,229,255,0.2); }
         .daily-reward-btn:hover { background: var(--theme-color); color: #000; box-shadow: 0 0 25px var(--theme-color); }
         .wheel-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 10000; backdrop-filter: blur(15px); flex-direction: column;}
         .wheel-container { position: relative; width: 300px; height: 300px; margin: 20px; border-radius: 50%; border: 5px solid var(--theme-color); overflow: hidden; box-shadow: 0 0 30px var(--theme-color); }
         .wheel { width: 100%; height: 100%; background: conic-gradient(#111 0% 25%, #222 25% 50%, #111 50% 75%, #222 75% 100%); transition: transform 4s cubic-bezier(0.1, 0.8, 0.1, 1); }
         .wheel-pointer { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid var(--theme-color); z-index: 2; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));}
-
         .settings-drawer { position: fixed; top: 0; right: -320px; width: 300px; height: 100%; background: rgba(10,10,10,0.95); border-left: 1px solid var(--theme-color); z-index: 10001; transition: right 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.8); backdrop-filter: blur(20px); display: flex; flex-direction: column; }
         .settings-drawer.open { right: 0; }
         .drawer-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; }
@@ -295,14 +297,12 @@
         .drawer-content { padding: 20px; flex: 1; overflow-y: auto; }
         .setting-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .setting-item span { font-size: 12px; font-weight: 600; color: #ddd; }
-        
         .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
         .switch input { opacity: 0; width: 0; height: 0; }
         .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 34px; border: 1px solid rgba(255,255,255,0.1); }
         .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 2px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%; }
         input:checked + .slider { background-color: var(--theme-color); }
         input:checked + .slider:before { transform: translateX(18px); background-color: #000; }
-
         .custom-select { background: #111; color: var(--theme-color); border: 1px solid rgba(255,255,255,0.1); padding: 5px; border-radius: 4px; font-family: 'Urbanist', sans-serif; font-size: 11px; outline: none; font-weight: 800; cursor: pointer;}
     </style>
 </head>
@@ -434,6 +434,7 @@
             <h2 style="color: var(--theme-color); font-size: 20px; margin-top: 0; text-align: left;"><i class="fa-solid fa-terminal"></i> PATCH NOTES v2.0.4</h2>
             <div class="changelog-content">
                 <strong>[UPDATE LOG - 2026-06-09]</strong><br><br>
+                <span class="add">[+]</span> Added Global Injection Feed & Compat Matrix.<br>
                 <span class="add">[+]</span> Added Wide Dashboard UI (VIP Plans & Servers).<br>
                 <span class="add">[+]</span> Added Daily Streak System & Rewards.<br>
                 <span class="add">[+]</span> Added Custom Cursor Trail Selector.<br>
@@ -486,7 +487,6 @@
 
     <div class="slide-container fade-ui">
         
-        <!-- CARD TENGAH (NARROW UI) -->
         <div class="hub-card">
             
             <div id="mainCardContent">
@@ -596,7 +596,6 @@
 
         </div>
 
-        <!-- FITUR-FITUR DI BAWAH CARD TENGAH (MASIH NARROW) -->
         <div class="extra-content">
 
             <h2>📊 SERVER TELEMETRY</h2>
@@ -626,6 +625,18 @@
                 </div>
             </div>
 
+            <h2>❓ FREQUENTLY ASKED QUESTIONS</h2>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px; margin-bottom: 40px;">
+                <div style="background: rgba(0,0,0,0.6); border-left: 4px solid var(--theme-color); padding: 15px; text-align: left; border-radius: 0 10px 10px 0;">
+                    <h4 style="margin: 0 0 5px 0; color: var(--theme-color); font-size: 13px;">Apakah Script Kellzy Hub Aman?</h4>
+                    <p style="margin: 0; font-size: 11px; color: #ccc;">Sangat aman! Kami menggunakan teknologi enkripsi terbaru dan Byfron Bypass untuk memastikan akun Anda terhindar dari pemblokiran. Namun, tetap gunakan dengan bijak.</p>
+                </div>
+                <div style="background: rgba(0,0,0,0.6); border-left: 4px solid var(--theme-color); padding: 15px; text-align: left; border-radius: 0 10px 10px 0;">
+                    <h4 style="margin: 0 0 5px 0; color: var(--theme-color); font-size: 13px;">Berapa lama Key akan bertahan?</h4>
+                    <p style="margin: 0; font-size: 11px; color: #ccc;">Setiap Key yang Anda dapatkan melalui Linkvertise kami akan aktif selama 24 Jam. Setelah itu, Anda bisa men-generate Key baru.</p>
+                </div>
+            </div>
+
             <h2>⚡ SCRIPT FEATURES</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 40px; text-align: left;">
                 <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--theme-color); padding: 12px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,229,255,0.1);">
@@ -650,6 +661,122 @@
                 </div>
             </div>
 
+            <h2>📥 RECOMMENDED EXECUTORS</h2>
+            <p style="margin-top: -10px; margin-bottom: 20px;">Download executor yang aman dan teruji untuk Kellzy Hub.</p>
+            <div class="dll-list">
+                <div class="dll-item interactive-btn">
+                    <div class="dll-info">
+                        <i class="fa-brands fa-windows dll-icon"></i>
+                        <div class="dll-text">
+                            <span class="dll-name">Potassium Injector</span>
+                            <span class="dll-desc">Level 8 Exec | Windows 10/11</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="dll-status-badge bg-working">WORKING</span>
+                        <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 10px;"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <div class="dll-item interactive-btn">
+                    <div class="dll-info">
+                        <i class="fa-brands fa-android dll-icon"></i>
+                        <div class="dll-text">
+                            <span class="dll-name">Delta Executor</span>
+                            <span class="dll-desc">Mobile Bypass | Android 9+</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="dll-status-badge bg-working">WORKING</span>
+                        <a href="#" class="btn btn-primary" style="padding: 8px 15px; font-size: 10px;"><i class="fa-solid fa-download"></i></a>
+                    </div>
+                </div>
+                <div class="dll-item interactive-btn" style="opacity: 0.6;">
+                    <div class="dll-info">
+                        <i class="fa-brands fa-apple dll-icon"></i>
+                        <div class="dll-text">
+                            <span class="dll-name">Arceus X (iOS)</span>
+                            <span class="dll-desc">Mobile Bypass | iOS 14+</span>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span class="dll-status-badge bg-patched">PATCHED</span>
+                        <button class="btn" style="padding: 8px 15px; font-size: 10px; background: #333; color: #666; cursor: not-allowed;"><i class="fa-solid fa-ban"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <h2>🏆 VIP HALL OF FAME</h2>
+            <p style="margin-top: -10px;">Top user dan pendukung setia Kellzy Hub bulan ini.</p>
+            <div class="vip-leaderboard" style="margin-bottom: 40px;">
+                <div class="lb-row lb-header">
+                    <span>RANK</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px;">USERNAME</span>
+                    <span>TIER</span>
+                </div>
+                <div class="lb-row interactive-btn">
+                    <span class="lb-rank rank-1">#1</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">ShadowSlayer_99</span>
+                    <span style="color: #ffd700; font-weight: 800; font-size: 10px;"><i class="fa-solid fa-crown"></i> LIFETIME VIP</span>
+                </div>
+                <div class="lb-row interactive-btn">
+                    <span class="lb-rank rank-2">#2</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">Kuli_BataX</span>
+                    <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 30D</span>
+                </div>
+                <div class="lb-row interactive-btn">
+                    <span class="lb-rank rank-3">#3</span>
+                    <span style="flex: 1; text-align: left; margin-left: 20px; color: #fff; font-weight: 800;">VellynCute</span>
+                    <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 7D</span>
+                </div>
+            </div>
+
+            <h2>🛒 KAELL STORE SHOWCASE</h2>
+            <p style="margin-top: -10px; margin-bottom: 20px;">Support developer dengan membeli Official Merchandise & VIP Access!</p>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; padding-bottom: 40px;">
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                        <img src="https://i.pinimg.com/736x/8a/be/67/8abe6746f3322e17ebdf2ec2f5c71d60.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Cyan Hoodie">
+                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Kaell Cyan Hoodie</span>
+                        <span style="color: #00ff7f; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">R$ 5</span>
+                    </div>
+                </a>
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                        <img src="https://i.pinimg.com/736x/91/d5/43/91d5434e3b7b2ef47e6ff82a5c9fc9df.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Hacker Tee">
+                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Kaell Hacker Tee</span>
+                        <span style="color: #00ff7f; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">R$ 5</span>
+                    </div>
+                </a>
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                        <img src="https://i.pinimg.com/736x/e4/df/e3/e4dfe3b3b2be0c681f21c2d28f092523.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Chibi Mascot">
+                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Kaell Chibi Mascot</span>
+                        <span style="color: #00ff7f; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">R$ 10</span>
+                    </div>
+                </a>
+                <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
+                    <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
+                        <img src="https://i.pinimg.com/736x/cf/e6/51/cfe6513813bd8e34898144eeaf27bb90.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Premium VIP">
+                        <span style="font-size: 12px; font-weight: 800; color: #fff; display: block;">Premium Hub Key</span>
+                        <span style="color: #00e5ff; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">$ 2.99</span>
+                    </div>
+                </a>
+            </div>
+
+            <h2>⭐ USER REVIEWS</h2>
+            <div style="overflow: hidden; width: 100%; margin-bottom: 50px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+                <div class="testimonial-track" style="display: flex; gap: 15px; width: max-content; animation: scrollTestimonials 25s linear infinite;">
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @VellynCute</div><div class="testi-text">"Adminnya ramah, scriptnya 100% work di delta android!"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @VellynCute</div><div class="testi-text">"Adminnya ramah, scriptnya 100% work di delta android!"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
+                </div>
+            </div>
+
             <h2>💻 KAELL-OS COMMAND CENTER</h2>
             <p style="margin-top: -10px; margin-bottom: 15px;">Terminal eksekusi langsung. Ketik <strong>help</strong> untuk memulai.</p>
             <div class="wide-terminal interactive-btn" onclick="document.getElementById('termInput').focus()">
@@ -666,13 +793,12 @@
             
         </div>
 
-        <!-- FITUR BARU 1: UI DASHBOARD LEBAR (FULL WIDTH) -->
         <div class="wide-dashboard fade-ui">
+            
             <h2>💎 VIP ACCESS TIERS</h2>
             <p>Upgrade ke Premium untuk pengalaman Scripting tanpa batas dan tanpa Key System harian!</p>
             
             <div class="pricing-grid">
-                <!-- Free Tier -->
                 <div class="pricing-card">
                     <div class="pricing-title">Standard Access</div>
                     <div class="pricing-price">$0 <span>/ forever</span></div>
@@ -686,7 +812,6 @@
                     <button class="btn btn-key interactive-btn" onclick="openKeyModal()">GET FREE KEY</button>
                 </div>
 
-                <!-- Premium Tier -->
                 <div class="pricing-card popular">
                     <div class="pricing-title">Premium VIP</div>
                     <div class="pricing-price">$2.99 <span>/ 30 Days</span></div>
@@ -700,7 +825,6 @@
                     <a href="https://www.g2g.com/Kaellstoree" target="_blank" class="btn btn-primary interactive-btn">BUY PREMIUM</a>
                 </div>
 
-                <!-- Lifetime Tier -->
                 <div class="pricing-card">
                     <div class="pricing-title">Lifetime Hub</div>
                     <div class="pricing-price">$9.99 <span>/ one-time</span></div>
@@ -758,7 +882,47 @@
             </div>
         </div>
 
-        <!-- FITUR BARU 2: MEGA FOOTER LEBAR -->
+        <div class="wide-dashboard fade-ui">
+            
+            <h2>📡 GLOBAL INJECTION FEED</h2>
+            <p>Live stream of Kellzy Engine executions worldwide.</p>
+            <div class="feed-container">
+                <div class="feed-list" id="feedList">
+                    </div>
+            </div>
+
+            <h2 style="margin-top: 50px;">⚙️ EXECUTOR COMPATIBILITY</h2>
+            <p>Real-time status and injection success rate of supported platforms.</p>
+            <div class="compat-grid">
+                <div class="compat-card">
+                    <div class="compat-header"><span class="compat-name">Delta</span><span class="compat-platform"><i class="fa-brands fa-android"></i> ANDROID</span></div>
+                    <div class="compat-status" style="color: #00ff7f;"><i class="fa-solid fa-circle-check"></i> ONLINE (99%)</div>
+                    <div class="compat-bar-bg"><div class="compat-bar-fill" style="width: 99%; background: #00ff7f;"></div></div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-header"><span class="compat-name">Hydrogen</span><span class="compat-platform"><i class="fa-brands fa-android"></i> ANDROID</span></div>
+                    <div class="compat-status" style="color: #00ff7f;"><i class="fa-solid fa-circle-check"></i> ONLINE (95%)</div>
+                    <div class="compat-bar-bg"><div class="compat-bar-fill" style="width: 95%; background: #00ff7f;"></div></div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-header"><span class="compat-name">Potassium</span><span class="compat-platform"><i class="fa-brands fa-windows"></i> WINDOWS</span></div>
+                    <div class="compat-status" style="color: #00ff7f;"><i class="fa-solid fa-circle-check"></i> ONLINE (98%)</div>
+                    <div class="compat-bar-bg"><div class="compat-bar-fill" style="width: 98%; background: #00ff7f;"></div></div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-header"><span class="compat-name">Arceus X</span><span class="compat-platform"><i class="fa-brands fa-apple"></i> IOS</span></div>
+                    <div class="compat-status" style="color: #ff3333;"><i class="fa-solid fa-circle-xmark"></i> PATCHED</div>
+                    <div class="compat-bar-bg"><div class="compat-bar-fill" style="width: 15%; background: #ff3333;"></div></div>
+                </div>
+                <div class="compat-card">
+                    <div class="compat-header"><span class="compat-name">Codex</span><span class="compat-platform"><i class="fa-brands fa-android"></i> ANDROID</span></div>
+                    <div class="compat-status" style="color: #ffaa00;"><i class="fa-solid fa-triangle-exclamation"></i> UPDATING (45%)</div>
+                    <div class="compat-bar-bg"><div class="compat-bar-fill" style="width: 45%; background: #ffaa00;"></div></div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="mega-footer fade-ui">
             <div class="footer-grid">
                 <div class="footer-col">
@@ -1042,6 +1206,7 @@
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
             
             initDailyStreak();
+            initFeed(); // INIT JS GLOBAL FEED
         });
 
         const telCanvas = document.getElementById('telemetryCanvas');
@@ -1094,6 +1259,25 @@
             }
         }
 
+        // --- FITUR BARU 3 JS: GLOBAL INJECTION FEED GENERATOR ---
+        function initFeed() {
+            const feedList = document.getElementById('feedList');
+            if(feedList) {
+                const games = ["Blox Fruits", "Pet Simulator 99", "Blade Ball", "Da Hood", "King Legacy", "Arsenal", "BedWars", "Adopt Me"];
+                const users = ["Shadow***", "Kuli***", "Bocil***", "ProG***", "Guest***", "Admin***", "xX_Killa", "Noob***", "Vellyn***"];
+                let feedHTML = '';
+                for(let i=0; i<25; i++) {
+                    const g = games[Math.floor(Math.random()*games.length)];
+                    const u = users[Math.floor(Math.random()*users.length)];
+                    const d = new Date();
+                    d.setSeconds(d.getSeconds() - Math.floor(Math.random() * 600));
+                    const time = d.toLocaleTimeString('en-US', {hour12:false});
+                    feedHTML += `<div class="feed-item"><span class="user">[${time}] ${u}</span><span class="game">Injected ${g}</span><span class="status">SUCCESS</span></div>`;
+                }
+                feedList.innerHTML = feedHTML + feedHTML; // Duplicate untuk continuous scrolling animasi CSS
+            }
+        }
+
         const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."]; let termIdx = 0; const termEl = document.getElementById('terminalLog');
         setInterval(() => { if(termIdx < termLogs.length) { const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx]; termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++; } }, 1500);
 
@@ -1135,95 +1319,4 @@
             }, 200);
         }
 
-        let mascotClicks = 0; function mascotClick() { mascotClicks++; const mascot = document.getElementById('mascotImg'); mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`; setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200); if (mascotClicks === 5) { showToast("🎉 EASTER EGG! Free Key Vip : KAELL-VIP-2026", "var(--theme-color)", "fa-gift"); mascotClicks = 0; } }
-
-        setInterval(() => { const counter = document.getElementById('userCount'); let val = parseInt(counter.innerText.replace(',', '')); val += Math.floor(Math.random() * 5) - 2; counter.innerText = val.toLocaleString(); }, 3000);
-
-        const heartSvgBase64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZTVmZiI+PHBhdGggZD0iTTEyIDIxLjM1bC0xLjQ1LTEuMzJDNS40IDE1LjM2IDIgMTIuMjggMiA4LjUgMiA1LjQyIDQuNDIgMyA3LjUgM2MxLjc0IDAgMy40MS44MSA0LjUgMi4wOUMxMy4wOSAzLjgxIDE0Ljc2IDMgMTYuNSAzIDE5LjU4IDMgMjIgNS40MiAyMiA4LjVjMCAzLjc4LTMuNCA2Ljg2LTguNTUgMTEuNTRMMTIgMjEuMzV6Ii8+PC9zdmc+";
-        function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
-        loadVfx('hearts');
-
-        function openStoreModal() { document.getElementById('storeModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); customMenu.style.display = 'none'; }
-        function closeStoreModal() { document.getElementById('storeModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
-
-        function openKeyModal() { document.getElementById('keyModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
-        function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
-        function submitKey() {
-            const keyVal = document.getElementById('scriptKeyInput').value.trim();
-            if(keyVal === "KELLZY-2X5NYFU6" || keyVal === "KAELL-VIP-2026") {
-                showToast("Key Valid! Access Granted.", "#00ff7f", "fa-unlock");
-                closeKeyModal();
-                ytVerified = true; dcVerified = true; 
-                document.getElementById('ytBtn').innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; document.getElementById('ytBtn').style.background = 'var(--theme-color)'; document.getElementById('ytBtn').style.color = '#000';
-                document.getElementById('dcBtn').innerHTML = '<i class="fa-solid fa-check"></i> VERIFIED'; document.getElementById('dcBtn').style.background = 'var(--theme-color)'; document.getElementById('dcBtn').style.color = '#000';
-                unlockScript();
-            } else {
-                showToast("Invalid Key! Please get a new one.", "#ff3333", "fa-xmark");
-                document.getElementById('scriptKeyInput').style.borderColor = "#ff3333";
-                setTimeout(() => document.getElementById('scriptKeyInput').style.borderColor = "rgba(255,255,255,0.2)", 2000);
-            }
-        }
-
-        const gameSearch = document.getElementById('gameSearch');
-        if(gameSearch) {
-            gameSearch.addEventListener('input', function(e) {
-                const term = e.target.value.toLowerCase();
-                const games = document.querySelectorAll('.game-card');
-                games.forEach(game => {
-                    const title = game.querySelector('span').innerText.toLowerCase();
-                    if(title.includes(term)) {
-                        game.style.display = 'block';
-                    } else {
-                        game.style.display = 'none';
-                    }
-                });
-            });
-        }
-
-        function openChangelogModal() { document.getElementById('changelogModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
-        function closeChangelogModal() { document.getElementById('changelogModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
-
-        const termInput = document.getElementById('termInput');
-        const termOutput = document.getElementById('termOutput');
-        if(termInput) {
-            termInput.addEventListener('keypress', function(e) {
-                if(e.key === 'Enter') {
-                    const val = this.value.trim().toLowerCase();
-                    this.value = '';
-                    if(val === '') return;
-                    
-                    const line = document.createElement('div');
-                    line.innerHTML = `<span style="color: var(--theme-color)">root@kellzy:~#</span> ${val}`;
-                    termOutput.appendChild(line);
-                    
-                    const res = document.createElement('div');
-                    res.style.color = '#ccc';
-                    
-                    if(val === 'help') {
-                        res.innerHTML = "Commands: <br>- <b style='color:#fff'>ping</b> : Check connection latency<br>- <b style='color:#fff'>getkey</b> : Generate new script key<br>- <b style='color:#fff'>store</b> : Open Kaell Store<br>- <b style='color:#fff'>discord</b> : Join community<br>- <b style='color:#fff'>clear</b> : Clear terminal";
-                    } else if(val === 'ping') {
-                        res.innerText = "Pinging Byfron servers... Latency: " + (Math.floor(Math.random() * 20) + 10) + "ms [STABLE]";
-                    } else if(val === 'clear') {
-                        termOutput.innerHTML = ''; return;
-                    } else if(val === 'getkey') {
-                        res.innerText = "Redirecting to Linkvertise...";
-                        setTimeout(() => window.open('https://link-target.net/6323111/fA6olvPyl0nD', '_blank'), 1000);
-                    } else if(val === 'store') {
-                        res.innerText = "Opening Kaell Store interface...";
-                        setTimeout(openStoreModal, 500);
-                    } else if(val === 'discord') {
-                        res.innerText = "Opening Discord...";
-                        setTimeout(() => window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank'), 500);
-                    } else {
-                        res.innerText = `Command not found: ${val}. Type 'help' to view commands.`;
-                    }
-                    
-                    termOutput.appendChild(res);
-                    termOutput.scrollTop = termOutput.scrollHeight;
-                }
-            });
-        }
-
-    </script>
-</body>
-</html>
+        let mascotClicks = 0; function mascotClick() { mascotClicks++; const mascot = document.getElementById('mascotImg'); mascot.style.transform = `translateX(-50%) scale(${1 + (mascotClicks*0.05)}) rotate(${(Math.random()*20)-10}deg)`; setTimeout(() => { mascot.style.transform = 'translateX(-50%) scale(1)'; }, 200); if
