@@ -54,7 +54,7 @@
         #securityBreach { position: fixed; inset: 0; background: red; z-index: 100000; display: none; justify-content: center; align-items: center; color: white; font-family: 'JetBrains Mono'; font-size: 40px; font-weight: 900; text-align: center; animation: glitch-bg 0.1s infinite; flex-direction: column; }
         @keyframes glitch-bg { 0% { background: red; } 50% { background: #000; } 100% { background: red; } }
 
-        .cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--theme-color); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); box-shadow: 0 0 10px var(--theme-color); }
+        .cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: background 0.3s, box-shadow 0.3s; }
         .shockwave { position: fixed; border: 2px solid var(--theme-color); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 9998; animation: shockwaveAnim 0.6s ease-out forwards; }
         @keyframes shockwaveAnim { 0% { width: 0; height: 0; opacity: 1; border-width: 3px; } 100% { width: 100px; height: 100px; opacity: 0; border-width: 0px; } }
 
@@ -72,19 +72,13 @@
         
         .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 130px 20px 50px 20px; min-height: 100vh; }
 
-        .hub-card {
-            background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px;
-            border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1);
-            text-align: center; position: relative; 
-        }
+        .hub-card { background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1); text-align: center; position: relative; }
 
         #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
         #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
 
         .top-controls { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100; }
         .top-controls-left { position: absolute; top: 20px; left: 20px; display: flex; gap: 10px; z-index: 100; }
-
         .control-btn { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 12px; color: var(--theme-color); font-size: 14px; cursor: pointer; transition: 0.3s; }
         .control-btn:hover { background: var(--theme-color); color: #000; }
 
@@ -101,11 +95,20 @@
         h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
         .sub-text { color: #aaa; font-size: 13px; margin-bottom: 15px; }
 
-        .hacker-level-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; margin-bottom: 20px; text-align: left; }
+        /* --- STREAK BOX & HACKER LEVEL --- */
+        .hacker-level-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; margin-bottom: 10px; text-align: left; }
         .level-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono'; margin-bottom: 5px; }
         .level-header #rankTitle { color: var(--theme-color); }
         .level-bar-bg { width: 100%; height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
         .level-bar-fill { height: 100%; width: 0%; background: var(--theme-color); transition: width 0.5s ease; box-shadow: 0 0 10px var(--theme-color); }
+        
+        .streak-box { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; margin-bottom: 15px; text-align: left; }
+        .streak-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono'; margin-bottom: 8px; }
+        .streak-header span:first-child { color: #ffaa00; }
+        .streak-days { display: flex; gap: 5px; justify-content: space-between; }
+        .streak-day { width: 100%; height: 25px; background: #222; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #555; transition: 0.3s; }
+        .streak-day.active { background: var(--theme-color); color: #000; box-shadow: 0 0 10px var(--theme-color); }
+        .streak-reward { font-size: 9px; color: #aaa; text-align: center; margin-top: 8px; font-weight: bold; letter-spacing: 1px; transition: 0.3s; }
 
         .live-counter { background: rgba(255,255,255,0.02); border-radius: 12px; padding: 12px; margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border: 1px solid rgba(255,255,255,0.05); }
         .counter-item { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.02); }
@@ -210,6 +213,12 @@
         .rank-2 { color: #c0c0c0; }
         .rank-3 { color: #cd7f32; }
 
+        /* --- USER REVIEWS TICKER CSS --- */
+        @keyframes scrollTestimonials { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .testi-card { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); padding: 15px; border-radius: 12px; min-width: 250px; text-align: left; }
+        .testi-user { color: var(--theme-color); font-weight: 800; font-size: 12px; margin-bottom: 5px; display: flex; align-items: center; gap: 5px;}
+        .testi-text { color: #ccc; font-size: 11px; line-height: 1.4; font-style: italic; }
+
         #customMenu { position: absolute; display: none; background: rgba(15, 15, 15, 0.95); border: 1px solid var(--theme-color); border-radius: 8px; width: 200px; z-index: 10000; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.8); overflow: hidden; font-family: 'Urbanist', sans-serif; }
         .menu-item { padding: 12px 15px; font-size: 12px; font-weight: 600; color: #ddd; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .menu-item:last-child { border-bottom: none; }
@@ -248,6 +257,7 @@
         input:checked + .slider { background-color: var(--theme-color); }
         input:checked + .slider:before { transform: translateX(18px); background-color: #000; }
 
+        .custom-select { background: #111; color: var(--theme-color); border: 1px solid rgba(255,255,255,0.1); padding: 5px; border-radius: 4px; font-family: 'Urbanist', sans-serif; font-size: 11px; outline: none; font-weight: 800; cursor: pointer;}
     </style>
 </head>
 <body>
@@ -286,6 +296,16 @@
                 <span>Force Dark Mode</span>
                 <label class="switch"><input type="checkbox" id="forceDark" onchange="forceDarkMode(this)"><span class="slider"></span></label>
             </div>
+            <!-- FITUR 5: CURSOR TRAIL CUSTOMIZER -->
+            <div class="setting-item">
+                <span>Cursor Trail Mode</span>
+                <select id="cursorTrailSelect" class="custom-select" onchange="changeCursorTrail(this.value)">
+                    <option value="cyan">Neon Cyan</option>
+                    <option value="matrix">Matrix Green</option>
+                    <option value="fire">Hell Fire</option>
+                    <option value="snow">Chill Snow</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -311,7 +331,6 @@
         </div>
     </div>
 
-    <!-- MODAL 1: KAELL STORE SHOWCASE -->
     <div class="modal" id="storeModal">
         <div class="modal-glass">
             <i class="fa-solid fa-xmark close-modal" onclick="closeStoreModal()"></i>
@@ -350,7 +369,6 @@
         </div>
     </div>
 
-    <!-- MODAL 3: KEY INPUT SYSTEM -->
     <div class="modal" id="keyModal">
         <div class="modal-glass">
             <i class="fa-solid fa-xmark close-modal" onclick="closeKeyModal()"></i>
@@ -365,18 +383,17 @@
         </div>
     </div>
 
-    <!-- MODAL 5: CHANGELOG PATCH NOTES -->
     <div class="modal" id="changelogModal">
         <div class="modal-glass" style="max-width: 500px;">
             <i class="fa-solid fa-xmark close-modal" onclick="closeChangelogModal()"></i>
             <h2 style="color: var(--theme-color); font-size: 20px; margin-top: 0; text-align: left;"><i class="fa-solid fa-terminal"></i> PATCH NOTES v2.0.4</h2>
             <div class="changelog-content">
                 <strong>[UPDATE LOG - 2026-06-09]</strong><br><br>
-                <span class="add">[+]</span> Added Kaell Store Showcase UI.<br>
-                <span class="add">[+]</span> Added Advanced Search Filter for Games.<br>
-                <span class="add">[+]</span> Implemented Secure Key Input System.<br>
+                <span class="add">[+]</span> Added Daily Streak System & Rewards.<br>
+                <span class="add">[+]</span> Added Live Server Telemetry Graph.<br>
+                <span class="add">[+]</span> Added Custom Cursor Trail Selector.<br>
+                <span class="add">[+]</span> Added User Reviews & Testimonials.<br>
                 <span class="fix">[*]</span> Improved Byfron Bypass (V2 Protocol).<br>
-                <span class="fix">[*]</span> Optimized UI Animations & Particle Memory.<br>
                 <span class="del">[-]</span> Removed Patched Arceus X Exploit Method.<br><br>
                 <em>System stability: 99.9%</em><br>
                 <em>Dev Note: Keep supporting @Kellllllll-f7i!</em>
@@ -428,7 +445,6 @@
             
             <div id="mainCardContent">
                 
-                <!-- TOMBOL TOKO PINDAH KE KIRI ATAS -->
                 <div class="top-controls-left">
                     <div class="control-btn interactive-btn" onclick="openStoreModal()" title="Kaell Store" style="font-weight: 800; font-size: 11px; display: flex; align-items: center; gap: 6px;">
                         <i class="fa-solid fa-store"></i> KAELL STORE
@@ -460,6 +476,21 @@
                     <div class="level-bar-bg">
                         <div class="level-bar-fill" id="expFill"></div>
                     </div>
+                </div>
+
+                <!-- FITUR 4: DAILY LOGIN STREAK SYSTEM -->
+                <div class="streak-box">
+                    <div class="streak-header"><span><i class="fa-solid fa-fire"></i> DAILY STREAK</span><span id="streakCount">1/7 DAYS</span></div>
+                    <div class="streak-days">
+                        <div class="streak-day active">1</div>
+                        <div class="streak-day">2</div>
+                        <div class="streak-day">3</div>
+                        <div class="streak-day">4</div>
+                        <div class="streak-day">5</div>
+                        <div class="streak-day">6</div>
+                        <div class="streak-day"><i class="fa-solid fa-gift"></i></div>
+                    </div>
+                    <div class="streak-reward" id="streakReward">Reach 7 Days for VIP Key!</div>
                 </div>
 
                 <div class="live-counter">
@@ -521,6 +552,15 @@
         </div>
 
         <div class="extra-content">
+
+            <!-- FITUR 1: SERVER TELEMETRY GRAPH -->
+            <h2>📊 SERVER TELEMETRY</h2>
+            <p style="margin-top: -10px; margin-bottom: 15px;">Byfron Bypass Uptime & Latency Monitor</p>
+            <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; margin-bottom: 40px; position: relative;">
+                <div style="position: absolute; top: 15px; left: 15px; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--theme-color); font-weight: bold;" id="telemetryStatus">PING: 24ms | STATUS: STABLE</div>
+                <canvas id="telemetryCanvas" style="width: 100%; height: 100px; display: block; border-bottom: 1px solid rgba(255,255,255,0.05);"></canvas>
+            </div>
+
             <h2>🔥 SUPPORTED GAMES</h2>
             
             <div class="search-box">
@@ -554,8 +594,6 @@
                     <p style="margin: 0; font-size: 11px; color: #ccc;">Setiap Key yang Anda dapatkan melalui Linkvertise kami akan aktif selama 24 Jam. Setelah itu, Anda bisa men-generate Key baru.</p>
                 </div>
             </div>
-
-            <!-- FITUR SCROLL BAWAH BARU MULAI DARI SINI -->
 
             <!-- SCRIPT FEATURE BREAKDOWN -->
             <h2>⚡ SCRIPT FEATURES</h2>
@@ -654,10 +692,11 @@
                     <span style="color: var(--theme-color); font-weight: 800; font-size: 10px;">PREMIUM 7D</span>
                 </div>
             </div>
+
             <!-- KAELL STORE SHOWCASE MAIN PAGE -->
             <h2 style="margin-top: 50px;">🛒 KAELL STORE SHOWCASE</h2>
             <p style="margin-top: -10px; margin-bottom: 20px;">Support developer dengan membeli Official Merchandise & VIP Access!</p>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; padding-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; padding-bottom: 40px;">
                 <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
                     <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; transition: var(--transition); height: 100%;" onmouseover="this.style.borderColor='var(--theme-color)'; this.style.transform='translateY(-5px)';" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)';">
                         <img src="https://i.pinimg.com/736x/8a/be/67/8abe6746f3322e17ebdf2ec2f5c71d60.jpg" style="width: 100%; border-radius: 8px; margin-bottom: 10px; aspect-ratio: 1/1; object-fit: cover;" alt="Cyan Hoodie">
@@ -686,6 +725,23 @@
                         <span style="color: #00e5ff; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 800; margin-top: 5px; display: block;">$ 2.99</span>
                     </div>
                 </a>
+            </div>
+
+            <!-- FITUR 2: TESTIMONIAL TICKER -->
+            <h2>⭐ USER REVIEWS</h2>
+            <div style="overflow: hidden; width: 100%; margin-bottom: 40px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+                <div class="testimonial-track" style="display: flex; gap: 15px; width: max-content; animation: scrollTestimonials 25s linear infinite;">
+                    <!-- Original -->
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @VellynCute</div><div class="testi-text">"Adminnya ramah, scriptnya 100% work di delta android!"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
+                    <!-- Duplicate for infinite scroll loop -->
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @VellynCute</div><div class="testi-text">"Adminnya ramah, scriptnya 100% work di delta android!"</div></div>
+                    <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
+                </div>
             </div>
             
         </div>
@@ -760,10 +816,16 @@
             document.getElementById('expFill').style.width = (currentExp / expMax * 100) + '%';
         }, 2000);
 
+        // --- FITUR 5: CURSOR TRAIL LOGIC ---
         const trailContainer = document.createElement('div'); document.body.appendChild(trailContainer);
         const dots = [];
+        let cursorTrailColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || "#00e5ff";
+        
         for(let i=0; i<12; i++) {
-            let dot = document.createElement('div'); dot.className = 'cursor-dot';
+            let dot = document.createElement('div'); 
+            dot.className = 'cursor-dot';
+            dot.style.background = cursorTrailColor;
+            dot.style.boxShadow = `0 0 10px ${cursorTrailColor}`;
             trailContainer.appendChild(dot); dots.push({x:0, y:0, node: dot});
         }
         let mouseX = 0, mouseY = 0;
@@ -777,6 +839,16 @@
             });
             requestAnimationFrame(drawTrail);
         } drawTrail();
+
+        function changeCursorTrail(mode) {
+            const colors = { 'cyan': '#00e5ff', 'matrix': '#00ff00', 'fire': '#ff3300', 'snow': '#ffffff' };
+            cursorTrailColor = colors[mode];
+            dots.forEach(dot => {
+                dot.node.style.background = cursorTrailColor;
+                dot.node.style.boxShadow = `0 0 10px ${cursorTrailColor}`;
+            });
+            showToast("Cursor trail updated!", cursorTrailColor, "fa-mouse-pointer");
+        }
 
         document.addEventListener('click', (e) => {
             const wave = document.createElement('div'); wave.className = 'shockwave';
@@ -917,7 +989,7 @@
         requestAnimationFrame(updateFPS); const pingEl = document.getElementById('pingValue'); setInterval(() => { pingEl.innerText = Math.floor(Math.random() * 25) + 15; }, 2500);
 
         const themes = ['#00e5ff', '#39ff14', '#ff66cc']; let currentTheme = 0;
-        function toggleTheme() { currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]); showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
+        function toggleTheme() { currentTheme = (currentTheme + 1) % themes.length; document.documentElement.style.setProperty('--theme-color', themes[currentTheme]); showToast("Theme Changed!", themes[currentTheme], "fa-palette"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); changeCursorTrail(document.getElementById('cursorTrailSelect').value); }
         const vfxModes = ['hearts', 'snow', 'matrix']; const vfxNames = ['Cyan Hearts', 'Chill Snow', 'Matrix Rain']; let currentVfx = 0;
         function toggleVfx() { currentVfx = (currentVfx + 1) % vfxModes.length; loadVfx(vfxModes[currentVfx]); showToast(`VFX: ${vfxNames[currentVfx]}`, "var(--theme-color)", "fa-wand-magic-sparkles"); clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }
 
@@ -925,7 +997,62 @@
             const ua = navigator.userAgent; let device = "PC / Desktop"; let rec = "Pottasium / Medium";
             if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; } else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
+            
+            // --- FITUR 4: INIT DAILY STREAK ---
+            initDailyStreak();
         });
+
+        // --- FITUR 1: SERVER TELEMETRY LOGIC ---
+        const telCanvas = document.getElementById('telemetryCanvas');
+        const telCtx = telCanvas.getContext('2d');
+        let pingData = new Array(40).fill(25);
+        function drawTelemetry() {
+            if(!telCanvas) return;
+            telCanvas.width = telCanvas.parentElement.clientWidth - 30;
+            telCtx.clearRect(0, 0, telCanvas.width, telCanvas.height);
+            pingData.shift();
+            pingData.push(Math.floor(Math.random() * 20) + 15); 
+            document.getElementById('telemetryStatus').innerText = `PING: ${pingData[pingData.length-1]}ms | STATUS: STABLE`;
+            telCtx.beginPath();
+            const step = telCanvas.width / (pingData.length - 1);
+            telCtx.moveTo(0, telCanvas.height - (pingData[0] * 2));
+            for(let i=1; i<pingData.length; i++) { telCtx.lineTo(i * step, telCanvas.height - (pingData[i] * 2)); }
+            telCtx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || '#00e5ff';
+            telCtx.lineWidth = 2; telCtx.stroke();
+            telCtx.lineTo(telCanvas.width, telCanvas.height); telCtx.lineTo(0, telCanvas.height);
+            telCtx.fillStyle = 'rgba(0, 229, 255, 0.1)'; telCtx.fill();
+        }
+        setInterval(drawTelemetry, 1000); setTimeout(drawTelemetry, 100);
+
+        // --- FITUR 4: DAILY STREAK LOGIC ---
+        function initDailyStreak() {
+            let currentStreak = 1;
+            const lastLogin = localStorage.getItem('kellzyLastLogin');
+            const today = new Date().toDateString();
+            let savedStreak = parseInt(localStorage.getItem('kellzyStreak')) || 0;
+
+            if (lastLogin !== today) {
+                if (lastLogin === new Date(Date.now() - 86400000).toDateString()) {
+                    savedStreak++;
+                } else {
+                    savedStreak = 1;
+                }
+                localStorage.setItem('kellzyLastLogin', today);
+                localStorage.setItem('kellzyStreak', savedStreak);
+            }
+            currentStreak = savedStreak > 7 ? 7 : (savedStreak === 0 ? 1 : savedStreak);
+
+            document.getElementById('streakCount').innerText = `${currentStreak}/7 DAYS`;
+            const streakDays = document.querySelectorAll('.streak-day');
+            streakDays.forEach((el, idx) => {
+                if(idx < currentStreak) el.classList.add('active');
+                else el.classList.remove('active');
+            });
+            if(currentStreak >= 7) {
+                document.getElementById('streakReward').innerText = "🎉 VIP KEY: KAELL-VIP-2026 🎉";
+                document.getElementById('streakReward').style.color = "#00ff7f";
+            }
+        }
 
         const termLogs = ["[SYSTEM] Bypassing Roblox Byfron Anti-Cheat... SUCCESS", "[SYSTEM] Fetching Kellzy Key API... OK", "[SYSTEM] Securing Connection... ENCRYPTED", "[SYSTEM] Injecting Modules... READY", "[SYSTEM] Awaiting User Execution..."]; let termIdx = 0; const termEl = document.getElementById('terminalLog');
         setInterval(() => { if(termIdx < termLogs.length) { const newLog = document.createElement('div'); newLog.innerText = termLogs[termIdx]; termEl.appendChild(newLog); termEl.scrollTop = termEl.scrollHeight; termIdx++; } }, 1500);
@@ -976,11 +1103,9 @@
         function loadVfx(mode) { if(window.pJSDom && window.pJSDom.length > 0){ window.pJSDom[0].pJS.fn.vendors.destroypJS(); window.pJSDom = []; } let config = {}; if(mode === 'hearts') { config = { "particles": { "number": { "value": 40 }, "color": { "value": "#00e5ff" }, "shape": { "type": "image", "image": { "src": heartSvgBase64, "width": 100, "height": 100 } }, "opacity": { "value": 0.6, "random": true }, "size": { "value": 12, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 5, "sync": false } }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "top", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } }, "modes": { "repulse": { "distance": 80, "duration": 0.4 }, "push": { "particles_nb": 2 } } }, "retina_detect": true }; } else if(mode === 'snow') { config = { "particles": { "number": { "value": 100 }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } else if(mode === 'matrix') { config = { "particles": { "number": { "value": 80 }, "color": { "value": "#00ff00" }, "shape": { "type": "edge" }, "opacity": { "value": 0.8 }, "size": { "value": 4, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 8, "direction": "bottom", "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false } } }, "retina_detect": true }; } particlesJS('particles-js', config); }
         loadVfx('hearts');
 
-        // 1. Store Modal Logic
         function openStoreModal() { document.getElementById('storeModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); customMenu.style.display = 'none'; }
         function closeStoreModal() { document.getElementById('storeModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
 
-        // 3. Key Modal Logic
         function openKeyModal() { document.getElementById('keyModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
         function closeKeyModal() { document.getElementById('keyModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
         function submitKey() {
@@ -999,7 +1124,6 @@
             }
         }
 
-        // 4. Game Search Filter Logic
         const gameSearch = document.getElementById('gameSearch');
         if(gameSearch) {
             gameSearch.addEventListener('input', function(e) {
@@ -1016,7 +1140,6 @@
             });
         }
 
-        // 5. Changelog Modal Logic
         function openChangelogModal() { document.getElementById('changelogModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
         function closeChangelogModal() { document.getElementById('changelogModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
 
