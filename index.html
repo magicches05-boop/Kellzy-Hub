@@ -197,7 +197,6 @@
         .compat-bar-bg { width: 100%; height: 4px; background: #222; border-radius: 2px; overflow: hidden; }
         .compat-bar-fill { height: 100%; transition: width 1s ease; box-shadow: 0 0 5px currentColor;}
 
-        /* --- FITUR BARU: GLOBAL CYBER RADAR --- */
         .radar-box { width: 100%; max-width: 600px; height: 350px; margin: 0 auto 40px auto; background: radial-gradient(circle at center, rgba(0,229,255,0.1) 0%, rgba(0,0,0,0.8) 70%); border: 1px solid rgba(255,255,255,0.1); border-radius: 50%; position: relative; overflow: hidden; box-shadow: inset 0 0 50px rgba(0,229,255,0.2), 0 0 20px rgba(0,0,0,0.5); }
         .radar-grid { position: absolute; inset: 0; background: 
             linear-gradient(rgba(0,229,255,0.2) 1px, transparent 1px),
@@ -210,7 +209,6 @@
         .radar-label { position: absolute; color: #fff; font-size: 9px; font-family: 'JetBrains Mono', monospace; padding-left: 12px; pointer-events: none; white-space: nowrap; text-shadow: 0 0 5px #000;}
         @keyframes targetPing { 0% { transform: scale(1); opacity: 1; } 80% { transform: scale(1); opacity: 1; } 100% { transform: scale(3); opacity: 0; } }
 
-        /* --- FITUR BARU: PREMIUM CODE DECRYPTER --- */
         .decrypter-container { width: 100%; max-width: 800px; margin: 0 auto 50px auto; background: #050505; border: 1px solid var(--theme-color); border-radius: 12px; padding: 20px; text-align: left; cursor: crosshair; position: relative; box-shadow: inset 0 0 30px rgba(0,229,255,0.1); overflow: hidden; }
         .decrypter-container::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.1), transparent); transform: skewX(-20deg); transition: 0.5s; }
         .decrypter-container:hover::before { left: 200%; transition: 1.5s; }
@@ -219,7 +217,6 @@
         .decrypter-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; opacity: 1; transition: 0.3s; z-index: 10; font-family: 'Urbanist'; letter-spacing: 2px;}
         .decrypter-container:hover .decrypter-overlay { opacity: 0; pointer-events: none; }
 
-        /* --- FITUR BARU: ROADMAP TIMELINE --- */
         .roadmap-wrap { width: 100%; max-width: 900px; margin: 0 auto 40px auto; position: relative; padding: 40px 0; }
         .roadmap-line { position: absolute; top: 50px; left: 10%; right: 10%; height: 2px; background: rgba(255,255,255,0.1); z-index: 1; }
         .roadmap-line-fill { position: absolute; top: 50px; left: 10%; width: 60%; height: 2px; background: var(--theme-color); z-index: 2; box-shadow: 0 0 10px var(--theme-color); }
@@ -234,6 +231,19 @@
         .roadmap-step.active .rm-title { color: var(--theme-color); }
         .rm-desc { font-size: 11px; color: #888; padding: 0 15px; }
 
+        /* --- FITUR TERBARU: SCRIPT TABLE & DIAGNOSTICS --- */
+        .script-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: left; }
+        .script-table th { background: rgba(0,229,255,0.1); color: var(--theme-color); padding: 12px; border-bottom: 1px solid rgba(0,229,255,0.2); text-transform: uppercase;}
+        .script-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+        .script-table tr:hover td { background: rgba(255,255,255,0.02); color: #fff; }
+        .st-working { color: #00ff7f; background: rgba(0,255,127,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .st-updating { color: #ffaa00; background: rgba(255,170,0,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+
+        .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; margin-bottom: 40px;}
+        .diag-card { background: #000; border: 1px dashed rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; transition: 0.3s; }
+        .diag-card:hover { border-color: var(--theme-color); box-shadow: inset 0 0 15px rgba(0,229,255,0.1); transform: translateY(-3px);}
+        .diag-card i { font-size: 24px; color: #555; transition: 0.3s; }
+        .diag-card:hover i { color: var(--theme-color); }
 
         /* MEGA FOOTER LEBAR */
         .mega-footer { width: 95%; max-width: 1000px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 40px; text-align: left; font-size: 11px; color: #888; margin-bottom: 50px; backdrop-filter: blur(15px); }
@@ -463,11 +473,12 @@
             <i class="fa-solid fa-xmark close-modal" onclick="closeChangelogModal()"></i>
             <h2 style="color: var(--theme-color); font-size: 20px; margin-top: 0; text-align: left;"><i class="fa-solid fa-terminal"></i> PATCH NOTES v2.0.4</h2>
             <div class="changelog-content">
-                <strong>[UPDATE LOG - 2026-06-09]</strong><br><br>
+                <strong>[UPDATE LOG - FINAL EDITION]</strong><br><br>
+                <span class="add">[+]</span> Added Script Database Status Table.<br>
+                <span class="add">[+]</span> Added Advanced System Diagnostics.<br>
                 <span class="add">[+]</span> Added Global Cyber Radar System.<br>
                 <span class="add">[+]</span> Added Premium Code Decrypter.<br>
                 <span class="add">[+]</span> Added Kellzy Evolution Roadmap.<br>
-                <span class="add">[+]</span> Added Wide Dashboard UI (VIP Plans & Servers).<br>
                 <span class="fix">[*]</span> Improved Byfron Bypass (V2 Protocol).<br>
                 <span class="del">[-]</span> Removed Patched Arceus X Exploit Method.<br><br>
                 <em>System stability: 99.9%</em><br>
@@ -833,16 +844,15 @@
         <!-- ============================================== -->
         <div class="wide-dashboard fade-ui">
             
-            <!-- FITUR BARU: GLOBAL CYBER RADAR -->
+            <!-- GLOBAL CYBER RADAR -->
             <h2>🌍 GLOBAL CYBER RADAR</h2>
             <p>Live tracking system detecting Kellzy Script executions worldwide.</p>
             <div class="radar-box" id="radarBox">
                 <div class="radar-grid"></div>
                 <div class="radar-sweep"></div>
-                <!-- Targets will be generated by JS here -->
             </div>
 
-            <!-- FITUR BARU: PREMIUM CODE DECRYPTER -->
+            <!-- PREMIUM DECRYPTER -->
             <h2 style="margin-top: 50px;">🔐 PREMIUM DECRYPTER ENGINE</h2>
             <p>Hover over the encrypted matrix to preview our VIP Level 8 Script.</p>
             <div class="decrypter-container" id="decrypterBox" onmouseenter="startDecrypt()" onmouseleave="stopDecrypt()">
@@ -856,7 +866,7 @@
                 </div>
             </div>
 
-            <!-- FITUR LAMA LEBAR: VIP PLANS & NODES -->
+            <!-- VIP PLANS & NODES -->
             <h2 style="margin-top: 50px;">💎 VIP ACCESS TIERS</h2>
             <p>Upgrade ke Premium untuk pengalaman Scripting tanpa batas dan tanpa Key System harian!</p>
             
@@ -901,7 +911,7 @@
                 </div>
             </div>
 
-            <!-- FITUR BARU: ROADMAP TIMELINE -->
+            <!-- ROADMAP TIMELINE -->
             <h2 style="margin-top: 60px;">🚀 KELLZY HUB EVOLUTION</h2>
             <p>Sejarah dan rencana masa depan pengembangan Kellzy Hub.</p>
             <div class="roadmap-wrap">
@@ -931,47 +941,83 @@
                 </div>
             </div>
 
-            <h2 style="margin-top: 50px;">🌐 GLOBAL SERVER NODES</h2>
-            <p>Sistem jaringan terdesentralisasi untuk injeksi script yang sangat cepat (0ms Ping) dan stabil.</p>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- UI BAWAH LEBAR 2 (FITUR FINAL EDITION)         -->
+        <!-- ============================================== -->
+        <div class="wide-dashboard fade-ui">
             
-            <div class="server-grid">
-                <div class="server-node">
-                    <div class="node-info">
-                        <i class="fa-solid fa-server node-icon"></i>
-                        <div>
-                            <span class="node-name">Asia Pacific (SG)</span>
-                            <span class="node-ping" style="color: #00ff7f;">12ms - ONLINE</span>
-                        </div>
-                    </div>
+            <!-- FITUR FINAL 1: SCRIPT DATABASE STATUS -->
+            <h2>📂 SCRIPT DATABASE STATUS</h2>
+            <p>Real-time monitoring network untuk mendeteksi status script di dalam in-game.</p>
+            <div style="overflow-x: auto;">
+                <table class="script-table">
+                    <thead>
+                        <tr>
+                            <th>ROBLOX GAME</th>
+                            <th>ENGINE VERSION</th>
+                            <th>LIVE STATUS</th>
+                            <th>LAST PATCHED</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Blox Fruits</td>
+                            <td>v3.1.2</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>Just now</td>
+                        </tr>
+                        <tr>
+                            <td>Pet Simulator 99</td>
+                            <td>v1.0.5</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>2 hrs ago</td>
+                        </tr>
+                        <tr>
+                            <td>Blade Ball</td>
+                            <td>v2.2.0</td>
+                            <td><span class="st-updating">UPDATING</span></td>
+                            <td>Yesterday</td>
+                        </tr>
+                        <tr>
+                            <td>Da Hood</td>
+                            <td>v1.8.4</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>3 days ago</td>
+                        </tr>
+                        <tr>
+                            <td>Arsenal</td>
+                            <td>v1.9.9</td>
+                            <td><span class="st-working">WORKING</span></td>
+                            <td>5 days ago</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- FITUR FINAL 2: SYSTEM DIAGNOSTICS -->
+            <h2 style="margin-top: 60px;">🖥️ TARGET SYSTEM DIAGNOSTICS</h2>
+            <p>Membaca footprint perangkat dan jaringan lokal target secara real-time.</p>
+            <div class="diag-grid">
+                <div class="diag-card">
+                    <i class="fa-brands fa-windows"></i> 
+                    <span id="diagOS">Scanning OS...</span>
                 </div>
-                <div class="server-node">
-                    <div class="node-info">
-                        <i class="fa-solid fa-server node-icon"></i>
-                        <div>
-                            <span class="node-name">US East (NY)</span>
-                            <span class="node-ping" style="color: #00ff7f;">45ms - ONLINE</span>
-                        </div>
-                    </div>
+                <div class="diag-card">
+                    <i class="fa-brands fa-chrome"></i> 
+                    <span id="diagBrowser">Scanning Engine...</span>
                 </div>
-                <div class="server-node">
-                    <div class="node-info">
-                        <i class="fa-solid fa-server node-icon"></i>
-                        <div>
-                            <span class="node-name">Europe (FRA)</span>
-                            <span class="node-ping" style="color: #ffaa00;">120ms - BUSY</span>
-                        </div>
-                    </div>
+                <div class="diag-card">
+                    <i class="fa-solid fa-expand"></i> 
+                    <span id="diagRes">Scanning Display...</span>
                 </div>
-                <div class="server-node">
-                    <div class="node-info">
-                        <i class="fa-solid fa-server node-icon"></i>
-                        <div>
-                            <span class="node-name">Tokyo (JP)</span>
-                            <span class="node-ping" style="color: #00ff7f;">28ms - ONLINE</span>
-                        </div>
-                    </div>
+                <div class="diag-card">
+                    <i class="fa-solid fa-microchip"></i> 
+                    <span id="diagCores">Scanning CPU...</span>
                 </div>
             </div>
+
         </div>
 
         <div class="mega-footer fade-ui">
@@ -1023,6 +1069,22 @@
         <i class="fa-solid fa-forward-step mini-btn interactive-btn" onclick="nextTrack(event)"></i>
         <span id="trackName" style="font-size: 10px; font-weight: 800; color: #888; margin-left: 5px;">TRACK 1 - LOFI</span>
     </div>
+
+    <style>
+        /* CSS TAMBAHAN UNTUK FITUR FINAL (TABLE & DIAGNOSTICS) */
+        .script-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: left; }
+        .script-table th { background: rgba(0,229,255,0.1); color: var(--theme-color); padding: 12px; border-bottom: 1px solid rgba(0,229,255,0.2); text-transform: uppercase;}
+        .script-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+        .script-table tr:hover td { background: rgba(255,255,255,0.02); color: #fff; }
+        .st-working { color: #00ff7f; background: rgba(0,255,127,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .st-updating { color: #ffaa00; background: rgba(255,170,0,0.1); padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+
+        .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 20px; margin-bottom: 40px;}
+        .diag-card { background: #000; border: 1px dashed rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--theme-color); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: bold; transition: 0.3s; text-transform: uppercase;}
+        .diag-card:hover { border-color: var(--theme-color); box-shadow: inset 0 0 15px rgba(0,229,255,0.1); transform: translateY(-3px);}
+        .diag-card i { font-size: 24px; color: #555; transition: 0.3s; }
+        .diag-card:hover i { color: var(--theme-color); }
+    </style>
 
     <script>
         function toggleSettings() {
@@ -1257,7 +1319,27 @@
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
             
             initDailyStreak();
-            initRadar(); // Init fitur radar
+            initRadar(); 
+            
+            // --- INIT JS FITUR FINAL DIAGNOSTICS ---
+            try {
+                let osName = "Unknown OS";
+                if (navigator.userAgent.indexOf("Win") != -1) osName = "Windows OS";
+                if (navigator.userAgent.indexOf("Mac") != -1) osName = "Macintosh";
+                if (navigator.userAgent.indexOf("Linux") != -1) osName = "Linux OS";
+                if (navigator.userAgent.indexOf("Android") != -1) osName = "Android OS";
+                if (navigator.userAgent.indexOf("like Mac") != -1) osName = "iOS Device";
+                
+                let browserName = "Unknown Browser";
+                if(navigator.userAgent.indexOf("Chrome") != -1 ) browserName = "Google Chrome";
+                else if(navigator.userAgent.indexOf("Firefox") != -1 ) browserName = "Mozilla Firefox";
+                else if(navigator.userAgent.indexOf("Safari") != -1) browserName = "Apple Safari";
+
+                document.getElementById('diagOS').innerText = osName;
+                document.getElementById('diagBrowser').innerText = browserName;
+                document.getElementById('diagRes').innerText = `${window.screen.width} x ${window.screen.height} RES`;
+                document.getElementById('diagCores').innerText = `${navigator.hardwareConcurrency || 'N/A'} CPU CORES`;
+            } catch(e) {}
         });
 
         const telCanvas = document.getElementById('telemetryCanvas');
@@ -1310,7 +1392,6 @@
             }
         }
 
-        // --- FITUR BARU 1 JS: GLOBAL CYBER RADAR ---
         function initRadar() {
             const radarBox = document.getElementById('radarBox');
             if(!radarBox) return;
@@ -1320,9 +1401,9 @@
                 const target = document.createElement('div');
                 target.className = 'radar-target';
                 const angle = Math.random() * Math.PI * 2;
-                const radius = Math.random() * 120 + 20; // max radius inside the 350px box
-                const x = 300 + Math.cos(angle) * radius - 3; // Center is 300 (half of max-width 600)
-                const y = 175 + Math.sin(angle) * radius - 3; // Center is 175
+                const radius = Math.random() * 120 + 20; 
+                const x = 300 + Math.cos(angle) * radius - 3; 
+                const y = 175 + Math.sin(angle) * radius - 3; 
                 
                 target.style.left = `${Math.max(10, Math.min(x, radarBox.clientWidth - 20))}px`;
                 target.style.top = `${y}px`;
@@ -1334,12 +1415,10 @@
                 
                 radarBox.appendChild(target);
                 
-                // Remove after animation ends
                 setTimeout(() => { if(target.parentNode) target.remove(); }, 2000);
             }, 1500);
         }
 
-        // --- FITUR BARU 2 JS: PREMIUM DECRYPTER ENGINE ---
         const originalText = `0x8F 0x2A 0x4C 0x9B 0x11 0x7E 0x3D 0x5A 0x88 0x21 0x90 0x4F\n0x1C 0x3B 0x6E 0x8A 0x2D 0x55 0x7F 0x9C 0x14 0x3A 0x6B 0x82\n0x4D 0x1E 0x9F 0x2C 0x5B 0x7A 0x38 0x81 0x6C 0x4A 0x1D 0x9E\n0x2B 0x7C 0x5D 0x8E 0x3F 0x1A 0x4B 0x6D 0x9C 0x2E 0x7A 0x5F`;
         const trueLuaCode = `-- [Kellzy VIP Script Engine v2.0]\ngetgenv().SecureMode = true\n\nlocal function BypassByfron()\n    print("Hooking into memory...")\n    task.wait(0.5)\n    warn("Bypass Successful. Welcome to God Mode.")\nend\n\nBypassByfron()\nloadstring(game:HttpGet("https://kellzyy-hub/vip"))()`;
         
@@ -1366,7 +1445,7 @@
                     }
                 }
                 el.innerText = scrambled;
-                iteration += 2; // Kecepatan decrypt
+                iteration += 2; 
                 if(iteration > trueLuaCode.length) {
                     clearInterval(decryptInterval);
                 }
