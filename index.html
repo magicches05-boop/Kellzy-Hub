@@ -72,7 +72,7 @@
         
         .slide-container { position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 130px 20px 50px 20px; min-height: 100vh; }
 
-        .hub-card { background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1); text-align: center; position: relative; }
+        .hub-card { background: var(--card-glass); width: 100%; max-width: 520px; padding: 45px 50px 30px 50px; border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px); box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(0,229,255,0.1); text-align: center; position: relative; margin-bottom: 30px;}
 
         #snakeGameContainer { display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 400px; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px solid var(--theme-color); box-shadow: inset 0 0 20px rgba(0,0,0,0.8); }
         #snakeCanvas { background: #111; width: 100%; max-width: 300px; height: 300px; border-bottom: 1px solid #333; image-rendering: pixelated; }
@@ -95,7 +95,6 @@
         h1 { font-size: 48px; font-weight: 800; margin: 0; letter-spacing: -2px; color: var(--theme-color); transition: color 0.3s; }
         .sub-text { color: #aaa; font-size: 13px; margin-bottom: 15px; }
 
-        /* --- STREAK BOX & HACKER LEVEL --- */
         .hacker-level-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; margin-bottom: 10px; text-align: left; }
         .level-header { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono'; margin-bottom: 5px; }
         .level-header #rankTitle { color: var(--theme-color); }
@@ -145,9 +144,27 @@
         .exec-badge { background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 50px; font-size: 9px; font-weight: 800; color: #aaa; border: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; gap: 6px; }
         .status-working { color: #00ff7f; } .status-patched { color: #ff3333; }
 
-        .extra-content { width: 90%; max-width: 520px; margin-top: 40px; text-align: center; background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); margin-bottom: 50px; }
+        /* --- CONTENT AREAS --- */
+        .extra-content { width: 90%; max-width: 520px; text-align: center; background: rgba(15, 15, 15, 0.7); padding: 30px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); margin-bottom: 20px; }
         .extra-content h2 { color: var(--theme-color); font-size: 20px; margin-top: 0; font-weight: 800; text-transform: uppercase;}
         .extra-content p { color: #ccc; font-size: 12px; line-height: 1.6; }
+
+        /* --- FITUR BARU: TERMINAL LEBAR --- */
+        .wide-terminal { background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #ccc; text-align: left; height: 200px; display: flex; flex-direction: column; margin-bottom: 10px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8); transition: var(--transition); }
+        .wide-terminal:hover { border-color: var(--theme-color); }
+        .term-output { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; scrollbar-width: none; }
+        .term-output::-webkit-scrollbar { display: none; }
+        .term-input-line { display: flex; align-items: center; gap: 8px; margin-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 10px; }
+        .term-input-line span { color: var(--theme-color); font-weight: 800; }
+        .term-input-line input { background: transparent; border: none; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 11px; flex: 1; outline: none; }
+
+        /* --- FITUR BARU: MEGA FOOTER --- */
+        .mega-footer { width: 90%; max-width: 520px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; padding: 30px; text-align: left; font-size: 10px; color: #888; margin-bottom: 50px; backdrop-filter: blur(15px); }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .footer-col h4 { color: #fff; margin: 0 0 10px 0; font-size: 12px; font-weight: 800; }
+        .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--theme-color); }
 
         .terminal-box { position: fixed; bottom: 30px; right: 30px; z-index: 50; width: 320px; height: 90px; background: rgba(8, 8, 8, 0.6); backdrop-filter: blur(10px); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--theme-color); text-align: left; overflow-y: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); pointer-events: none; }
         .terminal-box div { margin-bottom: 4px; opacity: 0.8; }
@@ -296,7 +313,6 @@
                 <span>Force Dark Mode</span>
                 <label class="switch"><input type="checkbox" id="forceDark" onchange="forceDarkMode(this)"><span class="slider"></span></label>
             </div>
-            <!-- FITUR 5: CURSOR TRAIL CUSTOMIZER -->
             <div class="setting-item">
                 <span>Cursor Trail Mode</span>
                 <select id="cursorTrailSelect" class="custom-select" onchange="changeCursorTrail(this.value)">
@@ -393,6 +409,7 @@
                 <span class="add">[+]</span> Added Live Server Telemetry Graph.<br>
                 <span class="add">[+]</span> Added Custom Cursor Trail Selector.<br>
                 <span class="add">[+]</span> Added User Reviews & Testimonials.<br>
+                <span class="add">[+]</span> Added Interactive Terminal & Global Footer.<br>
                 <span class="fix">[*]</span> Improved Byfron Bypass (V2 Protocol).<br>
                 <span class="del">[-]</span> Removed Patched Arceus X Exploit Method.<br><br>
                 <em>System stability: 99.9%</em><br>
@@ -478,7 +495,6 @@
                     </div>
                 </div>
 
-                <!-- FITUR 4: DAILY LOGIN STREAK SYSTEM -->
                 <div class="streak-box">
                     <div class="streak-header"><span><i class="fa-solid fa-fire"></i> DAILY STREAK</span><span id="streakCount">1/7 DAYS</span></div>
                     <div class="streak-days">
@@ -553,7 +569,6 @@
 
         <div class="extra-content">
 
-            <!-- FITUR 1: SERVER TELEMETRY GRAPH -->
             <h2>📊 SERVER TELEMETRY</h2>
             <p style="margin-top: -10px; margin-bottom: 15px;">Byfron Bypass Uptime & Latency Monitor</p>
             <div style="background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; margin-bottom: 40px; position: relative;">
@@ -595,7 +610,6 @@
                 </div>
             </div>
 
-            <!-- SCRIPT FEATURE BREAKDOWN -->
             <h2>⚡ SCRIPT FEATURES</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 40px; text-align: left;">
                 <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--theme-color); padding: 12px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,229,255,0.1);">
@@ -620,7 +634,6 @@
                 </div>
             </div>
 
-            <!-- EXECUTOR & DLL LIBRARY -->
             <h2>📥 RECOMMENDED EXECUTORS</h2>
             <p style="margin-top: -10px; margin-bottom: 20px;">Download executor yang aman dan teruji untuk Kellzy Hub.</p>
             <div class="dll-list">
@@ -667,10 +680,9 @@
                 </div>
             </div>
 
-            <!-- VIP LEADERBOARD -->
             <h2>🏆 VIP HALL OF FAME</h2>
             <p style="margin-top: -10px;">Top user dan pendukung setia Kellzy Hub bulan ini.</p>
-            <div class="vip-leaderboard">
+            <div class="vip-leaderboard" style="margin-bottom: 40px;">
                 <div class="lb-row lb-header">
                     <span>RANK</span>
                     <span style="flex: 1; text-align: left; margin-left: 20px;">USERNAME</span>
@@ -693,8 +705,7 @@
                 </div>
             </div>
 
-            <!-- KAELL STORE SHOWCASE MAIN PAGE -->
-            <h2 style="margin-top: 50px;">🛒 KAELL STORE SHOWCASE</h2>
+            <h2>🛒 KAELL STORE SHOWCASE</h2>
             <p style="margin-top: -10px; margin-bottom: 20px;">Support developer dengan membeli Official Merchandise & VIP Access!</p>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left; padding-bottom: 40px;">
                 <a href="https://www.g2g.com/Kaellstoree" target="_blank" style="text-decoration: none;">
@@ -727,24 +738,58 @@
                 </a>
             </div>
 
-            <!-- FITUR 2: TESTIMONIAL TICKER -->
             <h2>⭐ USER REVIEWS</h2>
-            <div style="overflow: hidden; width: 100%; margin-bottom: 40px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+            <div style="overflow: hidden; width: 100%; margin-bottom: 50px; position: relative; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
                 <div class="testimonial-track" style="display: flex; gap: 15px; width: max-content; animation: scrollTestimonials 25s linear infinite;">
-                    <!-- Original -->
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @VellynCute</div><div class="testi-text">"Adminnya ramah, scriptnya 100% work di delta android!"</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
-                    <!-- Duplicate for infinite scroll loop -->
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Kuli_BataX</div><div class="testi-text">"Script auto farmnya cepet banget! Tembus Byfron mantap."</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @ShadowSlayer</div><div class="testi-text">"Gila UI nya keren abis, serasa hacker beneran 🥶"</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @VellynCute</div><div class="testi-text">"Adminnya ramah, scriptnya 100% work di delta android!"</div></div>
                     <div class="testi-card"><div class="testi-user"><i class="fa-solid fa-circle-check"></i> @Rxyy_999</div><div class="testi-text">"Aimbotnya smooth parah, recommend beli VIP!"</div></div>
                 </div>
             </div>
+
+            <h2>💻 KAELL-OS COMMAND CENTER</h2>
+            <p style="margin-top: -10px; margin-bottom: 15px;">Terminal eksekusi langsung. Ketik <strong>help</strong> untuk memulai.</p>
+            <div class="wide-terminal interactive-btn" onclick="document.getElementById('termInput').focus()">
+                <div class="term-output" id="termOutput">
+                    <div>[System] Kaell-OS v2.0.4 Initialized.</div>
+                    <div>[System] Secure connection established.</div>
+                    <div style="color: var(--theme-color);">Type 'help' to see available commands.</div>
+                </div>
+                <div class="term-input-line">
+                    <span>root@kellzy:~#</span>
+                    <input type="text" id="termInput" autocomplete="off" spellcheck="false">
+                </div>
+            </div>
             
         </div>
+
+        <div class="mega-footer">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>KELLZY HUB</h4>
+                    <p style="line-height: 1.5; margin: 0;">Penyedia script Roblox terbaik sejak 2024. Dilengkapi dengan Byfron Bypass dan update berkala untuk keamanan akun Anda.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>QUICK LINKS</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://discord.com/invite/Skg2mVqZ2q" target="_blank"><i class="fa-brands fa-discord"></i> Join Discord Server</a></li>
+                        <li><a href="https://youtube.com/@kellllllll-f7i" target="_blank"><i class="fa-brands fa-youtube"></i> Subscribe YouTube</a></li>
+                        <li><a href="https://www.g2g.com/Kaellstoree" target="_blank"><i class="fa-solid fa-store"></i> Kaell Store Official</a></li>
+                        <li><a href="#" onclick="openKeyModal()"><i class="fa-solid fa-key"></i> Get Premium Key</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <span>© 2026 Kellzy Hub & Kaell Store. All Rights Reserved.</span>
+                <span style="color: var(--theme-color); font-weight: 800; cursor: pointer;" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">BACK TO TOP <i class="fa-solid fa-arrow-up"></i></span>
+            </div>
+        </div>
+
     </div>
 
     <div class="live-chat-box fade-ui" id="liveChat">
@@ -816,7 +861,6 @@
             document.getElementById('expFill').style.width = (currentExp / expMax * 100) + '%';
         }, 2000);
 
-        // --- FITUR 5: CURSOR TRAIL LOGIC ---
         const trailContainer = document.createElement('div'); document.body.appendChild(trailContainer);
         const dots = [];
         let cursorTrailColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color').trim() || "#00e5ff";
@@ -998,11 +1042,9 @@
             if(/Android/i.test(ua)) { device = "Android"; rec = "Delta / Fluxus"; } else if(/iPhone|iPad|iPod/i.test(ua)) { device = "iOS Apple"; rec = "Appleware"; }
             document.getElementById('deviceType').innerText = device; document.getElementById('recExec').innerText = rec;
             
-            // --- FITUR 4: INIT DAILY STREAK ---
             initDailyStreak();
         });
 
-        // --- FITUR 1: SERVER TELEMETRY LOGIC ---
         const telCanvas = document.getElementById('telemetryCanvas');
         const telCtx = telCanvas.getContext('2d');
         let pingData = new Array(40).fill(25);
@@ -1024,7 +1066,6 @@
         }
         setInterval(drawTelemetry, 1000); setTimeout(drawTelemetry, 100);
 
-        // --- FITUR 4: DAILY STREAK LOGIC ---
         function initDailyStreak() {
             let currentStreak = 1;
             const lastLogin = localStorage.getItem('kellzyLastLogin');
@@ -1142,6 +1183,48 @@
 
         function openChangelogModal() { document.getElementById('changelogModal').style.display = 'flex'; clickSfx.play().catch(e=>{}); }
         function closeChangelogModal() { document.getElementById('changelogModal').style.display = 'none'; clickSfx.play().catch(e=>{}); }
+
+        // --- FITUR BARU: TERMINAL LOGIC ---
+        const termInput = document.getElementById('termInput');
+        const termOutput = document.getElementById('termOutput');
+        if(termInput) {
+            termInput.addEventListener('keypress', function(e) {
+                if(e.key === 'Enter') {
+                    const val = this.value.trim().toLowerCase();
+                    this.value = '';
+                    if(val === '') return;
+                    
+                    const line = document.createElement('div');
+                    line.innerHTML = `<span style="color: var(--theme-color)">root@kellzy:~#</span> ${val}`;
+                    termOutput.appendChild(line);
+                    
+                    const res = document.createElement('div');
+                    res.style.color = '#ccc';
+                    
+                    if(val === 'help') {
+                        res.innerHTML = "Commands: <br>- <b style='color:#fff'>ping</b> : Check connection latency<br>- <b style='color:#fff'>getkey</b> : Generate new script key<br>- <b style='color:#fff'>store</b> : Open Kaell Store<br>- <b style='color:#fff'>discord</b> : Join community<br>- <b style='color:#fff'>clear</b> : Clear terminal";
+                    } else if(val === 'ping') {
+                        res.innerText = "Pinging Byfron servers... Latency: " + (Math.floor(Math.random() * 20) + 10) + "ms [STABLE]";
+                    } else if(val === 'clear') {
+                        termOutput.innerHTML = ''; return;
+                    } else if(val === 'getkey') {
+                        res.innerText = "Redirecting to Linkvertise...";
+                        setTimeout(() => window.open('https://link-target.net/6323111/fA6olvPyl0nD', '_blank'), 1000);
+                    } else if(val === 'store') {
+                        res.innerText = "Opening Kaell Store interface...";
+                        setTimeout(openStoreModal, 500);
+                    } else if(val === 'discord') {
+                        res.innerText = "Opening Discord...";
+                        setTimeout(() => window.open('https://discord.com/invite/Skg2mVqZ2q', '_blank'), 500);
+                    } else {
+                        res.innerText = `Command not found: ${val}. Type 'help' to view commands.`;
+                    }
+                    
+                    termOutput.appendChild(res);
+                    termOutput.scrollTop = termOutput.scrollHeight;
+                }
+            });
+        }
 
     </script>
 </body>
