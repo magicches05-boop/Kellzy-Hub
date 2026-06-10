@@ -1343,7 +1343,7 @@
         const hoverSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'); hoverSfx.volume = 0.3; const clickSfx = new Audio('https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'); clickSfx.volume = 0.5;
         const interactiveBtns = document.querySelectorAll('.interactive-btn'); interactiveBtns.forEach(btn => { btn.addEventListener('mouseenter', () => { hoverSfx.currentTime = 0; hoverSfx.play().catch(e => {}); }); btn.addEventListener('click', () => { clickSfx.currentTime = 0; clickSfx.play().catch(e => {}); }); });
 
-        const playlist = [ { src: "musik.mp3", name: "TRACK 1 - LOFI" }, { src: "alquima.mp3", name: "TRACK 2 - CHILL" }, { src: "HEAVENLY JUMPSTYLE.mp3", name: "TRACK 3 - EDM" } ];
+        const playlist = [ { src: "musik.mp3", name: "TRACK 1 - LOFI" }, { src: "MONTAGEM ALQUIMIA (SLOWED) - h6itam (youtube).mp3", name: "TRACK 2 - CHILL" }, { src: "HEAVENLY JUMPSTYLE.mp3", name: "TRACK 3 - EDM" } ];
         let currentTrack = 0; const trackNameEl = document.getElementById('trackName');
         function loadTrack(index) { bgm.src = playlist[index].src; trackNameEl.innerText = playlist[index].name; if(!bgm.paused) { bgm.play().catch(e=>{}); } }
         function nextTrack(e) { e.stopPropagation(); currentTrack = (currentTrack + 1) % playlist.length; loadTrack(currentTrack); bgm.play(); document.querySelector('#musicToggle i').className = 'fa-solid fa-pause'; }
