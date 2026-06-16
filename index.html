@@ -1363,7 +1363,7 @@
             let progress = 0; let compileInterval = setInterval(() => { progress += Math.floor(Math.random() * 15) + 5;
                 if(progress >= 100) {
                     progress = 100; clearInterval(compileInterval); btn.innerHTML = '<i class="fa-solid fa-check"></i> SCRIPT COPIED'; btn.style.background = '#00ff7f';
-                    const code = `getgenv().Key = "KELLYZ-2X5NYFU6"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
+                    const code = `getgenv().Key = "KELLYZ-L1R0FKIM"; loadstring(game:HttpGet("https://kellzyy-hub.vercel.app/script-kell.lua"))()`;
                     navigator.clipboard.writeText(code).then(() => { showToast("Script Compiled & Copied!", "var(--theme-color)", "fa-circle-check"); });
                     setTimeout(() => { isCompiling = false; btn.innerHTML = '<i class="fa-solid fa-copy"></i> COPY LOADSTRING'; btn.style.background = 'var(--theme-color)'; btn.style.color = '#000'; }, 3000);
                 } else { let bars = '|'.repeat(Math.floor(progress/10)); btn.innerHTML = `COMPILING ${bars} ${progress}%`; }
